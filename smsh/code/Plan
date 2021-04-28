@@ -1,0 +1,59 @@
+Project: smsh
+
+Purpose: This is subset of sh. This takes input from user and executes.
+
+	 ./smsh  [FILENAME]
+
+	 - if FILENAME is passed then smsh understands that it has to read 
+	   from that file which is a script file
+	 - if FILENAME is not provided then smsh reads from stdin.
+	 
+Operations:
+
+   First smsh opens the file from which it has to read the commands.
+   Uses fopen to get the FILE* for this file.
+   If no file is provided it will use stdin as FILE*
+   If we are using stdin then we give a prompt to user '>'
+   If it is not stdin then the prompt is NULL.
+
+   Usual main loop is as follows
+
+     - opens the file
+     - read the file line by line
+     - while line != NULL
+         - substitute variables 
+	 - this will update the line
+	 - process the line
+	    - if it is builtin
+	        - process the builtin
+	    - else if it is a control command like (if, then,else, fi)
+	       - process control command
+	    - else
+	       - execute the command
+      - continue
+	       
+
+1. cd builtin:
+   calls unix function chdir() with the path specified after cd.
+   if success returns 0 else returns -1.
+
+
+2. exit builtin:
+   calls unix _exit(). if a value is passed argument, convert the string to
+   integer using strtol() and then pass the number to _exit() function.
+
+3. read builtin:
+   - reads the argument that is passed with read.This is the variable. 
+   - calls next_cmd() in splitline with FILE* = stdin
+   - gets the line from next_cmd(). This is the value.
+   - stores the variable and value using VLstore()
+
+4. comments:
+   - after next_cmd() returns the line
+   - check for the first character of the line
+   - if it is '#' then it is a comment
+      - continue 
+
+5. File Input:
+   - discussed above
+	

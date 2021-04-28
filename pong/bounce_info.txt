@@ -1,0 +1,40 @@
+The ball moves as follows:
+
+	The timer ticks at a regular interval.
+	Each time it ticks the 'ball_move' function
+	is called.
+
+	The way the speed of the ball is determined is
+	there is a number called  'delay' that
+	must elapse before the ball moves one screen
+	position.  For example, if the ball is set at
+	a delay of 10 in the x direction, then 
+	after each 10 timer ticks pass, the horizontal
+	position of the ball in increased.
+
+	Similarly, there is a setting for the delay
+	in the y direction.  Say that number is set
+	at 7.  Then after each seven ticks, the ball
+	moves one screen position in the vertical
+	direction.
+
+	How does the ball know how many ticks have passed
+	since it last moved?  It uses a counter called
+	count which keeps track of how many ticks
+	are left before the ball moves in that direction.
+
+	Therefore, when the ball starts, it sets x_count
+	equal to x_delay and sets y_count = y_delay .
+	At each timer tick, it decrements the x_count
+	and y_count variables.  If x_count hits zero, then
+	the ball is moved in the x-direction and the
+	x_count variable is reset to x_delay.  Similarly
+	if y_count hits zero, the ball is moved in the
+	y direction and the counter (y_count) is reset
+	to equal y_delay.
+
+	How does the ball know whether to move left 
+	or right?  It uses x_dir.  If x_dir is +1, the
+	ball moves right each time it moves.  If
+	x_dir is -1, the ball moves left each time it
+	moves.  Same idea for y_dir.

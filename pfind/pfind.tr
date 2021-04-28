@@ -1,0 +1,302 @@
+.\"
+.\"  this is a troff/nroff file.  To convert it to readable text,
+.\"    use the command  nroff -ms this.filename > result.txt
+.\"  If you want postscript output, try
+.\"      groff -Tps -ms this.filename > result.ps
+.\"   or
+.\"      psroff -ms this.filename > result.ps
+.\"
+.\"  hist: 2015-02-16 used spr 15 : changed cscie215 to cscie28
+.\"  hist: 2014-02-18 used spr 14
+.\"
+.rm CH
+.ds RH \s8pseudofind\s0
+.ds RF \s8page %\s0
+.ds LF \s8printed \*(DY
+.DS C
+.ft B
+csci-e28
+Assignment 2: pseudofind
+.ft R
+.DE
+.SH
+Introduction
+.sp 2p
+.LP
+For this assignment you will write a program that implements part
+of the Unix \fBfind\fR command.  In doing so, you
+will have a chance to work with the Unix directory structure, recursion,
+and the stat() system call.
+.SH
+Directory Trees: The Big Idea
+.sp 2p
+.LP
+Every modern operating system organizes storage media (disks,
+flash drives, CDROMs, DVDs, etc) into a tree of directories.
+And every modern system provides tools for searching those
+trees.  Here is a picture of a directory tree:
+.sp 4p
+.PSPIC pfindtree1.eps 3i
+
+The top directory in the diagram is the root of the tree, and the 
+boxes below that are subdirectories.  The little rectangles inside
+the directories represent files.  A directory tree can contain
+many, many subdirectories and many, many files.  On a Unix/Linux
+system, a single directory tree provides access to all disks
+and all input/output devices.  
+.SH
+Directory Trees: Operations
+.sp 2p
+.LP
+What sort of operations can one perform on a directory tree and its
+contents?  Unix provides a wide variety of tools to analyze and
+process directory trees and their contents.  In fact, many regular
+file processing tools can be told to process an entire tree of files.
+Some examples are:
+.TS
+center linesize(1) allbox;
+l  l  
+lfC l .
+\s-2COMMAND	ACTION\s+2
+=
+.ps 9
+ls dirname	list contents of dirname
+ls -R dirname	list contents of tree with root dirname
+_
+rm filename	remove file called filename
+rm -r dirname	remove entire tree with root dirname
+_
+chmod o-r filename	make filename unreadable to other users
+chmod -R o-r dirname	make all things in tree unreadable to others
+_
+cp f1 f2	copy the single file f1
+cp -r dir1 dir2	copy the entire tree with root dir1
+.TE
+These four commands support a \fB-r\fR or \fB-R\fR option (stands for
+recursive) that performs the operation for all items in and
+below the specified directory.
+
+Learning to use recursive versions of file and directory tools is an
+essential part of understanding and using Unix.  
+.SH
+\(rh \s-1PART ONE\s0: Name Three More Recursive Tools
+.sp 2p
+.LP
+The first part of this assignment involves no programming, just
+some simple research.  Name and describe
+three more Unix programs that operate on directory trees.  Do not
+include \fBfind\fR or the four commands mentioned in the previous section.
+For each of the three you mention, state the name of the program,
+write a sample command line, and write a one sentence description of 
+what the program does.
+.SH
+Similarities and Differences
+.sp 2p
+.LP
+Most directory processing programs have the same basic
+idea.  The programs visit each directory in the tree, and they
+perform some action on each directory and/or file they
+encounter.  Thus, there are two parts to the code: the tree traversal
+and the specific action.  The tree traversal logic is
+pretty much the same from tool to tool; the specific action
+is the part that varies.  Therefore, once you learn to
+write one tree-processing program, you have done half the
+work for several other programs.
+.SH
+.sp 2p
+Explanation of find
+.sp 2p
+.LP
+Imagine you have set up a complex, multi-level directory structure
+to organize your files.  Directories contain subdirectories which
+in turn contain subdirectories of their own.  Everything is in perfect
+order, but suddenly you realize that you mislaid a file called wtmplib.c .
+.sp 4p
+.LP
+With the find command, you could type:
+.DS
+.ft C
+.ps 9p
+.vs 10p
+$ find . -name wtmplib.c 
+.ft R
+.DE
+.LP
+The Unix \fBfind\fR command searches directories and all their
+subdirectories for files that fit certain specifications.  In the
+example just mentioned, find is used to search by name.  Find also
+allows you to
+search for files by modification time, by type, by size, by
+owner, by number of links, \fIetc\fR, as well as combinations of 
+attributes.  Read the manual page on find for more info.
+.SH
+\(rh \s-1PART\s0 2: Writing Simplified find
+.sp 2p
+.LP
+The actual find command is not too tricky to write once you get the
+general structure in place.  Rather than focus on the details of
+all the different search criteria, your version will support
+only two of the search criteria: name and file type.
+The syntax of your version of find, (pfind for pseudo-find), is:
+.sp 5p
+.ti +0.5i
+.ps 9
+.vs 11p
+\fC$ pfind starting_dir [-name filename-or-pattern] [-type {f|d|b|c|p|l|s}]\fP
+.br
+.ps 10
+.vs 12p
+.sp 6p
+Here are three examples:
+.sp 6p
+.ti +0.5i
+.ps 9
+.vs 11p
+\fC$ pfind /home/s/smith -name core\fP
+.br
+.ti +0.5i
+\fC$ pfind . -name '*.c' -type f\fP
+.br
+.ti +0.5i
+\fC$ pfind cscie28/hw\fP
+.vs 12p
+.ps 10
+.sp 6p
+The first command searches /home/s/smith and all its subdirectories 
+and prints the full pathnames of all items called core.  This is an example
+of calling find with one criterion -- a filename. 
+.sp 6p
+The second command shows calling pfind with two criteria -- a filename pattern
+and a file type.  This command searches the current directory and all its subdirectories
+and prints the paths to things that have names ending with \fB.c\fR and are files.
+.sp 6p
+The third command is an example of calling find with no criteria -- all items
+match the search rules.  Therefore, this command prints the paths to all files
+and directories in and below the directory called cscie28/hw .
+\fBpfind\fR, like the real \fBfind\fR, does not stop until it has searched 
+all subdirectories.
+.sp 8p
+\fBN\s-1OTES\s+1\fR
+.RS
+\(bu The order of the criteria does not matter
+.br
+\(bu It is a syntax error if either criterion appears more than once
+.br
+\(bu Exactly one starting directory must be specified
+.br
+\(bu Your solution may not use the ftw library function or its relatives
+.RE
+.SH
+Getting Started
+.sp 2p
+.LP
+1. Read the manual page on the find command.  Try it out in your
+own directory or in the lib215 directory.  For example, you might
+try:
+.DS
+\s-1\fC$ find ~lib215 -name Makefile\fR\s0
+.DE
+.LP
+2. cd to ~lib215/hw/pfind and explore the directory trees under
+pft.d and pft2.d .  Search for things named \fIcookie\fR under
+pft.d, and search for things called \fId8\fR under pft2.d .
+Use the find command to perform these two searches.
+Your program will need to perform the same search and produce
+the same results.
+.sp 8p
+.LP
+3. Explore the manual to find a function to help you match filename
+patterns.  
+.sp 8p
+.LP
+4. Once you see how real find works and have worked through the
+procedure manually, think about what your find has to do.  
+It has to look at each entry in the starting directory.  If the entry
+matches \fBall\fR criteria specified on the command line, print the 
+directory name with the file name appended.  If the entry is a directory 
+your program will have to do the same operations on that
+subdirectory.  Therefore the search and print function will be recursive.
+.sp 8p
+.LP
+5. You need to use lstat(2) to determine the type of a file.
+Read the text, online documentation, or header files.  This step is an
+essential part of your program.
+.sp 8p
+.LP
+6. Write a function called searchdir( char *dirname, char *findme , char type).  
+This function will open the directory, read it entry by entry, print out
+any names of items that match \fIall\fR search criteria.
+If \(gafindme\(aa is not null, then the function will only list files that
+match that pattern.  If \(gatype\(aa is not '\e0', then the function
+will only include items that are of the type specified. 
+
+In addition, if any entry in the directory is a directory, then 
+searchdir() will have to create a new string to hold the new directory name and 
+pass that string to itself.  Use malloc() to create the string; a fixed 
+size buffer is liable to run out when you least expect it.
+.SH
+Building Your Program
+.sp 2p
+.LP
+Write your own file or files of code.  Be sure to write a Makefile
+and an explanatory document.
+.SH
+Testing Your Program
+.sp 2p
+.LP
+You can make up your own test system data, but you must test it sometime
+with ~lib215/hw/pfind/test.pfind .  This shell script  will 
+exercise your program on a preset directory tree.  To run it, type:
+.DS
+.ft C
+$ ~lib215/hw/pfind/test.pfind
+.ft R
+.DE
+.SH
+\(rh \s-1PART\s0 3: The Open File Limit
+.sp 2p
+.LP
+There is no limit on the depth of a directory tree; any directory can
+contain subdirectories.  The burrowing shell script example from class shows
+how to create extremely deep structures.
+.sp 8p
+Each time you open a directory in the recursive calls, your progam has
+another open file.  Unix usually sets a limit on the number of open files
+a program can have.  Once that limit was 20, then 60, now it is much
+greater.  Nonetheless, each open directory requires some system resources.
+It is a good practice to program with use and limitations of system resources
+in mind.  In particular, plan your programs so they do not crash if
+they run out of resources (here, too many open directories) and also so
+they do not use more system resources than they need.
+In this example, if your program has too many directories open, the
+\fC\s-1opendir()\s0\fP call returns NULL.
+.sp 8p
+Describe a solution to this limit.  Devise a method that will allow
+your program to process directory trees that are deeper than the
+maximum number of open files.
+.SH
+What to Turn In
+.sp 2p
+.LP
+Hand in 
+.DS
+1. A ReadMe text file with 
+   a) A summary of what you are submitting
+   b) the list of three tools that process directories 
+   c) a short answer to the \fIOpen File Limit\fR question, 
+
+2. your source code
+
+3. a typescript of its output from the test.pfind test script and 
+   any other samples you wish to include
+
+4. a Makefile
+
+5. a design outline
+.DE
+
+Prepare these files in a directory then type
+.sp 4p
+   \fC~lib215/handin pfind\fR
+.sp 4p
+

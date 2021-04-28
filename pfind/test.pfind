@@ -1,0 +1,394 @@
+#!/bin/sh
+#
+#	test.pfind
+#
+#	purpose:	shell script to test the operation of
+#			the pseudo-find program
+#
+#	usage:		test.pfind
+#
+#	operation:	1. makes sure that a program called pfind exists
+#			2. looks for standard stuff in /etc 
+#			3. puts some stuff in /tmp and then looks for it
+#			4. looks for pfind in the user's home directory
+#			   compares results to that of real find
+#
+#	history:	11/feb/26 bem: added arglist test
+#	history:	11/feb/15 korgenized, major cleanup for nice
+#	history:	02/feb/25 put in test for pfind . . 
+#	history:	01/feb/11 put stdout and stderr in diff files in 3
+#	history:	95/mar/05 changed handling of CWD for the case
+#				  in which -f pfind is true
+#
+
+	#
+	# settings for operation
+	#
+	SLTEST=NO			# do symlink loop test?
+	RDNAME="test_results"		# name of results dir
+
+	#
+	# internal vars set by various functions
+	# 
+	FIND=""				# 'real' version
+	ROOT=""				# test dir root
+	PROG=""				# full path to user version of program
+	TMPD=""				# temp dir used by test script
+	RESD=""				# dir for results of tests
+	
+	main()
+	{
+		set_dirs
+		set_prog
+		do_tests
+		RV=$?
+		printf "\n__________________________tests done________\n"
+		if test $RV = 0
+		then
+			echo "All tests passed.  None of the errors detected."
+		else
+			echo "One or more tests did not succeed."
+			echo "See files in $RDNAME for outputs and comparisons."
+		fi
+	}
+
+# -------------------------------------------------------------------------
+#	The main part of this script
+#	  returns 0 for passed all, 1 for not
+# -------------------------------------------------------------------------
+
+	do_tests()
+	{
+		dt_RV=0
+
+		TESTS="0 1 2 3 4 5 7"
+		for t in $TESTS
+		do
+			test_$t || dt_RV=1
+		done
+		return $dt_RV
+	}
+
+	#
+	# set_dirs --
+	#   The test data dirs are under course account root
+	#       figure out where that is
+	#
+	#   The standard for testing is probably /usr/bin/find
+	#
+	#
+	set_dirs()
+	{
+		#
+		# locate find
+		#
+		FIND=/usr/bin/find
+		if test ! -x $FIND
+		then
+			FIND=$(which find)
+		fi
+		if test ! -x $FIND
+		then
+			echo "Cannot locate the find command"
+			exit 1
+		fi
+
+		#
+		# locate test dir
+		#
+		ROOT=`  ldapsearch -x '(uid=lib215)' homeDirectory \
+			|
+			sed -n 's/^homeDirectory: *//p'`
+
+		ROOT=$ROOT/hw/pfind
+		if test ! -d $ROOT
+		then
+			echo "Cannot locate test directory"
+			exit 2
+		fi
+
+		#
+		# make and name scratch dir
+		#
+		TMPD=`mktemp -d /tmp/pft.XXXXXX` || exit 1
+		trap "rm -rf $TMPD; exit 0" 0 2 3 15
+
+		#
+		# make results directory
+		#
+		echo "Making directory for test results.."
+		if test -d $RDNAME
+		then
+			if test `ls $RDNAME | wc -l` -gt 0
+			then
+				echo "$RDNAME contains files:"
+				ls -C $RDNAME
+				printf "Ok to delete those (y/n)? "
+				read X
+				case "$X" in
+					y*|Y*)	rm -r $RDNAME/*	;;
+				esac
+			fi
+		else
+			mkdir $RDNAME || exit 1
+		fi
+		RESD=`pwd`/$RDNAME
+	}
+
+	#
+	# this function is called during the symlink test
+	# when the program receives SIGINT
+	#
+	intr_handler()
+	{
+		if test $SLTEST = Y
+		then
+			echo "Examine the directory tree at $ROOT/pft3.d"
+			echo "to see what is going on."
+			exit
+		fi
+	}
+
+# -------------------------------------------------------------------------
+#	part I : locate program to test
+# -------------------------------------------------------------------------
+
+	set_prog()
+	{
+		PROG=pfind
+		CWD=`pwd`
+
+		if [ -x $PROG ]
+		then
+			PROG=$PROG
+		else
+			echo    "There is no program here called $PROG."
+			printf  "Test what program (press Enter to quit)? "
+			read PROG
+			test -z "$PROG" && exit 0
+		fi
+		PROG=$CWD/$PROG
+	}
+
+# ---------------------------------------
+#    test 0 -- check arg syntax checking
+# ---------------------------------------
+
+	test_0()
+	{
+		rv=0
+		announce "0: Checking handling of bad command lines"
+
+		do_test 0a "" ". -name"		  ""	|| rv=1
+		do_test 0b "" ". -name x -type"	  ""	|| rv=1
+		do_test 0c "" ". -oops bad"	  ""	|| rv=1
+
+		return $rv
+	}
+
+
+# ---------------------------------------
+#    test 1 -- look for one file
+# ---------------------------------------
+
+	test_1()
+	{
+		rv=0
+		announce "1: checking for passwd in /etc"
+
+		do_test 1a "" "/etc -name passwd" ""	|| rv=1
+		do_test 1b /etc ". -name passwd"  ""    || rv=1
+		do_test 1c / "etc -name passwd"   ""    || rv=1
+
+		return $rv
+	}
+
+# --------------------------------------------------------
+# do_test(testID, dir, cmd, testDesc)
+#   perform cmd in dir 'dir'
+#   and report it using testID and describe it with testDesc
+#
+
+	do_test()
+	{
+		dt_PRE=""
+		if test -z "$2"
+		then
+			cd $CWD
+		else
+			cd "$2" ; dt_PRE="cd $2; "
+
+		fi
+		printf "\t  Test $1: $dt_PRE find $3\n"
+
+		# 
+		# run the two programs with the same args
+		#
+		$FIND $3 > $TMPD/find.out    2> $TMPD/f.e
+		$PROG $3 > $TMPD/pfind.out   2> $TMPD/p.e
+		#
+		# now replace names in error strings
+		#
+		sed 's/^[^:]*:/program-name:/' $TMPD/f.e > $TMPD/find.err
+		sed 's/^[^:]*:/program-name:/' $TMPD/p.e > $TMPD/pfind.err
+
+		#
+		# check for diffs
+		#
+		diff $TMPD/pfind.out $TMPD/find.out > $TMPD/diffs.out
+		RVout=$?
+		diff $TMPD/pfind.err $TMPD/find.err > $TMPD/diffs.err
+		RVerr=$?
+
+		if test $RVout$RVerr = 00
+		then
+			do_test_rv=0
+			printf "\t\tTest $1..OK\n"
+		else
+			do_test_rv=1
+			printf "\t\tTest $1..NOT OK\n"
+			if test $RVout != 0
+			then
+			    printf "\t\t\t Output diffs shown below.\n"
+			    printf "\t\t\t < is pfind output, > is find output\n"
+			    cat $TMPD/diffs.out
+			    cp $TMPD/find.out  $RESD/$1.find
+			    cp $TMPD/pfind.out $RESD/$1.pfind
+			    cp $TMPD/diffs.out $RESD/$1.diffs
+			    printf "================="
+			    printf "\t\t\toutput from find in $1.find\n"
+			    printf "\t\t\toutput from pfind in $1.pfind\n"
+			fi
+			if test $RVerr != 0
+			then
+			    printf "\t\t\t stderr diffs shown below.\n"
+			    printf "\t\t\t < is pfind stderr, > is find stderr\n"
+			    cat $TMPD/diffs.err
+			    cp $TMPD/find.err  $RESD/$1.find.err
+			    cp $TMPD/pfind.err $RESD/$1.pfind.err
+			    cp $TMPD/diffs.err $RESD/$1.diffs.err
+			    printf "================="
+			    printf "\t\t\toutput from find in $1.find.err\n"
+			    printf "\t\t\toutput from pfind in $1.pfind.err\n"
+			fi
+		fi
+		return $do_test_rv
+	}
+	announce()
+	{
+		printf "\n\tPart %s\n" "$1"
+	}
+#
+# ---------------------------------------
+#    test 2 -- multi-level search
+# ---------------------------------------
+
+	test_2()
+	{
+		rv=0
+		announce "2: multi-level search"
+
+		do_test 2a ""    "$ROOT/pft.d -name cookie" ""	|| rv=1
+
+		do_test 2b $ROOT "pft.d -name cookie" 	    ""	|| rv=1
+		return $rv
+	}
+
+# -------------------------------------------------------------------------
+#     test 3 -- searches hit unreadable paths
+# -------------------------------------------------------------------------
+
+	test_3()
+	{
+		rv=0
+
+		announce "3: detect unreadable paths"
+		echo "		This test searches some unreadable paths..
+		Error messages should be written to stderr."
+
+		do_test 3 "" "$ROOT/pft2.d -name d8"	   ""	|| rv=1
+		return $rv
+	}
+
+# -------------------------------------------------------------------------
+#	test 4 -- symlink test -- watch for loops
+# -------------------------------------------------------------------------
+
+	test_4()
+	{
+		rv=0
+
+		SLTEST=Y
+		trap "intr_handler" 2
+
+		announce "4: symlink test"
+		echo "		If the test seems stuck here, your program
+		is lost in symlink loop.  Press Ctrl-C to stop it."
+
+		do_test 4 "" "$ROOT/pft3.d -name cookie"    "" 	|| rv=1
+
+		return $rv
+	}
+
+# -------------------------------------------------------------------------
+#	test 5 -- pattern matching test
+# -------------------------------------------------------------------------
+
+	test_5()
+	{
+		rv=0
+		announce "5: pattern matching tests"
+
+		do_test 5a "" "$ROOT/pft.d -name \*1"    ""	|| rv=1
+
+		do_test 5b "" "$ROOT/pft.d -name dir\*"  ""	|| rv=1
+
+		do_test 5c "" "$ROOT/pft2.d -name d\?"	  ""	|| rv=1
+
+		return $rv
+	}
+
+
+# -------------------------------------------------------------------------
+#	test 6 -- . and .. test -- not used because it silly
+# -------------------------------------------------------------------------
+
+
+	test_6()
+	{
+		return 0
+
+		announce "6: dot and dotdot test"
+
+		do_test 6a "" ". -name ." 		  ""	|| rv=1
+		do_test 6b "" ".. -name .."		  ""	|| rv=1
+		return $rv
+	}
+
+# -------------------------------------------------------------------------
+#	test 7 -- combo of -type and -name
+# -------------------------------------------------------------------------
+
+	test_7()
+	{
+		rv=0
+		announce "7: test combinations of args"
+
+		do_test 7a "" ". -type d"		"" || rv=1
+		do_test 7b "" ". -type f"		"" || rv=1
+		do_test 7c "" ". -type l"		"" || rv=1
+
+		do_test 7d "" ". -name cookie -type d"	"" || rv=1
+		do_test 7e "" ". -type f -name cookie"	"" || rv=1
+
+		do_test 7f "" "."			"" || rv=1
+		do_test 7g "/tmp" "."			"" || rv=1
+
+		return $rv
+	}
+
+# -------------------------------------------------------------------------
+#	finally, we can call main
+# -------------------------------------------------------------------------
+
+	main "$@"

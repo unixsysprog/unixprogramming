@@ -1,0 +1,25 @@
+#!/bin/sh
+#
+# test of passing args with wildcards into functions
+#
+
+	do_test()
+	{
+		echo "About to ls $1"
+		ls $1
+	}
+
+	do_cmd()
+	{
+		echo About to call find with args "$1"
+		find $1
+	}
+
+	try()
+	{
+		do_test "test.*"
+		do_cmd ". -name test.\*"
+		
+	}
+
+	try

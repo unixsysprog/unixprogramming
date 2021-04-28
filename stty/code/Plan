@@ -1,0 +1,135 @@
+Project :   stty-lite
+
+Purpose :   displays the current settings of terminal (tty) when no arguments specified.
+	    changes the settings of tty based on the arguments passed.
+
+	     $ sttyl     	       	  - displays current settings
+	     $ sttyl [operands]
+
+Background : 
+            Program is based on termios stucture which hold current 
+	    setting for tty.
+	    The termios structure has four fields of type tc_flag and one character array.
+	    four tc_flags are c_iflag, c_oflag, c_lflag, c_cflag
+	    Based on the bit value of these flag, different settings are turned on 
+	    or off.
+	    char array is c_cc. This array hold control keys for 
+	    operations like erase, kill, interrupt etc..
+
+Outline : 
+            The program has two modes
+	    1. with no arguments - displays setting of tty by calling tcgetattr() on termios
+	    2. with arguments    - modifies the settings of tty using tcsetattr() on termios
+
+Arguments : when program is run with arguments mode, it can take any 
+	    number of arguments.
+	    sttyl [control op] [value] [-][operand]
+	    
+	    e.g. sttyl erase b -echo icanon kill ^k
+	    erase b means:erase operation will take value as b. 
+	    i.e. if you press button 'b' on the keyboard 
+	    it will erase the previous characters.
+
+	    -echo means: the '-' before echo says terminal to stop echoing
+	    icanon means: with no '-' user says to allow buffering 
+	    kill ^k means: kill can be done by pressing Ctrl K
+
+Output  :   If program is run with arguments and no error, no output is generated.
+            If program is run with arguments and has errors, error is reported.
+
+	    if program is run without arguments, shows current setting as below
+	      speed 9600 baud; rows 63; columns 80;
+              intr = ^C; erase = ^H; kill = ^U; start = ^Q;
+              stop = ^S; werase = ^W
+              -parenb hupcl cread
+              brkint -inpck icrnl -ixany onlcr
+              iexten echo -echoe -echok
+
+
+Data Structures :
+            A struct is defined to hold the setting description (fl_name)
+     	    and its value which is essentially a mask (fl_value).
+
+	    This struct is defined in flags.h file.
+	    Five array variables that hold objects of this struct 
+	    are declared and made extern so that they can be used from
+	    different source files. We refer to these arrays as tables in below discussion.
+
+   	    In flags.c the extern variables are defined.
+
+	    one table for holding different c_iflag setting name and mask ,
+	    one table for holding different c_oflag setting name and mask , 
+	    one table for holding different c_lflag setting name and mask ,
+	    one table for holding different c_cflag setting name and mask ,
+	    one table for holding c_cc control key name and the index  value.
+	              
+Program Flow :
+	   sttyl.c is where all the logic is written and includes flags.h
+	   to make use of the tables.
+
+	   majority of program is based on processing command line arguments
+	   and checking the validity of them. If valid then set the corresponding
+	   tty setting.
+
+	   processing command line arguments:
+	   each argument is taken and checked if it is matches the fl_name in the tables.
+	   
+	   first the program checks if the argument is in control key table 
+	   i.e. table that holds c_cc.
+	   If found then reads the next argument, which is the value of the control key.
+	   This argument should be a one character or something that
+	   has Ctrl and a char which is actually a one character internally.
+	   Then the corresponding termios.c_cc[] element is set to that character.
+
+	   If the argument is not found in control key table, then the program
+	   checks in other tables one by one.
+	   If the argument is found in one table, then the program will
+	   skip checking other tables.
+	   Once it is found then the corresponding tc_flag value is modified
+	   with mask value specified in the table.
+	   The argument may start with '-' which means to disable. In this case
+	   the corresponding setting is turned off.
+	   If it does not start with '-' then the setting will be turned on.
+
+	   once all the arguments are processed then tcsetattr on the termios struct
+	   so that all the changes are committed to terminal driver.
+
+	   display settings:
+	   tcgetattr is called and termios struct is loaded with current settings.
+	   
+	   bit rate is obtained by using cfgetospeed on termios struct. This returns
+	   a value of speed_t type. simple switch statement is used to print it in 
+	   human readable form.
+	   terminal rows and columns are obtained by calling ioctl() or using getenv().
+	  
+	   control key operations and their character symbols are displayed next.
+	   If the character symbol(c) is printable then it is displayed as is.
+	   If the character symbol(c) is non printable like Ctrl C etc.., then 
+	   it has to be converted as  'A' + c -1
+	   If the character symbol is delete , it will be displayed as ^?
+	   If the symbol is not defined, it will be displayed as <undef>
+
+	   All other settings corresponding to tc_flag are displayed next.
+	   Each table specified in flag.h is looped around and corresponding bit values
+	   are unmasked. If the bit value is 1 then the setting is displayed as fl_name
+	   if the bit value is 0 then the setting is displayed as '-' before fl_name.
+
+Error reporting:
+           If the argument specified in not in any table, then an invalid argument error 
+           is generated and program exits.
+           If the control key value is more than one char, then an invalid argument error 
+           is generated and program exits.
+           If terminal file could not open, then the program exits.
+           If calls to tcgetattr() or tcsetattr() fail, then the program exits.
+	   
+	   
+	   
+
+	   
+
+	 
+	   
+	   
+     	    
+	     
+	    

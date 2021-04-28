@@ -1,0 +1,170 @@
+Project: pong
+
+Purpose: This is a one person ping-pong game. Idea is to keep the ball 
+	 in the court as long as possible. User has three chance i.e
+	 three balls to play.
+
+
+Structure:
+	   program has three physical objects - wall, paddle, ball
+	  	   
+	   ball.h, ball.c:
+	   ball struct has members to hold x,y positions, delays in x,y,
+	   x,y directions, symbol for ball, actual symbol at the location
+	   before the ball moved to that location (this is used to restore
+	   the symbol back when ball bounces), and counters in x,y for delays.
+	   source code controls the position and state of ball object. If
+	   ball is lost then the ball is initiated and set to play again.
+	   
+	   wall.h , wall.c:
+	   wall struct has members to hold x,y of top leftmost corner and
+	   x,y of bottom rightmost corner
+	   source code draws the borders on the screen.
+
+	   paddle.h, paddle.h:
+           paddle struct has members to hold x position and top y and bottom y
+	   positions and symbol.
+	   source file controls the position of paddle based on key presses
+	   by the user.
+	   
+	   draw.h, draw.c:
+	   All the drawing is done using curses library. This source
+	   file is just a wrapper for curses functionality. Before moving
+	   and adding symbol to new position,
+	   previous curses position is saved and restored after the move.
+	  
+	   Apart from three physical objects,
+	   alarmlib.h alarmlib.c:
+	   alarmlib.c sets the timer for kernel to send alaram signals
+
+	   pong.c:
+	   This is the place from where the game is controlled.
+	   This initializes all the physical objects 
+	   and processes key presses and handles alarm signal.
+	   updates the game timer.
+	   
+	   Play continues untill the ball is in the court and total of three
+	   balls are served. If user loses all three balls, game is over.
+
+
+Program flow:
+	  Setup:
+	  First the court is drawn using the screen size obtained from
+	  LINES and COLS of curses. Left edge, top edge and bottom edge 
+	  are drawn from 3 colums and 3 rows of actual screen. 
+	  Left edge is drawn with '|' and top and bottom are drawn with '-'.
+	  court dimension does not change over the duration of the game.
+	  Program does not handle changes in screen size during the game.
+
+	  If the screen width and height are less than 15 then the program
+	  exits throwing an error.
+
+	  Paddle object is initialized and drawn approximately one third
+	  the height of the court. This object is drawn as # brick symbol.
+
+	  Now ball object is initialized and put in the center of the court.
+	  
+	  After all physical objects are initialized, set the  signal handler
+	  using sigaction for SIGALRM. 
+	  sigaction.sa_flags is set to nothing. specifically it should not be 
+	  set to SA_RESTART which will make the ball movement to wait for
+	  key press.
+
+	  Once the signal handler is set, we need to tell the ticker to go.
+	  This will start the timer and send signal every time when interval
+	  is reached. 
+
+	  Serve/Randomization of ball movement:
+	  velocity of ball is represented by delays which is actually 
+	  reciprocal to velocity. More the delay, slower the ball moves.
+	  Lesser the delay, faster the ball moves. ball delays are randomized.
+	  max random number in x direction is based on width of court.
+	  max random number in y direction is based on width+ height of court.
+	  i.e. ball is first move in x direction and then move in y direction
+	  instead of moving diagonally.
+
+	  To randomize we use rand(). For proper use of this rand() we need to
+	  seed it first using srand(). srand() is done only once during the 
+	  duration of game.
+
+	  
+	  Signal handler is as follows:
+	  There are three static variables
+	  1. qcounter   - queue for how many times balls need to be moved
+	  2. game_timer - counter for holding the game duration.
+	  3. balls_left - number of balls available for the play.
+
+	  signal_handler:
+	     if there are enough balls
+	     	- increment the qcounter
+	     	- increment number of ticks
+	     	- if number of ticks == TICKS_PER_SEC
+	             -increment game_timer
+		     -update time on the screen.
+
+	  Main loop runs as follows:
+	  main:
+	        -Setup
+		-Serve
+		-while ((c =getch() )!= 'Q')
+	  	     -if c== 'k' or 'm'
+		     	- move the paddle
+			
+		     -iterate through the queue
+		    
+	    
+	        -Release everything
+
+	  Iterate the queue:
+	     while qcounter > 0 
+	     	   move the ball
+
+
+          Move ball:
+	  There is a x_count member in ball struct which is 
+	  set to x_delay in x-direction. This is decremented for each signal 
+	  and the ball in x-direction only when it reaches 0. In other words
+	  ball will not move in x-direction for x-delay ticks. 
+	  Same in y-direction using y_count 
+
+	     ball_move:
+	        - get old positions of ball
+	        - decrement the x_count, y_count for each signal
+		- if x_count || y_count is zero
+		  - draws the ball.prevsymbol in old location
+		  - draws the ball in new location.    
+		  - check if ball will bounce or lose
+		       - if lost
+		       	   - decrement the number of balls
+			   - intialize the ball again
+	
+		ball_bounce_lose:
+	  	   -if ball.xpos == paddle.column
+	       	      -if ball.ypos is between paddle.bottom row 
+		      	 and paddle.toprow
+	             	- then it is a bounce change the x direction trajectory
+		  	- set ball.prevsymbol = '#'
+	       	      -if ball.ypos is below paddle.bottom row 
+			   or above paddle.toprow
+	         	- then the ball is out of the game. It is lost
+
+           	   -if ball.xpos == left edge
+	      	        -then it is a bounce change x direction
+	       		-set ball.prevsymbol = '|'
+	   	   -if ball.ypos == top edge
+	       	       -then it is a bounce change y direction
+	       	       -set ball.prevsymvbol = '-'
+	   	   -if ball.ypos == bottom edge
+	       	       -then it is a bounce change x direction
+	       	       -set ball.prevsymbol = '-'
+	    
+
+	
+
+	
+	  
+	  
+
+
+	 
+	  

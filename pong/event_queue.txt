@@ -1,0 +1,38 @@
+A Different Model for pong
+----------------------------------
+
+One of the problems with the getchar()/ball_move() model is that
+the signal handler may be called when the program is busy moving
+the paddle and drawing on the screen.  It is possible to block
+or ignore signals but what about missed signals?  
+
+One can count them up and then count them down later, but that
+is more complex.
+
+Event Queue
+-----------
+A different model is to create an event queue.  The main loop
+simply blocks until the next event shows up, then services the
+event.  Keyboard input generates keyboard-input events, and the
+timer generates tick events.  These are just placed in the queue.
+
+Now, it is impossible to be `called away' to run ball_move() from
+being in the middle of moving the paddle.  The paddle-up request
+is performed to completion, and then the timer tick is picked
+from the queue.
+
+Sounds great, but how can one design this and how can one
+add to the queue while also pulling from it?  Are the
+same problems there, just rearranged?
+
+Event Generator and Event Eater
+-------------------------------
+A variration on the event queue from which events are pulled
+is an event queue from which events are pushed.  Here's the
+idea.  One function waits for keystrokes or for timer ticks.
+When it gets one, it adds it to the queue and then calls
+the dequeuer.  While the dequeuer (i.e. handle_event()) is
+working, a timer tick counter can just accumulate values or
+events.  When the handle_event() function returns the
+queuer can see what's come in and then queue them and call
+handle_evnets() when stuff is there.

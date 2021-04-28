@@ -1,0 +1,1754 @@
+<!doctype html public "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<title>An Introduction to the Unix Shell</title>
+<link rev="made"
+href="http://www.iki.fi/era/feedback.html">
+</head>
+<body bgcolor="#fffff0" text="#000000"
+link="#0000ff" vlink="#600060" alink="#ff0000">
+<h1>An Introduction to the Unix Shell</h1>
+<!-- Generated from troff source in 
+http://cm.bell-labs.com/7thEdMan/vol2/shell.bun
+era Sun May 10 15:43:17 1998 -->
+<blockquote>
+This is an HTMLized version of
+Steve Bourne's original shell tutorial.
+I found the source at 
+<a href="http://cm.bell-labs.com/7thEdMan/vol2/shell.bun">http://cm.bell-labs.com/7thEdMan/vol2/shell.bun</a>
+and generated my own copy with <b>troff</b>,
+which I then edited into an HTML version.
+<p>
+This 1978 classic
+(not sure about the exact date, corrections welcome)
+is not only historically interesting,
+it's still a good tutorial
+as long as you keep in mind that some minor details
+like the terminal interface
+have changed quite a bit
+(DEL is not usually the interrupt character anymore, etc).
+The same goes, by the way, for a lot of the
+old Unix documentation from Murray Hill,
+including the excellent book
+<i>The Unix Programming Environment</i>
+by Kernighan and Pike.
+<p>
+You will find numerous other copies of this on the web,
+all of them -- as far as I can tell -- badly malformatted;
+for example, the pipe character will be completely missing
+throughout the document!
+<p>
+The original version I found was
+"updated for 4.3BSD by Mark Seiden"
+but as I didn't have
+Seiden's <tt>troff</tt> source
+for the updated version,
+only an online copy with
+the usual formatting errors,
+and it  had very marginal changes
+as compared to the older version at Bell
+(remark that this is not a csh tutorial;
+different mail spool directory; 
+mentioned that section 2 of the manual covers system calls; 
+BSD has some new signals),
+I decided to go with the original. 
+<p>
+If you find errors in this
+or otherwise wish to comment, 
+please don't hesitate to <a href="http://www.iki.fi/era/feedback.html">mail me</a>. 
+<p align=right><tt>/* era */</tt>
+<small>
+<p align=center>
+<a href="index.html">Back to cover page</a>
+</small>
+</blockquote>
+<h2>
+Abstract
+</h2>
+<blockquote>
+The  <i>shell</i>  is a command programming language that
+provides  an  interface to the UNIX operating system.  Its  
+features  include  control-flow  primitives,  
+parameter  passing,  variables  and string
+substitution.  Constructs such as <i>while,</i>  <i>if</i>  <i>then</i>
+<i>else,</i>  <i>case</i> and <i>for</i> are available.  Two-way 
+communication is possible between the  <i>shell</i>  and  
+commands.   String-valued  parameters, typically file
+names or flags, may be passed  to  a  command.   A
+return code is set by commands that may be used to
+determine control-flow, and  the  standard  output
+from a command may be used as shell input.
+<p>
+The <i>shell</i> can modify the environment in which 
+commands run.  Input and output can be redirected  to
+files,  and  processes  that  communicate  through
+`pipes' can be invoked.   Commands  are  found  by
+searching  directories  in  the  file  system in a
+sequence that can be defined by  the  user.   
+Commands can be read either from the terminal or from
+a file, which  allows  command  procedures  to  be
+stored for later use.
+</blockquote>
+<hr>
+<small>
+UNIX is a registered trademark of AT&#38;T Bell  
+Laboratories in the USA and other countries.
+</small>
+<hr>
+<h1>
+An Introduction to the UNIX Shell
+</h1>
+<p align=center>
+S. R. Bourne
+</p>
+<h2>
+1.0 Introduction
+</h2>
+The shell is both a command language and a programming language that
+provides an interface to the UNIX operating system. This memorandum
+describes, with examples, the UNIX
+shell.  The  first  section  covers  most  of  the  everyday
+requirements  of terminal users.  Some familiarity with UNIX
+is an advantage when reading this section; see, for example,
+"UNIX  for beginners". 
+Section 2
+describes those features of the shell primarily intended for
+use within shell procedures.  These include the control-flow
+primitives  and  string-valued  variables  provided  by  the
+shell.   A  knowledge  of  a programming language would be a
+help when reading this section.  The last section  describes
+the  more advanced features of the shell.  References of the
+form "see <i>pipe</i> (2)" are to a section  of  the  UNIX  manual.
+<h3>
+1.1 Simple commands
+</h3>
+Simple  commands  consist  of one or more words separated by
+blanks.  The first word is the name of  the  command  to  be
+executed; any remaining words are passed as arguments to the
+command.  For example,
+<blockquote><pre>
+	who
+</pre></blockquote>
+is a command that prints the names of users logged in.   The
+command
+<blockquote><pre>
+	ls -l
+</pre></blockquote>
+prints  a list of files in the current directory.  The argument
+<i>-l</i> tells <i>ls</i> to print status information, size  and  the
+creation date for each file.
+<h3>
+1.2 Background commands
+</h3>
+To  execute  a command the shell normally creates a new <i>process</i>
+and waits for it to finish.  A command may be run without waiting for
+it to finish.  For example,
+<blockquote><pre>
+	cc pgm.c &#38;
+</pre></blockquote>
+calls  the  C  compiler  to  compile  the  file  <i>pgm.c.</i>  The
+trailing <b>&#38;</b> is an operator that instructs the  shell  not  to
+wait  for the command to finish.  To help keep track of such
+a process the shell reports its process number following its
+creation.   A  list  of  currently  active  processes may be
+obtained using the <i>ps</i> command.
+<h3>
+1.3 Input output redirection
+</h3>
+Most commands produce output on the standard output that  is
+initially  connected  to  the  terminal.  This output may be
+sent to a file by writing, for example,
+<blockquote><pre>
+	ls -l &#62;file
+</pre></blockquote>
+The notation <i>&#62;file</i> is interpreted by the shell  and  is  not
+passed  as  an  argument to <i>ls.</i>  If <i>file</i> does not exist then
+the shell creates it; otherwise  the  original  contents  of
+<i>file</i>  are  replaced  with the output from <i>ls.</i>  Output may be
+appended to a file using the notation
+<blockquote><pre>
+	ls -l &#62;&#62;file
+</pre></blockquote>
+In this case <i>file</i> is also created if  it  does  not  already
+exist.
+<p>
+The  standard  input  of  a command may be taken from a file
+instead of the terminal by writing, for example,
+<blockquote><pre>
+	wc &#60;file
+</pre></blockquote>
+The command <i>wc</i> reads its standard input (in this case  redirected from <i>file</i>) and prints the number of characters, words
+and lines found.  If only the number of  lines  is  required
+then
+<blockquote><pre>
+	wc -l &#60;file
+</pre></blockquote>
+could be used.
+<h3>
+1.4 Pipelines and filters
+</h3>
+The  standard  output of one command may be connected to the
+standard input of another by writing  the  `pipe'  operator,
+indicated by <b>|</b>, as in,
+<blockquote><pre>
+	ls -l | wc
+</pre></blockquote>
+Two commands connected in this way constitute a <i>pipeline</i> and
+the overall effect is the same as
+<blockquote><pre>
+	ls -l &#62;file; wc &#60;file
+</pre></blockquote>
+except that no <i>file</i> is used.  Instead the two processes  are
+connected  by a pipe (see <i>pipe</i> (2)) and are run in parallel.
+<p>
+Pipes are unidirectional and synchronization is achieved  by
+halting <i>wc</i> when there is nothing to read and halting <i>ls</i> when
+the pipe is full.
+<p>
+A <i>filter</i> is a command that reads its standard input,
+transforms  it in some way, and prints the result as output.  One
+such filter, <i>grep,</i> selects from its input those  lines  that
+contain some specified string.  For example,
+<blockquote><pre>
+	ls | grep old
+</pre></blockquote>
+prints  those lines, if any, of the output from <i>ls</i> that contain
+the string <i>old.</i>  Another useful filter  is  <i>sort</i>.   For
+example,
+<blockquote><pre>
+	who | sort
+</pre></blockquote>
+will print an alphabetically sorted list of logged in users.
+<p>
+A pipeline may consist of more than two commands, for  example,
+<blockquote><pre>
+	ls | grep old | wc -l
+</pre></blockquote>
+prints  the  number  of  file names in the current directory
+containing the string <i>old.</i>
+<h3>
+1.5 File name generation
+</h3>
+Many commands accept arguments which are  file  names.   For
+example,
+<blockquote><pre>
+	ls -l main.c
+</pre></blockquote>
+prints information relating to the file <i>main.c</i>.
+<p>
+The shell provides a mechanism for generating a list of file
+names that match a pattern.  For example,
+<blockquote><pre>
+	ls -l *.c
+</pre></blockquote>
+generates, as arguments to <i>ls,</i> all file names in the current
+directory that end in <i>.c.</i>  The character * is a pattern that
+will match any string including the null string.  In general
+<i>patterns</i> are specified as follows.
+<dl compact>
+<dt><b>*</b>
+<dd>       Matches  any string of characters including the
+null string.
+<dt><b>?</b>
+<dd>       Matches any single character.
+<dt><b>[...]</b>
+<dd>   Matches any one of the characters enclosed.   A
+pair  of  characters  separated by a minus will
+match any character lexically between the pair.
+</dl>
+For example,
+<blockquote><pre>
+	[a-z]*
+</pre></blockquote>
+matches  all  names  in the current directory beginning with
+one of the letters <i>a</i> through <i>z.</i>
+<blockquote><pre>
+	/usr/fred/test/?
+</pre></blockquote>
+matches all names in the directory <b>/usr/fred/test</b> that  consist  of  a single character.  If no file name is found that
+matches the pattern then the pattern is  passed,  unchanged,
+as an argument.
+<p>
+This  mechanism  is useful both to save typing and to select
+names according to some pattern.  It may  also  be  used  to
+find files.  For example,
+<blockquote><pre>
+	echo /usr/fred/*/core
+</pre></blockquote>
+finds and prints the names of all <i>core</i> files in sub-directories
+of <b>/usr/fred.</b>  (<i>echo</i> is a standard  UNIX  command  that
+prints  its arguments, separated by blanks.)  This last feature can be
+expensive, requiring a scan of all  sub-directories of
+<b>/usr/fred.</b>
+<p>
+There  is  one exception to the general rules given for patterns.  The
+character `<b>.</b>'  at the start of a file name  must
+be explicitly matched.
+<blockquote><pre>
+	echo *
+</pre></blockquote>
+will  therefore echo all file names in the current directory
+not beginning with `<b>.</b>'.
+<blockquote><pre>
+	echo <b>.</b>*
+</pre></blockquote>
+will echo all those file names that begin  with  `<b>.</b>'.   This
+avoids inadvertent matching of the names `<b>.</b>' and `<b>..</b>'  which
+mean `the current  directory'  and  `the  parent  directory'
+respectively.   (Notice  that  <i>ls</i> suppresses information for
+the files `<b>.</b>' and `<b>..</b>'.)
+<h3>
+1.6 Quoting
+</h3>
+Characters that have a special meaning to the shell, such as
+<b>&#60; &#62; * ? | &#38;,</b> are called metacharacters.  A complete
+list of 
+metacharacters is given in appendix B.  Any  character  preceded  by
+a  <b>\</b>  is <i>quoted</i> and loses its special meaning, if 
+any.  The <b>\</b> is elided so that
+<blockquote><pre>
+	echo \?
+</pre></blockquote>
+will echo a single <b>?,</b> and
+<blockquote><pre>
+	echo \\
+</pre></blockquote>
+will echo a single <b>\.</b>  To allow long strings to be continued
+over more than one line the sequence <b>\newline</b> is ignored.
+<p>
+<b>\</b>  is  convenient  for quoting single characters.  When more
+than one character needs  quoting  the  above  mechanism  is
+clumsy  and  error  prone.   A  string  of characters may be
+quoted by enclosing the string between single  quotes.   For
+example,
+<blockquote><pre>
+	echo xx'****'xx
+</pre></blockquote>
+will echo
+<blockquote><pre>
+	xx****xx
+</pre></blockquote>
+The  quoted  string  may  not contain a single quote but may
+contain newlines, which are preserved.  This quoting  mechanism is the
+most simple and is recommended for casual use.
+<p>
+A third quoting mechanism using double quotes is also available that
+prevents  interpretation  of  some  but  not  all
+metacharacters.   Discussion  of  the details is deferred to
+section 3.4.
+<h3>
+1.7 Prompting
+</h3>
+When the shell is used from  a  terminal  it  will  issue  a
+prompt  before reading a command.  By default this prompt is
+`<b>$</b> '.  It may be changed by saying, for example,
+<blockquote><pre>
+	PS1=yesdear
+</pre></blockquote>
+that sets the prompt to be the string <i>yesdear.</i>  If a newline
+is  typed  and  further  input is needed then the shell will
+issue the prompt `<b>&#62;</b> '.  Sometimes  this  can  be  caused  by
+mistyping  a quote mark.  If it is unexpected then an interrupt (DEL)
+will return the shell to  read  another  command.
+This prompt may be changed by saying, for example,
+<blockquote><pre>
+	PS2=more
+</pre></blockquote>
+<h3>
+1.8 The shell and login
+</h3>
+Following  <i>login</i> (1) the shell is called to read and execute
+commands typed at the terminal.  If the user's login  directory  contains  the file <b>.profile</b> then it is assumed to contain commands and is read by the shell  before  reading  any
+commands from the terminal.
+<h3>
+1.9 Summary
+</h3>
+<dl>
+<dt>     <b>ls</b>
+<dd>          Print the names of files in the current directory.
+<dt>     <b>ls &#62;file</b>
+<dd>          Put the output from <i>ls</i> into <i>file.</i>
+<dt>     <b>ls | wc -l</b>
+<dd>          Print the number of files in  the  current  directory.
+<dt>     <b>ls | grep old</b>
+<dd>          Print  those file names containing the string <i>old.</i>
+<dt>     <b>ls | grep old | wc -l</b>
+<dd>          Print the number of files whose name contains  the
+string <i>old.</i>
+<dt>     <b>cc pgm.c &#38;</b>
+<dd>          Run <i>cc</i> in the background.
+</dl>
+<h2>
+2.0 Shell procedures
+</h2>
+The shell may be used to read and execute commands contained
+in a file.  For example,
+<blockquote><pre>
+	sh file [ args <b>...</b> ]
+</pre></blockquote>
+calls the shell to read commands from <i>file.</i>  Such a file  is
+called  a  <i>command procedure</i> or <i>shell procedure.</i>
+Arguments 
+may be supplied with the call and are referred  to  in  <i>file</i>
+using  the  positional parameters <b>$1, $2, ....</b>  For example,
+if the file <i>wg</i> contains
+<blockquote><pre>
+	who | grep $1
+</pre></blockquote>
+then
+<blockquote><pre>
+	sh wg fred
+</pre></blockquote>
+is equivalent to
+<blockquote><pre>
+	who | grep fred
+</pre></blockquote>
+UNIX files have three independent  attributes,  <i>read,</i>  <i>write</i>
+and <i>execute.</i>  The UNIX command <i>chmod</i> (1) may be used to make
+a file executable.  For example,
+<blockquote><pre>
+	chmod +x wg
+</pre></blockquote>
+will ensure that the file <i>wg</i> has execute status.   Following
+this, the command
+<blockquote><pre>
+	wg fred
+</pre></blockquote>
+is equivalent to
+<blockquote><pre>
+	sh wg fred
+</pre></blockquote>
+This  allows shell procedures and programs to be used interchangeably.  In either case a new process is created to  run
+the command.
+<p>
+As  well  as  providing names for the positional parameters,
+the number of positional parameters in the call is available
+as  <b>$#.</b>  The name of the file being executed is available as
+<b>$0.</b>
+<p>
+A special shell parameter <b>$*</b> is used to substitute  for  all
+positional  parameters  except <b>$0.</b>  A typical use of this is
+to provide some default arguments, as in,
+<blockquote><pre>
+	nroff -T450 -ms $*
+</pre></blockquote>
+which simply prepends some arguments to those already given.
+<h3>
+2.1 Control flow - for
+</h3>
+A  frequent  use  of shell procedures is to loop through the
+arguments (<b>$1, $2, ...</b>)  executing commands  once  for  each
+argument.   An  example  of  such  a  procedure  is <i>tel</i> that
+searches the file <b>/usr/lib/telnos</b> that contains lines of the
+form
+<blockquote><pre>
+	<b>...</b>
+	fred mh0123
+	bert mh0789
+	<b>...</b>
+</pre></blockquote>
+The text of <i>tel</i> is
+<blockquote><pre>
+	for i
+	do grep $i /usr/lib/telnos; done
+</pre></blockquote>
+The command
+<blockquote><pre>
+	tel fred
+</pre></blockquote>
+prints  those  lines  in  <b>/usr/lib/telnos</b>  that  contain the
+string <i>fred.</i>
+<blockquote><pre>
+	tel fred bert
+</pre></blockquote>
+prints those lines containing <i>fred</i>  followed  by  those  for
+<i>bert.</i>
+<p>
+The <b>for</b> loop notation is recognized by the shell and has the
+general form
+<blockquote><pre>
+	<b>for</b> <i>name</i> <b>in</b> <i>w1 w2</i> <b>...</b>
+	<b>do</b> <i>command-list</i>
+	<b>done</b>
+</pre></blockquote>
+A <i>command-list</i> is a sequence of one or more simple  commands
+separated or terminated by a newline or semicolon.  Furthermore,
+reserved words like <b>do</b> and <b>done</b>  are  only  recognized
+following  a newline or semicolon.  <i>name</i> is a shell variable
+that is set to the words <i>w1 w2</i> <b>...</b> in  turn  each  time  the
+<i>command-list</i>  following <b>do</b> is executed.  If <b>in</b>
+<i>w1 w2</i> <b>...</b>  is
+omitted then the loop is executed once for  each  positional
+parameter; that is, <b>in</b> <i>$*</i> is assumed.
+<p>
+Another  example  of  the  use of the <b>for</b> loop is the <i>create</i>
+command whose text is
+<blockquote><pre>
+	for i do &#62;$i; done
+</pre></blockquote>
+The command
+<blockquote><pre>
+	create alpha beta
+</pre></blockquote>
+ensures that two empty files <i>alpha</i> and <i>beta</i>  exist  and  are
+empty.   The notation <i>&#62;file</i> may be used on its own to create
+or clear the contents of a file.  Notice also that  a  semicolon (or
+newline) is required before <b>done.</b>
+<h3>
+2.2 Control flow - case
+</h3>
+A  multiple way branch is provided for by the <b>case</b> notation.
+For example,
+<blockquote><pre>
+	case $# in
+	     1) cat &#62;&#62;$1 ;;
+	     2) cat &#62;&#62;$2 <$1 ;;
+	     *) echo \'usage: append [ from ] to\' ;;
+	esac
+</pre></blockquote>
+is an <i>append</i> command.  When called with one argument as
+<blockquote><pre>
+	append file
+</pre></blockquote>
+<b>$#</b> is the string <i>1</i> and the standard input is copied onto the
+end of <i>file</i> using the <i>cat</i> command.
+<blockquote><pre>
+	append file1 file2
+</pre></blockquote>
+appends  the contents of <i>file1</i> onto <i>file2.</i>  If the number of
+arguments supplied to <i>append</i> is other than 1  or  2  then  a
+message is printed indicating proper usage.
+<p>
+The general form of the <b>case</b> command is
+<blockquote><pre>
+	<b>case</b> <i>word</i> <b>in</b>
+	     <i>pattern</i><b>)</b> <i>command-list</i><b>;;</b>
+	     <b>...</b>
+	<b>esac</b>
+</pre></blockquote>
+The  shell  attempts to match <i>word</i> with each <i>pattern,</i> in the
+order in which the patterns appear.  If a match is found the
+associated  <i>command-list</i>  is  executed  and execution of the
+<b>case</b> is complete.  Since * is the pattern that  matches  any
+string it can be used for the default case.
+<p>
+A  word of caution: no check is made to ensure that only one
+pattern matches the case argument.  The  first  match  found
+defines  the set of commands to be executed.  In the example
+below the commands following the second * will never be executed.
+<blockquote><pre>
+	case $# in
+	     *) <b>...</b> ;;
+	     *) <b>...</b> ;;
+	esac
+</pre></blockquote>
+Another  example  of  the use of the <b>case</b> construction is to
+distinguish between different forms  of  an  argument.   The
+following example is a fragment of a <i>cc</i> command.
+<blockquote><pre>
+	for i
+	do case $i in
+	   -[ocs])      <b>...</b> ;;
+	   -*)  echo \'unknown flag $i\' ;;
+	   *.c) /lib/c0 $i <b>...</b> ;;
+	   *)   echo \'unexpected argument $i\' ;;
+	   esac
+	done
+</pre></blockquote>
+To  allow  the same commands to be associated with more than
+one pattern the <b>case</b> command provides for  alternative
+patterns separated by a <b>|</b>.  For example,
+<blockquote><pre>
+	case $i in
+	     -x|-y)     <b>...</b>
+	esac
+</pre></blockquote>
+is equivalent to
+<blockquote><pre>
+	case $i in
+	     -[xy])     <b>...</b>
+	esac
+</pre></blockquote>
+The usual quoting conventions apply so that
+<blockquote><pre>
+	case $i in
+	     \?)       <b>...</b>
+</pre></blockquote>
+will match the character <b>?.</b>
+<h3>
+2.3 Here documents
+</h3>
+The  shell  procedure  <i>tel</i>  in  section  2.1  uses  the file
+<b>/usr/lib/telnos</b> to supply the data for <i>grep.</i>  An alternative
+is to include this data within the shell procedure as a <i>here</i>
+document, as in,
+<blockquote><pre>
+	for i
+	do grep $i &#60;&#60;!
+	   <b>...</b>
+	   fred mh0123
+	   bert mh0789
+	   <b>...</b>
+	!
+	done
+</pre></blockquote>
+In this example the shell takes the lines between <b>&#60;&#60;!</b>
+and  <b>!</b>
+as  the standard input for <i>grep.</i>  The string <b>!</b> is arbitrary,
+the document being terminated by a line that consists of the
+string following &#60;&#60;.
+<p>
+Parameters are substituted in the document before it is made
+available to <i>grep</i> as illustrated by the following  procedure
+called <i>edg.</i>
+<blockquote><pre>
+	ed $3 &#60;&#60;%
+	g/$1/s//$2/g
+	w
+	%
+</pre></blockquote>
+The call
+<blockquote><pre>
+	edg string1 string2 file
+</pre></blockquote>
+is then equivalent to the command
+<blockquote><pre>
+	ed file &#60;&#60;%
+	g/string1/s//string2/g
+	w
+	%
+</pre></blockquote>
+and  changes  all occurrences of <i>string1</i> in <i>file</i> to
+<i>string2.</i> 
+Substitution can be prevented using \ to quote  the  special
+character <b>$</b> as in
+<blockquote><pre>
+	ed $3 &#60;&#60;+
+	1,\$s/$1/$2/g
+	w
+	+
+</pre></blockquote>
+(This  version of <i>edg</i> is equivalent to the first except that
+<i>ed</i> will print a <b>?</b> if there are no occurrences of the  string
+<b>$1.</b>)   Substitution  within a <i>here</i> document may be prevented
+entirely by quoting the terminating string, for example,
+<blockquote><pre>
+	grep $i &#60;&#60;\#
+	<b>...</b>
+	#
+</pre></blockquote>
+The document is presented without modification to <i>grep.</i>   If
+parameter  substitution  is  not required in a <i>here</i> document
+this latter form is more efficient.
+<h3>
+2.4 Shell variables
+</h3>
+The shell provides string-valued variables.  Variable  names
+begin  with  a  letter  and  consist  of letters, digits and
+underscores.  Variables may be given values by writing,  for
+example,
+<blockquote><pre>
+	user=fred box=m000 acct=mh0000
+</pre></blockquote>
+which assigns values to the variables <b>user, box</b> and <b>acct.</b>  A
+variable may be set to the null string by saying, for  example,
+<blockquote><pre>
+	null=
+</pre></blockquote>
+The value of a variable is substituted by preceding its name
+with <b>$;</b> for example,
+<blockquote><pre>
+	echo $user
+</pre></blockquote>
+will echo <i>fred.</i>
+<p>
+Variables may be used interactively to provide abbreviations
+for frequently used strings.  For example,
+<blockquote><pre>
+	b=/usr/fred/bin
+	mv pgm $b
+</pre></blockquote>
+will  move  the  file  <i>pgm</i> from the current directory to the
+directory <b>/usr/fred/bin.</b>  A more general notation is  available for parameter (or variable) substitution, as in,
+<blockquote><pre>
+	echo ${user}
+</pre></blockquote>
+which is equivalent to
+<blockquote><pre>
+	echo $user
+</pre></blockquote>
+and  is used when the parameter name is followed by a letter
+or digit.  For example,
+<blockquote><pre>
+	tmp=/tmp/ps
+	ps a &#62;${tmp}a
+</pre></blockquote>
+will direct the output of <i>ps</i> to the file <b>/tmp/psa,</b> whereas,
+<blockquote><pre>
+	ps a &#62;$tmpa
+</pre></blockquote>
+would cause the value of the variable  <b>tmpa</b>  to  be  substituted.
+<p>
+Except  for <b>$?</b> the following are set initially by the shell.
+<b>$?</b> is set after executing each command.
+<dl compact>
+<dt>     <b>$?</b>
+<dd>      The exit status (return code) of the last  command  executed
+as a decimal string.  Most commands return a zero exit status  if
+they  complete  successfully,  otherwise a non-zero exit 
+status  is  returned.   Testing  the  value  of
+return  codes  is dealt with later under <b>if</b> and
+<b>while</b> commands.
+<dt>     <b>$#</b>
+<dd>      The number of positional parameters  (in  decimal).  Used,
+for example, in the <i>append</i> command
+to check the number of parameters.
+<dt>     <b>$$</b>
+<dd>      The process number of this shell (in  decimal).
+Since  process  numbers  are  unique  among all
+existing processes, this string  is  frequently
+used  to  generate unique temporary file names.
+For example,
+<blockquote><pre>
+	ps a &#62;/tmp/ps$$
+	<b>...</b>
+	rm /tmp/ps$$
+</pre></blockquote>
+<dt>     <b>$!</b>
+<dd>      The process number of the last process  run  in
+the background (in decimal).
+<dt>     <b>$-</b>
+<dd>      The current shell flags, such as <b>-x</b> and <b>-v.</b>
+</dl>
+Some  variables  have  a  special  meaning  to the shell and
+should be avoided for general use.
+<dl compact>
+<dt>     <b>$MAIL</b>
+<dd>   When used interactively the shell looks at  the
+file  specified  by  this  variable  before  it
+issues a prompt.  If  the  specified  file  has
+been  modified  since it was last looked at the
+shell prints the message <i>you have</i>  <i>mail</i>  before
+prompting  for the next command.  This variable
+is typically set in the file <b>.profile,</b>  in  the
+user's login directory.  For example,
+<blockquote><pre>
+	MAIL=/usr/mail/fred
+</pre></blockquote>
+<dt>     <b>$HOME</b>
+<dd>   The  default  argument for the <i>cd</i> command.  The
+current directory is used to resolve file  name
+references  that  do not begin with a <b>/,</b> and is
+changed using the <i>cd</i> command.  For example,
+<blockquote><pre>
+	cd /usr/fred/bin
+</pre></blockquote>
+makes the current directory <b>/usr/fred/bin.</b>
+<blockquote><pre>
+	cat wn
+</pre></blockquote>
+will print on the terminal the file <i>wn</i> in  this
+directory.   The command <i>cd</i> with no argument is
+equivalent to
+<blockquote><pre>
+	cd $HOME
+</pre></blockquote>
+This variable is also typically set in the  the
+user's login profile.
+<dt>     <b>$PATH</b>
+<dd>   A  list  of  directories  that contain commands
+(the <i>search path</i>).  Each time a command is
+executed  by  the  shell  a list of directories is
+searched for an executable file.  If  <b>$PATH</b>  is
+not  set  then the current directory, <b>/bin</b>, and
+<b>/usr/bin</b> are searched  by  default.   Otherwise
+<b>$PATH</b>  consists of directory names separated by
+<b>:.</b>  For example,
+<blockquote><pre>
+	PATH=<b>:</b>/usr/fred/bin<b>:</b>/bin<b>:</b>/usr/bin
+</pre></blockquote>
+specifies that the current directory (the  null
+string before the first <b>:</b>), <b>/usr/fred/bin, /bin</b>
+and <b>/usr/bin</b> are to be searched in that  order.
+In this way individual users can have their own
+`private' commands that are accessible independently  of
+the current directory.  If the command name contains  a  <b>/</b>
+then  this  directory 
+search is not used; a single attempt is made to
+execute the command.
+<dt>     <b>$PS1</b>
+<dd>    The primary shell prompt  string,  by  default,
+`<b>$</b> '.
+<dt>     <b>$PS2</b>
+<dd>    The  shell prompt when further input is needed,
+by default, `<b>&#62;</b> '.
+<dt>     <b>$IFS</b>
+<dd>    The set of characters used by <i>blank interpretation</i> (see
+section 3.4).
+</dl>
+<h3>
+2.5 The test command
+</h3>
+The  <i>test</i>  command,  although  not  part  of  the  shell, is
+intended for use by shell programs.  For example,
+<blockquote><pre>
+	test -f file
+</pre></blockquote>
+returns zero exit status if <i>file</i> exists  and  non-zero  exit
+status otherwise.  In general <i>test</i> evaluates a predicate and
+returns the result as its exit status.   Some  of  the  more
+frequently  used <i>test</i> arguments are given here, see <i>test</i> (1)
+for a complete specification.
+<dl compact>
+<dt> test s       <dd>   true if the argument <i>s</i> is not the null string
+<dt> test -f file <dd>   true if <i>file</i> exists
+<dt> test -r file <dd>   true if <i>file</i> is readable
+<dt> test -w file <dd>   true if <i>file</i> is writable
+<dt> test -d file <dd>   true if <i>file</i> is a directory
+</dl>
+<h3>
+2.6 Control flow - while
+</h3>
+The actions of the <b>for</b> loop and the <b>case</b> branch  are  determined by data available to the shell.  A <b>while</b> or <b>until</b> loop
+and an <b>if then else</b> branch are also provided  whose  actions
+are  determined  by the exit status returned by commands.  A
+<b>while</b> loop has the general form
+<blockquote><pre>
+	<b>while</b> <i>command-list1</i>
+	<b>do</b> <i>command-list2</i>
+	<b>done</b>
+</pre></blockquote>
+The value tested by the <b>while</b> command is the exit status  of
+the  last  simple  command following <b>while.</b>  Each time round
+the loop <i>command-list1</i> is executed; if a zero exit status is
+returned then <i>command-list2</i> is executed; otherwise, the loop
+terminates.  For example,
+<blockquote><pre>
+	while test $1
+	do <b>...</b>
+	   shift
+	done
+</pre></blockquote>
+is equivalent to
+<blockquote><pre>
+	for i
+	do <b>...</b>
+	done
+</pre></blockquote>
+<i>shift</i> is a shell command that renames the positional parameters
+<b>$2, $3, ...</b> as <b>$1, $2, ...</b>  and loses <b>$1.</b>
+<p>
+Another  kind  of  use  for  the <b>while/until</b> loop is to wait
+until some external event occurs and then run some commands.
+In an <b>until</b> loop the termination condition is reversed.  For
+example,
+<blockquote><pre>
+	until test -f file
+	do sleep 300; done
+	<i>commands</i>
+</pre></blockquote>
+will loop until <i>file</i> exists.  Each time round  the  loop  it
+waits  for  5  minutes  before  trying  again.   (Presumably
+another process will eventually create the file.)
+<h3>
+2.7 Control flow - if
+</h3>
+Also available is a general conditional branch of the form,
+<blockquote><pre>
+	<b>if</b> <i>command-list</i>
+	<b>then</b>    <i>command-list</i>
+	<b>else</b>    <i>command-list</i>
+	<b>fi</b>
+</pre></blockquote>
+that tests the value returned by  the  last  simple  command
+following <b>if.</b>
+<p>
+The <b>if</b> command may be used in conjunction with the <i>test</i>
+command to test for the existence of a file as in
+<blockquote><pre>
+	if test -f file
+	then    <i>process file</i>
+	else    <i>do something else</i>
+	fi
+</pre></blockquote>
+An example of the use of <b>if, case</b> and <b>for</b>  constructions  is
+given in section 2.10.
+<p>
+A multiple test <b>if</b> command of the form
+<blockquote><pre>
+	if <b>...</b>
+	then    <b>...</b>
+	else    if <b>...</b>
+		then    <b>...</b>
+		else    if <b>...</b>
+			<b>...</b>
+			fi
+		fi
+	fi
+</pre></blockquote>
+may be written using an extension of the <b>if</b> notation as,
+<blockquote><pre>
+	if <b>...</b>
+	then    <b>...</b>
+	elif    <b>...</b>
+	then    <b>...</b>
+	elif    <b>...</b>
+	<b>...</b>
+	fi
+</pre></blockquote>
+The following example is the <i>touch</i> command which changes the
+`last modified' time for a list of files.  The  command  may
+be  used in conjunction with <i>make</i> (1) to force recompilation
+of a list of files.
+<blockquote><pre>
+	flag=
+	for i
+	do case $i in
+	   -c)  flag=N ;;
+	   *)   if test -f $i
+		then    ln $i junk$$; rm junk$$
+		elif test $flag
+		then    echo file \'$i\' does not exist
+		else    &#62;$i
+		fi
+	    esac
+	done
+</pre></blockquote>
+The <b>-c</b> flag is used in  this  command  to  force  subsequent
+files  to  be  created if they do not already exist.  Otherwise, if
+the file  does  not  exist,  an  error  message  is
+printed.   The  shell  variable <i>flag</i> is set to some non-null
+string if the <b>-c</b> argument is encountered.  The commands
+<blockquote><pre>
+	ln <b>...</b>; rm <b>...</b>
+</pre></blockquote>
+make a link to the file and then remove it thus causing  the
+last modified date to be updated.
+<p>
+The sequence
+<blockquote><pre>
+	if command1
+	then    command2
+	fi
+</pre></blockquote>
+may be written
+<blockquote><pre>
+	command1 &#38;&#38; command2
+</pre></blockquote>
+Conversely,
+<blockquote><pre>
+	command1 <b>||</b> command2
+</pre></blockquote>
+executes  <i>command2</i> only if <i>command1</i> fails.  In each case the
+value returned is that of the last simple command  executed.
+<h3>
+2.8 Command grouping
+</h3>
+Commands may be grouped in two ways,
+<blockquote><pre>
+	<b>{</b> <i>command-list</i> <b>; }</b>
+</pre></blockquote>
+and
+<blockquote><pre>
+	<b>(</b> <i>command-list</i> <b>)</b>
+</pre></blockquote>
+In  the  first  <i>command-list</i> is simply executed.  The second
+form executes <i>command-list</i> as a separate process.  For example,
+<blockquote><pre>
+	(cd x; rm junk )
+</pre></blockquote>
+executes  <i>rm</i>  <i>junk</i>  in  the directory <b>x</b> without
+changing the
+current directory of the invoking shell.
+<p>
+The commands
+<blockquote><pre>
+	cd x; rm junk
+</pre></blockquote>
+have the same effect but leave the  invoking  shell  in  the
+directory <b>x.</b>
+<h3>
+2.9 Debugging shell procedures
+</h3>
+The  shell  provides  two  tracing  mechanisms  to help when
+debugging shell procedures.  The first is invoked within the
+procedure as
+<blockquote><pre>
+	set -v
+</pre></blockquote>
+(<b>v</b>  for  verbose)  and  causes  lines of the procedure to be
+printed as they are read.  It is useful to help isolate syntax  errors.  It may be invoked without modifying the procedure by saying
+<blockquote><pre>
+	sh -v proc <b>...</b>
+</pre></blockquote>
+where <i>proc</i> is the name of the shell  procedure.   This  flag
+may  be  used in conjunction with the <b>-n</b> flag which prevents
+execution of subsequent commands.  (Note that saying <i>set</i>  <i>-n</i>
+at a terminal will render the terminal useless until an end-
+of-file is typed.)
+<p>
+The command
+<blockquote><pre>
+	set -x
+</pre></blockquote>
+will produce an execution trace.  Following  parameter  substitution  each  command is printed as it is executed.  (Try
+these at the terminal to see what effect they  have.)   Both
+flags may be turned off by saying
+<blockquote><pre>
+	set -
+</pre></blockquote>
+and  the  current setting of the shell flags is available as
+<b>$-.</b>
+<h3>
+2.10 The man command
+</h3>
+The following is the <i>man</i> command which is used to print sections of the UNIX manual.  It is called, for example, as
+<blockquote><pre>
+	$ <b>man sh</b>
+	$ <b>man -t ed</b>
+	$ <b>man 2 fork</b>
+</pre></blockquote>
+In the first the manual section for <i>sh</i> is printed.  Since no
+section is specified, section 1 is used.  The second example
+will  typeset  (<b>-t</b>  option)  the manual section for <i>ed.</i>  The
+last prints the <i>fork</i> manual page from section 2.
+<blockquote>
+<blockquote><pre>
+	cd /usr/man
+
+	: 'colon is the comment command'
+	: 'default is nroff ($N), section 1 ($s)'
+	N=n s=1
+
+	for i
+	do case $i in
+	   [1-9]*)      s=$i ;;
+	   -t)  N=t ;;
+	   -n)  N=n ;;
+	   -*)  echo unknown flag \'$i\' ;;
+	   *)   if test -f man$s/$i.$s
+		then    ${N}roff man0/${N}aa man$s/$i.$s
+		else    : 'look through all manual sections'
+			found=no
+			for j in 1 2 3 4 5 6 7 8 9
+			do if test -f man$j/$i.$j
+			   then man $j $i
+				found=yes
+			   fi
+			done
+			case $found in
+			     no) echo \'$i: manual page not found\'
+			esac
+		fi
+	   esac
+	done
+</pre></blockquote>
+<b>Figure 1. A version of the man command</b>
+</blockquote>
+<h2>
+3.0 Keyword parameters
+</h2>
+Shell variables may be given values by assignment or when  a
+shell  procedure  is invoked.  An argument to a shell procedure of the
+form <i>name=value</i> that precedes the  command  name
+causes  <i>value</i> to be assigned to <i>name</i> before execution of the
+procedure begins.  The value of <i>name</i> in the  invoking  shell
+is not affected.  For example,
+<blockquote><pre>
+	user=fred command
+</pre></blockquote>
+will  execute  <i>command</i>  with  <b>user</b> set to <i>fred</i>.
+The <b>-k</b> flag
+causes arguments of the form <i>name=value</i> to be interpreted in
+this  way  anywhere  in  the  argument list.  Such <i>names</i> are
+sometimes  called  keyword  parameters.   If  any  arguments
+remain  they  are available as positional parameters <b>$1, $2,</b>
+<b>....</b>
+<p>
+The <i>set</i> command may also be used to set  positional  parameters
+from within a procedure.  For example,
+<blockquote><pre>
+	set - *
+</pre></blockquote>
+will set <b>$1</b> to the first file name in the current directory,
+<b>$2</b> to the next, and so on.  Note that the first argument, -,
+ensures  correct  treatment  when the first file name begins
+with a -.
+<h3>
+3.1 Parameter transmission
+</h3>
+When a shell procedure is invoked both positional  and  keyword
+parameters  may  be  supplied  with the call.  Keyword
+parameters are also made available  implicitly  to  a  shell
+procedure  by specifying in advance that such parameters are
+to be exported.  For example,
+<blockquote><pre>
+	export user box
+</pre></blockquote>
+marks the variables <b>user</b> and <b>box</b> for export.  When  a  shell
+procedure is invoked copies are made of all exportable variables for
+use within the invoked procedure.  Modification of 
+such variables within the procedure does not affect the values in the
+invoking shell.  It is generally true of a  shell 
+procedure  that  it  may  not modify the state of its caller
+without explicit request on the part of the caller.  (Shared
+file descriptors are an exception to this rule.)
+<p>
+Names  whose  value  is  intended  to remain constant may be
+declared <i>readonly.</i>  The form of this command is the same  as
+that of the <i>export</i> command,
+<blockquote><pre>
+	readonly name <b>...</b>
+</pre></blockquote>
+Subsequent attempts to set readonly variables are illegal.
+<h3>
+3.2 Parameter substitution
+</h3>
+If a shell parameter is not set then the null string is substituted for it.  For example, if the variable <b>d</b> is not set
+<blockquote><pre>
+	echo $d
+</pre></blockquote>
+or
+<blockquote><pre>
+	echo ${d}
+</pre></blockquote>
+will echo nothing.  A default string may be given as in
+<blockquote><pre>
+	echo ${d-<b>.</b>}
+</pre></blockquote>
+which will echo the value of the variable <b>d</b> if it is set and
+`<b>.</b>'  otherwise.   The  default string is evaluated using the
+usual quoting conventions so that
+<blockquote><pre>
+	echo ${d-'*'}
+</pre></blockquote>
+will echo <b>*</b> if the variable <b>d</b> is not set.  Similarly
+<blockquote><pre>
+	echo ${d-$1}
+</pre></blockquote>
+will echo the value of <b>d</b> if it is set and the value (if any)
+of <b>$1</b> otherwise.  A variable may be assigned a default value
+using the notation
+<blockquote><pre>
+	echo ${d=<b>.</b>}
+</pre></blockquote>
+which substitutes the same string as
+<blockquote><pre>
+	echo ${d-<b>.</b>}
+</pre></blockquote>
+and if <b>d</b> were not previously set then it will be set to  the
+string  `<b>.</b>'.   (The notation ${<b>...</b>=<b>...</b>} is not
+available for
+positional parameters.)
+<p>
+If there is no sensible default then the notation
+<blockquote><pre>
+	echo ${d?message}
+</pre></blockquote>
+will echo the value of the variable <b>d</b> if it has one,  otherwise
+<i>message</i>  is  printed by the shell and execution of the
+shell procedure is abandoned.  If <i>message</i> is absent  then  a
+standard   message  is  printed.   A  shell  procedure  that
+requires some parameters to be set might start as follows.
+<blockquote><pre>
+	: ${user?} ${acct?} ${bin?}
+	<b>...</b>
+</pre></blockquote>
+Colon (<b>:</b>) is a command that is built in  to  the  shell  and
+does nothing once its arguments have been evaluated.  If any
+of the variables <b>user, acct</b> or <b>bin</b>  are  not  set  then  the
+shell will abandon execution of the procedure.
+<h3>
+3.3 Command substitution
+</h3>
+The  standard  output from a command can be substituted in a
+similar way to parameters.  The command <i>pwd</i>  prints  on  its
+standard  output  the  name  of  the current directory.  For
+example, if the current directory is <b>/usr/fred/bin</b> then  the
+command
+<blockquote><pre>
+	d=`pwd`
+</pre></blockquote>
+is equivalent to
+<blockquote><pre>
+	d=/usr/fred/bin
+</pre></blockquote>
+The  entire string between grave accents (`<b>...</b>`) is taken as
+the command to be executed and is replaced with  the  output
+from  the  command.   The command is written using the usual
+quoting conventions except that a <b>`</b> must be escaped using  a
+<b>\.</b>  For example,
+<blockquote><pre>
+	ls `echo "$1"`
+</pre></blockquote>
+is equivalent to
+<blockquote><pre>
+	ls $1
+</pre></blockquote>
+Command  substitution occurs in all contexts where parameter
+substitution  occurs  (including  <i>here</i>  documents)  and  the
+treatment  of  the resulting text is the same in both cases.
+This mechanism allows string processing commands to be  used
+within  shell  procedures.   An example of such a command is
+<i>basename</i> which removes a specified  suffix  from  a  string.
+For example,
+<blockquote><pre>
+	basename main<b>.</b>c <b>.</b>c
+</pre></blockquote>
+will  print  the string <i>main.</i>  Its use is illustrated by the
+following fragment from a <i>cc</i> command.
+<blockquote><pre>
+	case $A in
+	     <b>...</b>
+	     *<b>.</b>c)       B=`basename $A <b>.</b>c`
+	     <b>...</b>
+	esac
+</pre></blockquote>
+that sets <b>B</b> to the part of <b>$A</b> with the suffix <b>.c</b>
+stripped. 
+<p>
+Here are some composite examples.
+<dl>
+<dt>     ·    <b>for i in `ls -t`; do ...</b>
+<dd>
+The variable <b>i</b> is set to the  names  of  files  in
+time order, most recent first.
+<dt>     ·    <b>set `date`; echo $6 $2 $3, $4</b>
+<dd>
+will print, e.g., <i>1977 Nov 1, 23:59:59</i>
+</dl>
+<h3>
+3.4 Evaluation and quoting
+</h3>
+The  shell is a macro processor that provides parameter substitution,
+command substitution and file name generation for
+the arguments to commands.  This section discusses the order
+in which these evaluations occur and the effects of the various
+quoting mechanisms.
+<p>
+Commands are parsed initially according to the grammar given
+in appendix A.  Before a command is executed  the  following
+substitutions occur.
+<dl>
+<dt>    parameter substitution, e.g. <b>$user</b>
+<dt>    command substitution, e.g. <b>`pwd`</b>
+<dd>          Only  one  evaluation occurs so that if, for example,
+the value of the variable <b>X</b> is the string  <i>$y</i>
+then
+<blockquote><pre>
+	echo $X
+</pre></blockquote>
+will echo <i>$y.</i>
+<dt>    blank interpretation
+<dd>          Following  the  above  substitutions the resulting
+characters are broken into non-blank words  (<i>blank</i>
+<i>interpretation</i>).   For  this  purpose `blanks' are
+the characters of the string  <b>$IFS</b>.   By  default,
+this  string  consists  of blank, tab and newline.
+The null string is not regarded as a  word  unless
+it is quoted.  For example,
+<blockquote><pre>
+	echo ''
+</pre></blockquote>
+will pass on the null string as the first argument
+to <i>echo</i>, whereas
+<blockquote><pre>
+	echo $null
+</pre></blockquote>
+will call <i>echo</i> with no arguments if  the  variable
+<b>null</b> is not set or set to the null string.
+<dt>    file name generation
+<dd>          Each  word  is  then  scanned for the file pattern
+characters <b>*, ?</b> and  <b>[...]</b>   and  an  alphabetical
+list  of  file  names  is generated to replace the
+word.  Each such file name is a separate argument.
+</dl>
+The  evaluations  just  described  also occur in the list of
+words associated with a <b>for</b> loop.  Only substitution  occurs
+in the <i>word</i> used for a <b>case</b> branch.
+<p>
+As  well as the quoting mechanisms described earlier using <b>\</b>
+and <b>'...'</b> a third quoting mechanism is provided using double
+quotes.   Within double quotes parameter and command substitution occurs but file name generation and  the  interpretation  of  blanks  does not.  The following characters have a
+special meaning within double quotes and may be quoted using
+<b>\.</b>
+<dl compact>
+<dt>    <b>$</b>  <dd>     parameter substitution
+<dt>    <b>`</b>  <dd>     command substitution
+<dt>    <b>"</b>  <dd>     ends the quoted string
+<dt>    <b>\</b>  <dd>     quotes the special characters
+<b>$ ` " \</b>
+</dl>
+For example,
+<blockquote><pre>
+	echo "$x"
+</pre></blockquote>
+will  pass  the value of the variable <b>x</b> as a single argument
+to <i>echo.</i>  Similarly,
+<blockquote><pre>
+	echo "$*"
+</pre></blockquote>
+will pass the positional parameters as a single argument and
+is equivalent to
+<blockquote><pre>
+	echo "$1 $2 <b>...</b>"
+</pre></blockquote>
+The  notation <b>$@</b> is the same as <b>$*</b> except when it is quoted.
+<blockquote><pre>
+	echo "$@"
+</pre></blockquote>
+will pass the positional parameters,  unevaluated,  to  <i>echo</i>
+and is equivalent to
+<blockquote><pre>
+	echo "$1" "$2" <b>...</b>
+</pre></blockquote>
+The  following  table gives, for each quoting mechanism, the
+shell metacharacters that are evaluated.
+<blockquote>
+<blockquote><pre>
+                           <i>metacharacter</i>
+                       \       $       *       `       "       '
+               '       n       n       n       n       n       t
+               `       y       n       n       t       n       n
+               "       y       y       n       y       t       n
+
+                       t       terminator
+                       y       interpreted
+                       n       not interpreted
+</pre></blockquote>
+<b>Figure 2. Quoting mechanisms</b>
+</blockquote>
+In cases where more than  one  evaluation  of  a  string  is
+required  the  built-in command <i>eval</i> may be used.  For example, if the variable <b>X</b> has the value <i>$y</i>, and if  <b>y</b>  has  the
+value <i>pqr</i> then
+<blockquote><pre>
+	eval echo $X
+</pre></blockquote>
+will echo the string <i>pqr.</i>
+<p>
+In  general  the <i>eval</i> command evaluates its arguments (as do
+all commands) and treats the result as input to  the  shell.
+The  input  is  read  and the resulting command(s) executed.
+For example,
+<blockquote><pre>
+	wg=\'eval who|grep\'
+	$wg fred
+</pre></blockquote>
+is equivalent to
+<blockquote><pre>
+	who|grep fred
+</pre></blockquote>
+In this example, <i>eval</i> is required since there is  no
+interpretation  of metacharacters, such as <b>|, following
+substitution.</b>
+<h3>
+3.5 Error handling
+</h3>
+The treatment of errors detected by the shell depends on the
+type  of error and on whether the shell is being used interactively.
+An interactive shell is one whose input and  output are connected to a
+terminal (as determined by <i>gtty</i> (2)).
+A shell invoked with the <b>-i</b> flag is also interactive.
+<p>
+Execution of a command (see also 3.7) may fail  for  any  of
+the following reasons.
+<ul>
+<li>    Input - output  redirection may fail.  For example, if a
+file does not exist or cannot be created.
+<li>    The  command  itself  does  not  exist  or  cannot   be
+executed.
+<li>    The  command terminates abnormally, for example, with a
+"bus error" or "memory fault".  See Figure 2 below  for
+a complete list of UNIX signals.
+<li>    The  command terminates normally but returns a non-zero
+exit status.
+</ul>
+In all of these cases the shell will go on  to  execute  the
+next  command.   Except  for  the last case an error message
+will be printed by the shell.  All  remaining  errors  cause
+the  shell to exit from a command procedure.  An interactive
+shell will return to read another command from the terminal.
+Such errors include the following.
+<ul>
+<li>    Syntax errors.  e.g., if <b>...</b> then <b>...</b> done
+<li>    A  signal  such  as interrupt.  The shell waits for the
+current command, if any, to finish execution  and  then
+either exits or returns to the terminal.
+<li>    Failure of any of the built-in commands such as <i>cd.</i>
+</ul>
+The shell flag <b>-e</b> causes the shell to terminate if any error
+is detected.
+<blockquote>
+<dl compact>
+<dt>        1    <dd>   hangup
+<dt>        2    <dd>   interrupt
+<dt>        3*   <dd>   quit
+<dt>        4*   <dd>   illegal instruction
+<dt>        5*   <dd>   trace trap
+<dt>        6*   <dd>   IOT instruction
+<dt>        7*   <dd>   EMT instruction
+<dt>        8*   <dd>   floating point exception
+<dt>        9    <dd>   kill (cannot be caught or ignored)
+<dt>        10*  <dd>   bus error
+<dt>        11*  <dd>   segmentation violation
+<dt>        12*  <dd>   bad argument to system call
+<dt>        13   <dd>   write on a pipe with no one to read it
+<dt>        14   <dd>   alarm clock
+<dt>        15   <dd>   software termination (from <i>kill</i> (1))
+</dl>
+<b>Figure 3. UNIX signals</b>
+</blockquote>
+Those signals marked with an asterisk produce a core dump if
+not caught.  However, the shell itself ignores quit which is
+the only external signal that can cause a dump.  The signals
+in  this list of potential interest to shell programs are 1,
+2, 3, 14 and 15.
+<h3>
+3.6 Fault handling
+</h3>
+Shell procedures normally terminate  when  an  interrupt  is
+received  from  the  terminal.   The <i>trap</i> command is used if
+some cleaning up is required,  such  as  removing  temporary
+files.  For example,
+<blockquote><pre>
+	trap 'rm /tmp/ps$$; exit' 2
+</pre></blockquote>
+sets  a  trap for signal 2 (terminal interrupt), and if this
+signal is received will execute the commands
+<blockquote><pre>
+	rm /tmp/ps$$; exit
+</pre></blockquote>
+<i>exit</i> is another built-in command that  terminates  execution
+of  a  shell  procedure.   The  <i>exit</i> is required; otherwise,
+after the trap has been taken, the shell will resume executing the
+procedure at the place where it was interrupted.
+<p>
+UNIX  signals can be handled in one of three ways.  They can
+be ignored, in which case the signal is never  sent  to  the
+process.  They can be caught, in which case the process must
+decide what action to take  when  the  signal  is  received.
+Lastly, they can be left to cause termination of the process
+without it having to take any further action.  If  a  signal
+is  being ignored on entry to the shell procedure, for example, by
+invoking it in the background (see  3.7)  then  <i>trap</i>
+commands (and the signal) are ignored.
+<p>
+The  use  of <i>trap</i> is illustrated by this modified version of
+the <i>touch</i> command (Figure 4).   The  cleanup  action  is  to
+remove the file <b>junk$$</b>.
+<blockquote>
+<blockquote><pre>
+	flag=
+	trap 'rm -f junk$$; exit' 1 2 3 15
+	for i
+	do case $i in
+	   -c)  flag=N ;;
+	   *)   if test -f $i
+		then    ln $i junk$$; rm junk$$
+		elif test $flag
+		then    echo file \'$i\' does not exist
+		else    &#62;$i
+		fi
+	   esac
+	done
+</pre></blockquote>
+<b>Figure 4. The touch command</b>
+</blockquote>
+The  <i>trap</i>  command appears before the creation of the temporary
+file; otherwise it would be possible for the process to
+die without removing the file.
+<p>
+Since  there  is no signal 0 in UNIX it is used by the shell
+to indicate the commands to be executed  on  exit  from  the
+shell procedure.
+<p>
+A procedure may, itself, elect to ignore signals by specifying the null string as the argument to trap.  The  following
+fragment is taken from the <i>nohup</i> command.
+<blockquote><pre>
+	trap '' 1 2 3 15
+</pre></blockquote>
+which  causes <i>hangup, interrupt, quit</i> and <i>kill</i> to be ignored
+both by the procedure and by invoked commands.
+<p>
+Traps may be reset by saying
+<blockquote><pre>
+	trap 2 3
+</pre></blockquote>
+which resets the traps for signals 2 and 3 to their  default
+values.   A  list  of  the  current  values  of traps may be
+obtained by writing
+<blockquote><pre>
+	trap
+</pre></blockquote>
+The procedure <i>scan</i> (Figure 5) is an example of  the  use  of
+<i>trap</i> where there is no exit in the trap command.  <i>scan</i> takes
+each directory in the current directory,  prompts  with  its
+name, and then executes commands typed at the terminal until
+an end of file or an interrupt is received.  Interrupts  are
+ignored  while  executing  the  requested commands but cause
+termination when <i>scan</i> is waiting for input.
+<blockquote>
+<blockquote><pre>
+	d=`pwd`
+	for i in *
+	do if test -d $d/$i
+	   then cd $d/$i
+		while echo "$i:"
+		      trap exit 2
+		      read x
+		do trap : 2; eval $x; done
+	   fi
+	done
+</pre></blockquote>
+<b>Figure 5. The scan command</b>
+</blockquote>
+<i>read x</i> is a built-in command that reads one  line  from  the
+standard  input and places the result in the variable <b>x.</b>  It
+returns a non-zero exit status if either an  end-of-file  is
+read or an interrupt is received.
+<h3>
+3.7 Command execution
+</h3>
+To  run  a  command  (other than a built-in) the shell first
+creates a new process using the system call <i>fork.</i>  The
+execution  environment  for  the command includes input, output
+and the states of signals, and is established in  the  child
+process  before  the command is executed.  The built-in command
+<i>exec</i> is used in the rare cases when no fork is required
+and simply replaces the shell with a new command.  For example, a
+simple version of the <i>nohup</i> command looks like
+<blockquote><pre>
+	trap \'\' 1 2 3 15
+	exec $*
+</pre></blockquote>
+The <i>trap</i> turns off the signals specified so  that  they  are
+ignored  by  subsequently created commands and <i>exec</i> replaces
+the shell by the command specified.
+<p>
+Most forms of input output  redirection  have  already  been
+described.  In the following <i>word</i> is only subject to parameter and command substitution.  No file  name  generation  or
+blank interpretation takes place so that, for example,
+<blockquote><pre>
+	echo <b>...</b> &#62;*.c
+</pre></blockquote>
+will  write its output into a file whose name is <b>*.c.</b>  Input
+output specifications are evaluated left to  right  as  they
+appear in the command.
+<dl compact>
+<dt>&#62; <i>word</i>
+<dd>      The  standard output (file descriptor 1) is sent
+to the file <i>word</i> which is created if it does not
+already exist.
+<dt>&#62;&#62; <i>word</i>
+<dd>     The  standard  output  is sent to file <i>word.</i>  If
+the file exists  then  output  is  appended  (by
+seeking  to the end); otherwise the file is created.
+<dt>&#60; <i>word</i>
+<dd>      The standard input (file descriptor 0) is  taken
+from the file <i>word.</i>
+<dt>&#60;&#60; <i>word</i>
+<dd>     The  standard  input  is taken from the lines of
+shell input that follow up to but not  including
+a  line  consisting  only  of  <i>word.</i>  If <i>word</i> is
+quoted then no interpretation  of  the  document
+occurs.   If  <i>word</i>  is not quoted then parameter
+and command substitution occur and <b>\</b> is used  to
+quote the characters <b>\ $ `</b> and the first character
+of <i>word.</i>  In the  latter  case  <b>\newline</b>  is
+ignored (c.f. quoted strings).
+<dt>&#62;&#38; <i>digit</i>
+<dd>    The  file  descriptor  <i>digit</i> is duplicated using
+the system call <i>dup</i> (2) and the result  is  used
+as the standard output.
+<dt>&#60;&#38; <i>digit</i>
+<dd>    The  standard  input  is  duplicated  from  file
+descriptor <i>digit.</i>
+<dt>&#60;&#38;-
+<dd>         The standard input is closed.
+<dt>&#62;&#38;-
+<dd>         The standard output is closed.
+</dl>
+Any of the above may be preceded by a digit  in  which  case
+the  file  descriptor created is that specified by the digit
+instead of the default 0 or 1.  For example,
+<blockquote><pre>
+	<b>...</b> 2&#62;file
+</pre></blockquote>
+runs a command  with  message  output  (file  descriptor  2)
+directed to <i>file.</i>
+<blockquote><pre>
+	<b>...</b> 2&#60;&#38;1
+</pre></blockquote>
+runs  a  command with its standard output and message output
+merged.  (Strictly speaking file descriptor 2 is created  by
+duplicating  file  descriptor 1 but the effect is usually to
+merge the two streams.)
+<p>
+The environment for a command run in the background such as
+<blockquote><pre>
+	list *.c | lpr &#38;
+</pre></blockquote>
+is modified in two  ways.   Firstly,  the  default  standard
+input  for such a command is the empty file <b>/dev/null.</b>  This
+prevents two processes (the shell and  the  command),  which
+are running in parallel, from trying to read the same input.
+Chaos would ensue if this were not the case.  For example,
+<blockquote><pre>
+	ed file &#38;
+</pre></blockquote>
+would allow both the editor and the shell to read  from  the
+same input at the same time.
+<p>
+The  other  modification  to the environment of a background
+command is to turn off the QUIT  and  INTERRUPT  signals  so
+that  they  are  ignored  by the command.  This allows these
+signals to be used at the  terminal  without  causing  background
+commands to terminate.  For this reason the UNIX convention for a
+signal is that if it is  set  to  1  (ignored) 
+then  it  is never changed even for a short time.  Note that
+the shell command <i>trap</i> has no effect for an ignored  signal.
+<h3>
+3.8 Invoking the shell
+</h3>
+The  following flags are interpreted by the shell when it is
+invoked.  If the first  character  of  argument  zero  is  a
+minus, then commands are read from the file <b>.profile.</b>
+<dl compact>
+<dt><b>-c</b> <i>string</i>
+<dd>     If  the  <b>-c</b> flag is present then commands are read from
+<i>string.</i>
+<dt><b>-s</b>
+<dd>   If the <b>-s</b> flag is present or  if  no  arguments  remain
+then  commands are read from the standard input.  Shell
+output is written to file descriptor 2.
+<dt><b>-i</b>
+<dd>   If the <b>-i</b> flag is present or if  the  shell  input  and
+output  are  attached  to  a terminal (as told by <i>gtty</i>)
+then this shell is <i>interactive.</i>  In this case TERMINATE
+is ignored (so that <b>kill 0</b> does not kill an interactive
+shell) and INTERRUPT is caught  and  ignored  (so  that
+<b>wait</b>  is  interruptable).  In all cases QUIT is ignored
+by the shell.
+</dl>
+<h3>
+Acknowledgements
+</h3>
+The design of the shell is based in  part  on  the  original
+UNIX shell 
+and the PWB/UNIX
+shell, 
+some  features  having  been
+taken  from  both.  Similarities also exist with the command
+interpreters of the Cambridge Multiple Access  System  
+and of CTSS.  
+<p>
+I would like to thank Dennis Ritchie  and  John  Mashey
+for  many  discussions during the design of the shell.  I am
+also grateful  to  the  members  of  the  Computing  Science
+Research  Center  and to Joe Maranzano for their comments on
+drafts of this document.
+<h3>
+Appendix A - Grammar
+</h3>
+<dl>
+<dt>        <i>item:</i>
+<dd>           <i>word</i>
+<dd>                        <i>input-output</i>
+<dd>                        <i>name = value</i>
+<dt>        <i>simple-command:</i>
+<dd><i>item</i>
+<dd>                        <i>simple-command item</i>
+<dt>        <i>command:</i>
+<dd> <i>simple-command</i>
+<dd> <b>(</b> <i>command-list</i> <b>)</b>
+<dd> <b>{</b> <i>command-list</i> <b>}</b>
+<dd> <b>for</b> <i>name</i> <b>do</b> <i>command-list</i> <b>done</b>
+<dd> <b>for</b> <i>name</i> <b>in</b> <i>word</i> <b>... do</b> <i>command-list</i> <b>done</b>
+<dd> <b>while</b> <i>command-list</i> <b>do</b> <i>command-list</i> <b>done</b>
+<dd> <b>until</b> <i>command-list</i> <b>do</b> <i>command-list</i> <b>done</b>
+<dd> <b>case</b> <i>word</i> <b>in</b> <i>case-part</i> <b>... esac</b>
+<dd> <b>if</b> <i>command-list</i> <b>then</b> <i>command-list else-part</i> <b>fi</b>
+<dt>        <i>pipeline:</i>
+<dd>               <i>command</i>
+<dd>                        <i>pipeline</i> <b>|</b> <i>command</i>
+<dt>        <i>andor:</i>
+<dd>          <i>pipeline</i>
+<dd>                        <i>andor</i> <b>&#38;&#38;</b> <i>pipeline</i>
+<dd>                        <i>andor</i> <b>||</b> <i>pipeline</i>
+<dt>        <i>command-list:</i>
+<dd>   <i>andor</i>
+<dd>                        <i>command-list</i> <b>;</b>
+<dd>                        <i>command-list</i> <b>&#38;</b>
+<dd>                        <i>command-list</i> <b>;</b> <i>andor</i>
+<dd>                        <i>command-list</i> <b>&#38;</b> <i>andor</i>
+<dt>        <i>input-output:</i>
+<dd>   <b>&#62;</b> <i>file</i>
+<dd>                        <b>&#60;</b> <i>file</i>
+<dd>                        <b>&#62;&#62;</b> <i>word</i>
+<dd>                        <b>&#60;&#60;</b> <i>word</i>
+<dt>        <i>file:</i>
+<dd>           <i>word</i>
+<dd>                        <b>&#38;</b> <i>digit</i>
+<dd>                        <b>&#38;</b> <i>-</i>
+<dt>        <i>case-part:</i>
+<dd>      <i>pattern</i> <b>)</b> <i>command-list</i> <b>;;</b>
+<dt>        <i>pattern:</i>
+<dd>                <i>word</i>
+<dd>                        <i>pattern</i> <b>|</b> <i>word</i>
+<dt>        <i>else-part:</i>
+<dd> <b>elif</b> <i>command-list</i> <b>then</b> <i>command-list else-part</i>
+<dd> <b>else</b> <i>command-list</i>
+<dd> <i>empty</i>
+<dt>        <i>empty:</i>
+<dt>        <i>word:</i>
+<dd>           a sequence of non-blank characters
+<dt>        <i>name:</i>
+<dd> a sequence of letters, digits or underscores starting with a letter
+<dt>        <i>digit:</i>
+<dd>          <b>0 1 2 3 4 5 6 7 8 9</b>
+</dl>
+<h3>
+Appendix B - Meta-characters and Reserved Words
+</h3>
+a) syntactic
+<dl compact>
+<dt>     <b>|</b>    <dd> pipe symbol
+<dt>     <b>&#38;&#38;</b>    <dd> `andf' symbol
+<dt>     <b>||</b>   <dd> `orf' symbol
+<dt>     <b>;</b>    <dd> command separator
+<dt>     <b>;;</b>   <dd> case delimiter
+<dt>     <b>&#38;</b>    <dd> background commands
+<dt>     <b>( )</b>  <dd> command grouping
+<dt>     <b>&#60;</b>    <dd> input redirection
+<dt>     <b>&#60;&#60;</b>   <dd> input from a here document
+<dt>     <b>&#62;</b>    <dd> output creation
+<dt>     <b>&#62;&#62;</b>   <dd> output append
+</dl>
+b) patterns
+<dl compact>
+<dt>     <b>*</b>    <dd> match any character(s) including none
+<dt>     <b>?</b>    <dd> match any single character
+<dt>     <b>[...]</b><dd> match any of the enclosed characters
+</dl>
+c) substitution
+<dl compact>
+<dt>     <b>${...}</b><dd> substitute shell variable
+<dt>     <b>`...`</b> <dd> substitute command output
+</dl>
+d) quoting
+<dl compact>
+<dt>     <b>\</b>     <dd> quote the next character
+<dt>     <b>'...'</b> <dd> quote the enclosed characters except for '
+<dt>     <b>"..."</b> <dd> quote the enclosed characters except for
+<b>$ ` \ "</b>
+</dl>
+e) reserved words
+<pre>
+<b>if then else elif fi</b>
+<b>case in esac</b>
+<b>for while until do done</b>
+<b>{</b>  <b>}</b>
+</pre>
+
+</body>
+</html>

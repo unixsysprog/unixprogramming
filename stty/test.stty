@@ -1,0 +1,383 @@
+#!/bin/sh
+# ---------------------------------------------------------------
+#	test script for sttyl
+#	last modified:  15 apr 14  onlcr->hupcl, olcuc->opost: Posix compliance
+#	last modified:  12 mar 14 - make erase/kill non-^H and non-^U before
+#	                            testing "$PROG erase/kill" -- mmk
+#	last modified: 	12 mar 08 - make sure stty erase  returns != 0
+#	last modified: 	11 mar 11 - removed tru64 and changed basepat
+#	last modified: 	09 mar 09 - added linux/true64 tests for portability
+#	last modified: 	19 apr 07 - checked for program crash in stty erase
+#	last modified: 	11 mar 07 - made min and time optional, fixed crtscts
+#	last modified: 	14 mar 06 - made even safer and removable tmpdir:10qmk
+#	last modified: 	08 mar 06 - made a safer tmp dir: 10q to morris keesan
+#	last modified: 	08 mar 03 - fixed upper case A in min test
+#	last modified: 	14 mar 02 - changed to /bin/stty from /usr/local/bin
+#	last modified: 	12 mar 00 (replaced tab3 with tab)
+#	last modified: 	20 mar 97 (moved tab3 out of big combo loop)
+#	last modified: 	22 mar 95 (complete rewrite)
+# ---------------------------------------------------------------
+
+# ---------------------------------------------------------------
+#	0: set vars and get name of program to test
+# ---------------------------------------------------------------
+
+	PROG=./sttyl
+	PLAT=linux
+	STTY=/bin/stty
+
+	TWOCHARS=N			# test ^X
+	TIME_AND_MIN=N                  # test time and min
+
+	SECS=`date '+%S'`
+        # OTHER=crtscts			# other test
+        OTHER=""  #crtscts not required, spring 2007
+	TMPDIR=/tmp/$USER.$$.$SECS	# 10q to morris
+	# OTHER=tabs			# tabs is trickier
+	# STTY=/bin/stty		# does tabs (weird)
+	# note: the tabs thing is not needed, since we
+	#       no longer ask students to handle these
+	#	The tabs thing is pretty useful for subtle
+	#	times where it can mess up various programs
+	#	but the settings are too odd
+	DIR=/home/l/i/lib215/hw/stty
+	FLAGS=$DIR/flags
+	STTYB=/bin/stty
+	if test $(date '+%Y') -gt 2014
+	then
+		SETTINGS="icrnl onlcr echo $OTHER echoe olcuc icanon isig"
+	else
+		SETTINGS="icrnl hupcl echo $OTHER echoe opost icanon isig"
+	fi
+
+	trap "cd / ; /bin/rm -rf $TMPDIR" 0 2 3 15 
+
+	#
+	# this basepat was installed on mar 11, 2011
+	# by running stty -g on linux
+	#
+	BASEPAT=2d00:1805:bf:8a3b:3:1c:7f:15:4:0:1:0:11:13:1a
+	BASEPAT=$BASEPAT:0:12:f:17:16:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0
+
+	if [ ! -f $PROG ]
+	then
+		echo There is no program here called $PROG , what program
+		printf "do you want to test? "
+		read PROG
+		[ "$PROG" = "" ] && exit 
+	fi
+
+	set_to_base()
+	{
+		stty $BASEPAT 2> /dev/null
+	}
+
+# ---------------------------------------------------------------
+#	1: prepare to exit in a graceful mode
+#	   then set tty into base patter
+# ---------------------------------------------------------------
+
+	$STTY -g > /tmp/$$.stty
+	OLDFLAGS=`cat /tmp/$$.stty`
+	rm -f /tmp/$$.stty
+	trap "echo resetting tty;$STTY $OLDFLAGS;rm -f $$.*;exit" 0 2 3 15
+	set_to_base
+
+# ---------------------------------------------------------------
+#	test erase and kill chars
+# ---------------------------------------------------------------
+
+	echo "   0. Looking at output : tf should examine this "
+	echo " "
+	$PROG
+	echo " "
+	sleep 5
+
+	echo "   I. testing erase and kill chars  "
+
+	STATUS=OK
+
+	# -------------------------------------------------------
+	# 	simple chars
+	# -------------------------------------------------------
+	printf  "	a. Simple chars .. "
+	$PROG erase A kill B		# set em
+	RESULT=`$FLAGS E K`		# test em
+	$STTY $OLDFLAGS			# put 'em back
+	if [  "$RESULT" = E=41K=42 ] 
+	then
+		echo OK
+	else
+		echo Failed to set erase to A and kill to B
+		STATUS=NOTOK
+	fi
+	echo " "
+
+	# -------------------------------------------------------
+	# 	tricky case
+	# -------------------------------------------------------
+
+	if test "$TWOCHARS" = Y
+	then
+		printf  "	b. Control Chars typed as Caret-Letter"
+		$STTY erase X kill Y 		#make them non-^H non-^U
+		$PROG erase \^H kill \^U	# beware of old pipe sign
+		RESULT=`$FLAGS E K`
+		$STTY $OLDFLAGS			# put 'em back
+		if [  $RESULT = E=08K=15 ] 
+		then
+			echo OK
+		else
+			echo "Not OK
+			Failed to set erase to caret-H or kill to caret-U"
+			STATUS=NOTOK
+		fi
+		echo " "
+	fi
+
+	# -------------------------------------------------------
+	# 	medium case
+	# -------------------------------------------------------
+
+	printf "	c. Typical one-char control chars.. "
+	$STTY erase X kill Y 		#make them non-^H non-^U
+	$PROG erase  kill 
+	RESULT=`$FLAGS E K`
+	$STTY $OLDFLAGS			# put 'em back
+	if [  $RESULT = E=08K=15 ] 
+	then
+		echo OK
+	else
+		echo "Not OK
+		Failed to set erase to ctrl-H and kill to ctrl-U "
+		STATUS=NOTOK
+	fi
+	echo " "
+
+	# -------------------------------------------------------
+	# 	special, error, case
+	# -------------------------------------------------------
+
+	printf  "	d. No argument given to erase.."
+	$STTY erase '^H' kill '^U'
+	$PROG erase 
+	EXITSTAT=$?
+	RESULT=`$FLAGS E K`
+	$STTY $OLDFLAGS			# put 'em back
+	NOARGS=OK
+	[ $RESULT = E=08K=15 ] || NOARGS=NOTOK 
+	[ $EXITSTAT -ge 128  ] && NOARGS=NOTOK
+	[ $EXITSTAT -eq 0    ] && NOARGS=NOTOK
+	if [ $NOARGS = OK ]
+	then
+		echo OK
+		echo "	Note: your version exited with $EXITSTAT"
+	else
+		echo "Not OK
+		Did not work correctly when no arg is given to erase"
+		STATUS=NOTOK
+	fi
+	echo " "
+	
+	
+	if [ $STATUS = NOTOK ]
+	then
+		printf  "$PROG did not pass erase/kill test.  Continue (y/n)? "
+		read ans
+		case "$ans" in
+			y*|Y*)		;;
+			*) 	exit	;;
+		esac
+	fi
+
+# -------------------------------------------------------
+# 	test min and time
+# -------------------------------------------------------
+
+    if test "$TIME_AND_MIN" = Y
+    then
+	echo "   II. min and time values"
+
+	STATUS=OK
+	printf  "	a. standard numbers.. "
+	$PROG min 16 time 10		# set em
+	RESULT=`$FLAGS M T`		# test em
+	$STTY $OLDFLAGS			# put 'em back
+	if [  "$RESULT" = "M=10T=0a" ] 
+	then
+		echo OK
+	else
+		echo Failed to set min to 16 and time to 10
+		STATUS=NOTOK
+	fi
+	echo " "
+
+
+	# -------------------------------------------------------
+	# 	missing argument
+	# -------------------------------------------------------
+
+	printf "	b. missing argument for time .. "
+	$PROG time
+	EXITSTAT=$?
+	$STTY $OLDFLAGS			# put 'em back
+	NOARGS=OK
+	if test $EXITSTAT -ne 0
+	then
+		echo OK
+		echo "	Note: your version exited with $EXITSTAT"
+	else
+		echo "Not OK
+		Your program should return a non-zero exit status"
+		STATUS=NOTOK
+	fi
+
+	# -------------------------------------------------------
+	# 	bad args to numeric params
+	# -------------------------------------------------------
+
+	printf  "	c. non-numeric argument .."
+	$PROG min echo
+	EXITSTAT=$?
+	$STTY $OLDFLAGS			# put 'em back
+	if test $EXITSTAT -ne 0
+	then
+		echo OK
+		echo "	Note: your version exited with $EXITSTAT"
+	else
+		echo "Not OK
+		Did not return an error code."
+		STATUS=NOTOK
+	fi
+	echo " "
+	
+	
+	if [ $STATUS = NOTOK ]
+	then
+		printf  "$PROG did not pass time/min test.  Continue (y/n)? "
+		read ans
+		case "$ans" in
+			y*|Y*)		;;
+			*) 	exit	;;
+		esac
+	fi
+    fi	# end of TIME_AND_MIN block
+
+# ---------------------------------------------------------------
+#  This part of the script tests how well the program 
+#  sets and clears flags.  Results are written to files
+#  in a directory called $TMPDIR
+# ---------------------------------------------------------------
+
+	if [ -d $TMPDIR ]			# --- prepare for next 
+	then					# --- tests
+		rm -f -r $TMPDIR		# --- clear out old
+	fi
+	mkdir $TMPDIR				# --- make new one
+
+
+# ---------------------------------------------------------------
+#	test all single functions
+# ---------------------------------------------------------------
+
+	$STTY erase  kill 	# to ensure compat. with script
+
+	echo "  III. Checking each flag separately .. "
+	# replaced: onlcr->hupcl, olcuc->opost  spr2014 for Posix compliance
+	# for i in icrnl hupcl echo $OTHER echoe opost icanon isig
+	for i in $SETTINGS
+	do
+		printf  "		$i .. "
+		set_to_base		# start with sensible settings
+			$PROG $i	# turn on option
+			$FLAGS > $$.my	# record driver state
+			$PROG -$i	# turn off option
+			$FLAGS >> $$.my	# record driver state
+
+		set_to_base		# force it to same settings
+			$STTY $i	# turn on option
+			$FLAGS > $$.hp	# record driver state
+			$STTY -$i	# turn off option
+			$FLAGS >> $$.hp	# record driver state
+
+		if diff $$.my $$.hp > /dev/null
+		then
+			printf  " OK "
+		else
+			printf  " NOT OK "
+			echo "Yours = ( setting $i, then setting -$i)"
+				 $FLAGS X < $$.my
+			echo  " Ours = ( setting $i, then setting -$i)"
+				$FLAGS X < $$.hp
+			echo " Make sure $i works for $PROG and try again."
+			rm -f $$.*
+			printf  "Continue (y/n)? "
+			read X
+			case "_$X" in 
+				_n*|_N*) exit ;;
+			esac
+		fi
+		rm -f $$.*
+		echo ""
+	done
+
+# ---------------------------------------------------------------
+#	test all combo pairs
+# ---------------------------------------------------------------
+
+	echo " "
+	echo " IV. Checking all flag pairs"
+
+
+	for i in icrnl onlcr echo $OTHER echoe olcuc icanon isig
+	do
+		printf   " $i:"
+		rm -f $TMPDIR/$i.my
+		for  j in icrnl onlcr echo $OTHER echoe olcuc icanon isig
+		do
+			set_to_base
+			# run the first one with test program
+			printf  " $j : " >> $TMPDIR/$i.my
+				$PROG $i $j
+				$FLAGS >> $TMPDIR/$i.my
+				printf   " -$j : " >> $TMPDIR/$i.my
+				$PROG $i -$j 
+				$FLAGS >> $TMPDIR/$i.my
+
+			# run the second test with `real' one
+			set_to_base
+			printf  " $j : " >> $TMPDIR/$i.hp
+				$STTY $i $j
+				$FLAGS >> $TMPDIR/$i.hp
+				printf   " -$j : " >> $TMPDIR/$i.hp
+				$STTY $i -$j 
+				$FLAGS >> $TMPDIR/$i.hp
+			# if there are no differences, remove the files
+		done
+		if diff $TMPDIR/$i.my $TMPDIR/$i.hp > /dev/null
+		then
+			printf  "OK"
+			rm -f $TMPDIR/$i.my $TMPDIR/$i.hp
+		else
+			printf  "NOTOK"
+		fi
+	done
+
+	$STTY $OLDFLAGS
+	echo " "
+	cd $TMPDIR
+	echo "	Checking results .. "
+	if test `ls | wc -w` = 0
+	then
+		echo all tests worked correctly
+		exit 0
+	fi
+
+	echo "The Following combinations did not work:"
+	for f in *.my
+	do
+		T=`basename $f .my`
+		sort $T.my $T.hp 	| uniq -d 	|
+		sed "s/\(.*\):.*/$T \1/"| sort -u	|
+		pr -t -l1 -4 -w76
+	done

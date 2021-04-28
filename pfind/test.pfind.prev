@@ -1,0 +1,154 @@
+#!/bin/sh
+#
+#	test.pfind
+#
+#	purpose:	shell script to test the operation of
+#			the pseudo-find program
+#
+#	usage:		test.pfind
+#
+#	operation:	1. makes sure that a program called pfind exists
+#			2. looks for standard stuff in /etc 
+#			3. puts some stuff in /tmp and then looks for it
+#			4. looks for pfind in the user's home directory
+#			   compares results to that of real find
+#
+#	history:	95/mar/05 changed handling of CWD for the case
+#				  in which -f pfind is true
+#
+
+	# ROOT=/home03/l/i/lib215/hmwks/pfind
+	ROOT=`ypcat passwd | grep '^lib215' | cut -d: -f6`/hw/pfind
+
+# -------------------------------------------------------------------------
+#	part I : locate program to test
+# -------------------------------------------------------------------------
+
+	PROG=pfind
+
+	trap "rm -f /tmp/$$.find /tmp/$$.pfind ; exit " 0 2 3 15
+
+	if [ ! -f pfind ]
+	then
+		echo    "There is no program here called pfind."
+		printf  "What program should I test (press Return to quit)? "
+
+		read PROG
+		case "$PROG" in
+			/*)	CWD=""					;;
+			?*)	CWD=`pwd`				;;
+			*)	exit					;;
+		esac
+	else
+		CWD=`pwd`
+	fi
+
+# -------------------------------------------------------------------------
+#	part II : look for passwd in /etc
+# -------------------------------------------------------------------------
+
+	echo "
+		Test 1: checking for passwd in /etc "
+
+	T1=`$CWD/$PROG /etc passwd`
+	T2=`cd /etc ; $CWD/$PROG . passwd`
+	T3=`cd / ; $CWD/$PROG etc passwd`
+
+	#
+	# ... find /etc -name passwd
+	#
+
+	printf  "		Test 1a.. pfind /etc passwd : "
+	if [ "$T1" = /etc/passwd ]
+	then
+		echo "OK"
+	else
+		echo "NOT OK, $T1 is not /etc/passwd "
+	fi
+
+	#
+	# ... find . -name passwd
+	#
+
+	printf  "		Test 1b..cd /etc ; pfind . passwd : "
+	if [ "$T2" = ./passwd ]
+	then
+		echo "OK"
+	else
+		echo "NOT OK, $T2 is not ./passwd "
+	fi
+
+	#
+	# ... find etc -name passwd
+	#
+
+	printf  "		Test 1c..cd / ; pfind etc passwd : "
+	if [ "$T3" = etc/passwd ]
+	then
+		echo "OK"
+	else
+		echo "NOT OK, $T3 is not etc/passwd "
+
+	fi
+
+# -------------------------------------------------------------------------
+#	part II : multi-level searches
+# -------------------------------------------------------------------------
+
+	echo "
+		Test 2 : multi-level search "
+
+
+	find $ROOT/pft.d -name cookie -print > /tmp/$$.find
+	$CWD/$PROG $ROOT/pft.d cookie > /tmp/$$.pfind
+	if diff /tmp/$$.pfind /tmp/$$.find
+	then
+		echo "		Test 2a..OK"
+	else
+		echo "		Test 2a..NOT OK"
+		echo "		> means from real find, < means from yours"
+		cp /tmp/$$.pfind $CWD/2a.pfind
+		cp /tmp/$$.find  $CWD/2a.find
+		echo "output from pfind in 2a.pfind, "
+		echo "output from find in 2a.find"
+	fi
+
+	cd $ROOT
+	find pft.d -name cookie -print > /tmp/$$.find
+	$CWD/$PROG pft.d cookie > /tmp/$$.pfind
+	if diff /tmp/$$.pfind /tmp/$$.find
+	then
+		echo "		Test 2b..OK"
+	else
+		echo "		Test 2b..NOT OK"
+		echo "		> means from real find, < means from yours"
+		cp /tmp/$$.pfind $CWD/2b.pfind
+		cp /tmp/$$.find  $CWD/2b.find
+		echo "output from pfind in 2b.pfind,"
+		echo "output from find in 2b.find"
+	fi
+
+	rm -f /tmp/$$.find /tmp/$$.pfind
+
+# -------------------------------------------------------------------------
+#	part III : searches that hit unreadable paths
+# -------------------------------------------------------------------------
+
+	echo "
+		Test 3 : searches down unreadable paths..
+			 Note: HP-UX find reports obstacles to stderr,
+			 Your program should do the same."
+
+	find $ROOT/pft2.d -name d8 -print 2>&1 > /tmp/$$.find
+	$CWD/$PROG $ROOT/pft2.d d8 2>&1 > /tmp/$$.pfind
+	if diff /tmp/$$.pfind /tmp/$$.find
+	then
+		echo "		Test 3..OK"
+	else
+		echo "		Test 3..NOT OK"
+		echo "		> means from real find, < means from yours"
+		cp /tmp/$$.pfind $CWD/3.pfind
+		cp /tmp/$$.find  $CWD/3.find
+		echo "output from pfind in 3.pfind, "
+		echo "output from find in 3.find"
+	fi

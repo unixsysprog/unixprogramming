@@ -1,0 +1,27 @@
+#
+#
+# makefile for webserver
+#
+
+CC = gcc -Wall
+
+ws: ws.o socklib.o webtime.o table.o flexstr.o
+	$(CC) -o ws ws.o socklib.o webtime.o table.o flexstr.o
+
+ws.o: socklib.h webtime.h table.h flexstr.h ws.c
+	gcc -g -Wall -c ws.c
+
+socklib.o: socklib.c socklib.h
+	gcc -g -Wall -c socklib.c
+
+webtime.o: webtime.c webtime.h
+	gcc -g -Wall -c webtime.c
+
+table.o: table.c table.h
+	gcc -g -Wall -c table.c
+
+flexstr.o: flexstr.c flexstr.h
+	gcc -g -Wall -c flexstr.c
+
+clean:
+	rm -f ws.o socklib.o webtime.o flexstr.o table.o core

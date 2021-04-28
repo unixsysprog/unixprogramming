@@ -1,0 +1,99 @@
+This file is an outline for the homework.  
+
+Project :
+	 wtmplib
+Purpose :
+	  buffering layer for reading wtmp file.
+
+Outline :
+	  read wtmp file from disk as big chunks and puts them in a big buffer. 
+	  has capability to read the file top to bottom or bottom to top.
+	  buffering reduces the number of system read calls.
+	  gives the subsequent record to calling program
+	  if it is in buffer or reload the buffer from
+	  disk and gives the record.
+
+Output : 
+       cannot be called standalone as there is no main.
+
+Data Structures:
+       char array to hold the buffer.
+       seek logic to read from back of file.
+
+Arguments :
+	  not a standalone. so no arguments.
+	   
+
+Project : lastlogin
+
+Purpose : displays last login results for a user from wtmp file in human readable form.
+
+Outline :lastlogin reads the wtmp file record by record and 
+        presents the contents in human-readable form. 
+	uses wtmplib (see above) to use the buffering, parse from bottom of file and get the data.
+	The form of output is one line per record with fixed-width fields,
+        all in text. time is in Y-M-D H:M format.
+        and uses printf to format and output results.
+
+Arguments:
+	lastlogin accepts , a file to read and user name to look for
+        If no filename is given, lastlogin processes WTMP_FILE as defined
+        in utmp.h
+Output :
+       reports the last login details for the user in human readbale form.
+       The output looks like:
+           logname, tty, pid, type, time, host
+
+Data Structures :
+     main work is done in wtmplib
+
+Files :
+      reads specified wtmp file which contains utmp records.
+
+
+Project : whodate
+
+Purpose :
+	 displays all the usage data from wtmp file for a particular date in human readable form.
+
+Outline :
+	whodate gets the user specified date and searches the wtmp file.
+        if it find any records for the specified date ,the program
+	presents the contents in human-readable form.
+	uses binary search to find the location of the records. 
+	uses wtmplib (see above) to use the buffering.
+	The form of output is one line per record with fixed-width fields,
+        all in text. time is in Y-M-D H:M format.
+        and uses printf to format and output results.
+
+Arguments:
+	whodate accepts  a file to read and date in the format %Y %m %d to look for.
+        If no filename is given, whodate processes WTMP_FILE as defined
+        in utmp.h
+
+Output :
+       reports the login details for all the users on the specified date in human readbale form.
+       The output looks like: logname, tty, pid, type, time, host
+
+Data Structures :
+     records in wtmp files are in chronological order.
+     so binary search can be done to narrow down the search.
+    
+     binary search is done recursively as follows:
+     assume specified date has time t in seconds then the range to look for is (t -  t+86400).
+     get the middle record in the file.
+     if time difference is in the range then the record is located.
+     if middle record time is greater than t
+     	- search the top branch
+     if middle record time is less than or equal t
+     	- search the bottom branch
+     
+     once the record is located, then set the recursion pointer to 1 and set the start or 
+     current seek position based on the calling branch when record is found.
+
+      if branch is found then use wtmplib to read the data.
+      if branch is not found program quits.
+
+
+Files :
+      reads specified wtmp file which contains utmp records.

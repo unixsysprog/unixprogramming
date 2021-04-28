@@ -1,0 +1,104 @@
+#include	<stdio.h>
+#include        <stdlib.h>
+#include	"string.h"
+#include        "dllist.h"
+
+struct ifstatus* list = NULL;
+static int nitems = 0;
+
+void add_item_list(int k , int r, int s)
+{
+    struct ifstatus *item = (struct ifstatus*) malloc(sizeof(struct ifstatus));
+    if (item == NULL){
+      fprintf(stderr,"not enough memory\n");
+      exit(1);
+    }
+    item->key       = k; 
+    item->if_state  = s;
+    item->if_result = r;
+    item->prev      = NULL;
+    item->next      = NULL;
+
+    if (list == NULL){
+      list        = item;
+      list->prev  = NULL;
+      list->next  = NULL;
+    }
+    else{
+      list->next  = item;
+      item->prev  = list;
+      item->next  = NULL;
+      list        = item;
+    }
+   
+    nitems++;
+}
+
+void remove_item_list()
+{
+    int key;
+    struct ifstatus* item;
+    
+    if (list  == NULL)
+      return;
+    
+    while (list != NULL){
+      key        = list->key;
+      item       = list;
+      list       = item->prev;
+      nitems--;
+      if (list == NULL){
+	free(list);
+	list = NULL;
+	break;
+      }
+      else{
+	list->next = NULL;
+	free(item);
+      }
+      if (key == 1)
+	break;
+    }
+}
+
+
+int get_list_state()
+{
+    if (list == NULL )
+      return 0;
+
+    return list->if_state;
+}
+
+int get_list_result()
+{
+    if (list == NULL )
+      return -1;
+
+    return list->if_result;
+}
+
+int is_list_empty()
+{
+    if (list == NULL || nitems <= 0)
+      return 1;
+
+    return 0; 
+}
+
+void print_list()
+{
+    struct ifstatus* head = list;
+    if (head == NULL) return;
+
+    while (head->prev != NULL)
+      head = head->prev;
+  
+    while (head != NULL){
+      printf("printing list- key: %d ;result: %d; state - %d\n",
+    	   head->key,head->if_result,head->if_state);
+      head = head->next;
+    }
+}
+
+

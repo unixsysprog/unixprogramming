@@ -1,0 +1,17 @@
+Project: pong
+
+Purpose: This is a one person ping-pong game. Idea is to keep the ball 
+	 in the court as long as possible. User has three chance i.e
+	 three balls to play.
+
+
+Structure: program has three objects - wall, paddle, ball
+	   Each of the object has its own header and source files. So there are
+	   Total of six files -wall.h, wall.c, paddle.h, paddle.c, ball.c,ball.h
+	   struct of these objects and access methods are declared in .h file
+	   and respective source code (.c file) of these objects control the 
+	   position and state of the object.
+
+	   All the drawing is done using curses library. This functionality
+	   is wrapped in draw.h and draw.c. 
+	   alar

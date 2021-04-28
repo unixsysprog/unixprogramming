@@ -1,0 +1,45 @@
+
+Q2:
+	At the risk of belaboring the obvious, I note that all the variables
+	in the bounce program sample are declared globally.  I assume this is
+	because they are called by the signal handler and one couldn't begin
+	to guarantee the state of the stack when the old interrupt comes at
+	you in the night.  Is there any other way to handle this seeming
+	indiscretion in programming protocol?  I haven't used global vars in
+	5 years and sure hate the thought of doing it now.  Can the volatile
+	keyword provide any relief or is that just to help the compiler?
+
+	Also, how straight and narrow are you on the definition of the game
+	since it's not really a UNIX utility?  Is there room for a little
+	creativity here like moving the paddle sideways, playing with the
+	velocity to mimic real world physics (ie slow down on bounces off the
+	walls and speed up on bounces off the paddle), perhaps a few visual
+	effects, and status lines etc?
+
+A2
+	One answer to the (ugh) global variables in this program is to 
+	make the program more object-oriented.  Create a function that
+	contains static variables and talks to the world through some
+	well-defined operation arguments, like the stuff we pass to fcntl()
+	or ioctl().  The ball-object could take messages like
+
+		ball(SENT_TICK,NULL,NULL);	/* send it a clock tick	*/
+		ball(SET_POS, &x, &y);		/* set ball position	*/
+		ball(GET_POS, &x, &y);		/* get ball position	*/
+		ball(X_BOUNCE,NULL,NULL);	/* send REVERSE message	*/
+
+	etc.  Notice no need for any global variables for the ball .
+	The interface runs through exactly one function, that function can be
+	implemented in any manner so long as it meets the interface spec.
+
+	The other objects in the game can also be created as single-function
+	interfaces, the paddle, the walls, even multiple balls can be created.
+
+	This program is quite suitable for OOP design.  The keyboard sends
+	messages to the paddle object, the timer thing sends TICK messages to
+	the ball.
+
+	Regarding extra enhancements, please add any stuff you like.  We've seen
+	some nice versions with bumpers, multi-ball, dual paddles.  With a good
+	basic design, a lot of these extra things are pretty easy to add.
+

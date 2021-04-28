@@ -1,0 +1,15 @@
+#
+# Makefile for smsh
+#
+# Type  make to compile the smsh program
+#
+
+CC = gcc -g -Wall
+
+smsh: smsh.o splitline.o execute2.o process2.o controlflow.o \
+		builtin.o flexstr.o  varlib.o
+	$(CC) -o smsh smsh.o splitline.o execute2.o process2.o \
+		controlflow.o  builtin.o  flexstr.o varlib.o
+
+clean: 
+	rm -f *.o core

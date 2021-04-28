@@ -1,0 +1,48 @@
+Project : pfind
+
+Purpose : searches the directory for specified file type or file name/pattern.
+	  pfind [directory] [options]
+	  
+	  options: -name , -type
+
+Outline : opens the directory, reads the directroy, gets entry
+          matches the type and pattern with entry, if so prints the file
+
+Arguments:
+       accepts a directory and options -name and -type
+       option -name : expects a filename or a search pattern (e.g. *.c)
+       option -type : expects a file type {f|d|c|b|p|l|s}
+
+       if directory is '.' pfind searches current directory
+Output :
+      lists all the files that matches the type and pattern
+      if no pattern is specified lists all the files in the directory and
+      subdirectories.
+
+Data Structures :
+      
+
+Program Flow:
+      recursive search is done on the user specified directory
+
+      Following are the steps how recursion is done 
+      START - search routine:
+      1. lstat on the passed in file
+      2. check if the file matches the type and file pattern that user specified
+      3. if match is obtained print the file path
+      4. check if the file is a directory
+      5. if yes 
+      	   a open the directory
+	   b read the directory, get the directory entry
+	   c skip the . (current direcotry) and .. (parent directory) entries
+	   d malloc a string and append the entry with previous path
+	       - go to START with new entry as base file name and new path.
+	       	 i.e. recurse on search
+           e free string
+
+      recurse till all the subdirectories and files are checked.
+ 
+     
+
+Files : pfind.c
+     

@@ -1,0 +1,25 @@
+Name	 : PavanKumar Kancherlapalli
+Homework : loginhist
+Course   : CSCIE -28
+
+Files    : 
+
+Source files:
+      wtmplib.c
+      wtmplib.h
+      lastlogin.c
+      whodate.c
+Documents: 
+     Plan
+     README
+Make file:
+     Makefile
+Output files:
+      typescript
+Input files:
+      wtmp.sample
+      wtmp.big
+Exe and object files:
+      lastlogin
+      whodate
+      wtmplib.o

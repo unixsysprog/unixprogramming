@@ -1,0 +1,47 @@
+:
+# Make_Tests	1.0	
+# purpose: create flag dumps for the combinations of flags that
+# 	   are tested by the test.stty script
+#
+	PROG=/bin/stty
+	FLAGS=../flags
+	OLDFLAGS=`stty -g`
+
+	BASEPAT1=526:1805:a50:3b:0:3:1c:8:15:4:0:ff:ff:526:1805
+	BASEPAT2=a50:8000003b:3:1c:8:15:4:0:ff:ff:ff:ff:ff:4:0
+	BASEPAT3=1a:11:13:0:0:1a:19:0:0:0
+	BASEPAT=$BASEPAT1:$BASEPAT2:$BASEPAT3
+	/bin/stty $BASEPAT
+
+	for i in icrnl onlcr echo tabs echoe olcuc icanon isig
+	do
+		stty -icrnl onlcr -echo -tabs -echoe -olcuc -icanon -isig
+		echo "		$i .. \c"
+		$PROG $i 			# turn on option
+		$FLAGS > $$			# dump driver state
+		$PROG -$i			# turn off option
+		$FLAGS >> $$			# dump driver state
+		stty -icrnl onlcr -echo -tabs -echoe -olcuc -icanon -isig
+		mv $$ $i.simple
+		echo ""
+	done
+
+# ---------------------------------------------------------------
+
+	for i in icrnl onlcr echo tabs echoe olcuc icanon isig
+	do
+		rm -f $i
+		echo  "$i \c"
+		for  j in icrnl onlcr echo tabs echoe olcuc icanon isig
+		do
+		    stty -icrnl onlcr -echo -tabs -echoe -olcuc -icanon -isig
+			echo " $j : \c" >> $i
+			$PROG $i $j
+			$FLAGS >> $i
+			echo  " -$j : \c" >> $i
+			$PROG $i -$j 
+			$FLAGS >> $i
+		done
+	done
+	stty icrnl onlcr
+	/bin/stty $OLDFLAGS

@@ -1,0 +1,526 @@
+<BASE HREF="http://www.onlamp.com/pub/a/bsd/2002/02/21/">
+<!doctype html public "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+	<title>O'Reilly Network: Finding Things in Unix [Feb. 21, 2002]</title>
+	<meta name="keywords" content="O'Reilly Network,O'Reilly Network,oreillynet,oreillynet.com,O'Reilly,OREILLY,,BSD,find,locate,grep,search,files">
+	<meta name="description" content="Dru Lavigne introduces us to the some of the powerful features hidden in the Unix find command.">
+
+<!--  sc/388 Common JavaScript  -->
+<LINK rel="STYLESHEET" type="text/css" href="http://oreillynet.com/styles/linux-px.css">
+
+
+</HEAD>
+
+<BODY  bgcolor="#ffffff" text="#000000">
+<TABLE width="100%" cellspacing="0" cellpadding="0">
+<TR>
+<TD valign="bottom" align="left">
+<A href="http://www.onlamp.com/"><IMG src="/images/onlamp/onlamp_logo.jpg" width="226" height="75" hspace="0" vspace="0" border="0" align="left" alt="ONLamp.com - Linux (and BSD), Apache, MySQL, PHP, Python, Perl" /></A>
+</TD>
+<TD align="center" valign="bottom">
+<TABLE border="0" cellpadding="0" cellspacing="0" width="468" height="60"><TR><TD>				</NOLAYER>
+				</TD></TR></TABLE></TD>
+<TD align="right" valign="bottom"><SPAN class="tiny">Sponsored by:</SPAN><BR /><A href="http://www.apple.com/developer/"><IMG src="/images/sponsors/applesponsor.jpg" width="60" height="60" border="0" alt="Apple." hspace="0" vspace="0"></A></TD>
+</TR>
+</TABLE>
+
+<TABLE width="100%" border="0" cellspacing="0" cellpadding="0">
+<TR>
+<TD width="100%" valign="top" colspan="2">
+<A href="http://www.oreillynet.com"><IMG src="/images/header/tab-network.gif" alt="O'Reilly Network" width="96" height="18" border="0" /></A><A href="http://www.oreilly.com/"><IMG src="/images/header/tab-oreilly.gif" alt="O'Reilly.com" width="94" height="18" border="0" /></A></TD>
+
+<TD width="140" bgcolor="#ffffff" valign="top">
+<IMG src="/images/trans.gif" alt=" " width="140" height="1" /></TD>
+</TR>
+
+<TR>
+<TD width="395" valign="top" bgcolor="#000000">
+<NOBR><A href="http://www.oreillynet.com/search/"><IMG src="/images/header/nav-search.gif" alt="Search" width="44" height="26" border="0"></A><A href="/features/"><IMG src="/images/header/navbar-features.gif" alt=" To Features" width="55" height="26" border="0"></A><A href="http://meerkat.oreillynet.com"><IMG src="/images/header/nav-meerkat.gif" alt="To Meerkat" width="55" height="26" border="0" hspace="0" vspace="0"></A><A href="http://www.oreillynet.com/faqs/"><IMG src="/images/header/nav-faqs.gif" alt="FAQs" width="32" height="26" border="0"></A><A href="/forums/"><IMG src="/images/header/nav-forums.gif" alt="Forums" width="46" height="26" border="0"></A><A href="/general/articles.csp"><IMG src="/images/nav-articles.gif" alt="All Articles" width="51" height="26" border="0" hspace="0" vspace="0"></A><A href="http://www.oreillynet.com/cs/elists/query/q/246"><IMG src="/images/header/nav-newsletter.gif" alt="Free Newsletter" width="67" height="26" border="0"></A></NOBR><BR /></TD>
+<TD width="100%" valign="top" bgcolor="#000000">
+<IMG src="/images/trans.gif" alt=" " width="200" height="1"></TD>
+<TD width="140" valign="top" bgcolor="#000000">
+<IMG src="/images/trans.gif" alt=" " width="140" height="1"></TD>
+</TR></TABLE>
+
+<TABLE width="100%" cellspacing="0" cellpadding="0" border="0">
+<TR>
+<TD valign="top" bgcolor="#663366">
+<A href="/bsd"><IMG src="/images/bsd/dev-bsd.gif" alt="BSD DevCenter" width="189" height="26" border="0"></A></TD>
+
+<TD valign="middle" bgcolor="#663366" align="right" class="nolinewhite"><A class="nolinewhite" href="http://careers.onlamp.com/">Tech Jobs</A> | 
+<A class="nolinewhite" href="/pub/q/all_bsd_articles">Articles</A>
+</TD>
+
+<TD width="140" valign="top" bgcolor="#663366">
+<IMG src="/images/trans.gif" alt=" " width="140" height="1" /></TD>
+</TR>
+<TR><TD colspan="2" bgcolor="#663366"> <A href="http://conferences.oreilly.com/etcon" class="medlist" style="color: #ffffff; font-weight: bold;"><A href="http://conferences.oreilly.com/etcon" class="medlist" Ttyle="color: #ffffff; font-weight: bold;">O'Reilly's Emerging Technology Conference: May 13-16, 2002</A></TD>
+<TD bgcolor="#663366"><IMG src="/images/trans.gif" alt=" " width="1" height="24" border="0" /></TD>
+</TR>
+</TABLE>
+
+
+<TABLE width="100%" border="0" cellspacing="0" cellpadding="0">
+<TR>
+<TD width="5" valign="top">
+<IMG src="/images/trans.gif" alt=" " width="5" height="1" /></TD>
+
+<TD width="125" valign="top" align="right">
+<BR />
+<TABLE border="0" cellspacing="0" cellpadding="6" width="125">
+<TR>
+<TD valign="top" bgcolor="#efefef"><P class="headline" style="color: #333333;"><P class="headline" Ttyle="color: #333333;">BSD Columns:</P>
+</TD>
+</TR><TR>
+<TD valign="top" bgcolor="#efefef" class="secondary">
+<A href="/pub/ct/13">Big Scary Daemons</A>
+</TD>
+</TR><TR>
+<TD valign="top" bgcolor="#efefef" class="secondary">
+<A href="/pub/ct/15">FreeBSD Basics</A></TD>
+</TR>
+<TR>
+<TD valign="top" bgcolor="#efefef" class="secondary">
+<A href="/pub/ct/14">OpenBSD Explained</A></TD>
+</TR>
+<TR><TD class="tiny"> </TD></TR>
+</TABLE>
+
+<BR />
+
+<BR />
+<TABLE border="0" cellpadding="0" cellspacing="0" width="125" height="125"><TR><TD>				</NOLAYER>
+				</TD></TR></TABLE>
+
+
+</TD>
+
+<TD width="20" valign="top">
+<IMG src="/images/trans.gif" alt=" " width="20" height="1" /></TD>
+
+<TD width="100%" valign="top"><BR />
+<IMG src="/images/trans.gif" alt=" " width="450" height="8" border="0" /><BR />
+
+<TABLE border="0" width="105" cellspacing="0" cellpadding="0" align="right">
+<TR>
+<TD valign="top">
+<A href="/lpt/a//bsd/2002/02/21/FreeBSD_Basics.html"><IMG src="/images/print.gif" width="102" height="22" alt="Print this article" border="0" align="left" hspace="2" vspace="12" /></A><BR clear="all">
+</TD>
+</TR>
+</TABLE>
+
+	<A href="/pub/ct/15"><IMG src="/images/bsd/111-freebsd_basics.jpg" height="91" width="111" alt="FreeBSD Basics" border="0" align="left" hspace="10" vspace="0"></A>
+
+
+
+
+
+
+
+
+
+
+
+<H2>
+Finding Things in Unix</H2>
+02/21/2002<BR clear="all">
+
+<P style="margin: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; margin-top: 0px; padding: 0px; padding-bottom: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px; font-size: 1px;"><P Ttyle="margin: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; margin-top: 0px; padding: 0px; padding-bottom: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px; font-size: 1px;"></P>
+
+<P><TABLE border="0" cellpadding="0" cellspacing="0" align="right" width="336" height="280"><TR><TD>				</NOLAYER>
+				</TD></TR></TABLE>
+One of the most useful utilities to be found on any Unix system is the  <CODE>find</CODE> command.</P>
+
+<P>In the next two articles, I'd like to work you through the syntax of this command and provide you with some practical examples of its usage.</P>
+
+<P>The command itself has a very simple syntax:</P>
+
+
+<P><CODE>find where_to_search expressions</CODE></P>
+
+<P>The expressions are the part that can look confusing the first few times 
+you use <CODE>find</CODE>. They are also the part that can vary from Unix system to 
+Unix system, so you may want to take a quick peek at <CODE>find</CODE>'s manpage if 
+you find yourself on a new system. The most common expressions that 
+you can use on your FreeBSD system are as follows:</P>
+
+<BR clear="all" />
+
+<TABLE cellspacing="0" cellpadding="3" border="1">
+<TR><TD valign="top"><CODE>-name</CODE></TD><TD valign="top">must be quoted when using wildcards</TD></TR>
+<TR><TD valign="top"><CODE>-type</CODE></TD><TD valign="top">e.g. <CODE>f</CODE>=file   <CODE>d</CODE>=directory   <CODE>l</CODE>=link</TD></TR>
+<TR><TD valign="top"><CODE>-user</CODE></TD><TD valign="top">name or UID</TD></TR>
+<TR><TD valign="top"><CODE>-group</CODE></TD><TD valign="top">name or GID</TD></TR>
+<TR><TD valign="top"><CODE>-perm</CODE></TD><TD valign="top">specify permissions</TD></TR>
+<TR><TD valign="top"><CODE>-size</CODE></TD><TD valign="top">rounded up to next 512 byte block or use <CODE>c</CODE> to specify bytes</TD></TR>
+<TR><TD valign="top"><CODE>-atime</CODE></TD><TD valign="top">last time file was read</TD></TR>
+<TR><TD valign="top"><CODE>-ctime</CODE></TD><TD valign="top">last time file's owner or permissions were changed</TD></TR>
+<TR><TD valign="top"><CODE>-mtime</CODE></TD><TD valign="top">last time file was modified</TD></TR>
+<TR><TD valign="top"><CODE>-newer</CODE></TD><TD valign="top">find files newer than given file</TD></TR>
+<TR><TD valign="top"><CODE>-delete</CODE></TD><TD valign="top">remove files found</TD></TR>
+<TR><TD valign="top"><CODE>-ls</CODE></TD><TD valign="top">gives same output as <CODE>ls -dgils</CODE></TD></TR>
+<TR><TD valign="top"><CODE>-print</CODE></TD><TD valign="top">displays results of <CODE>find</CODE> command</TD></TR>
+<TR><TD valign="top"><CODE>-exec command {} \;</CODE></TD><TD valign="top">to execute a command; note the required syntax</TD></TR>
+<TR><TD valign="top"><CODE>-ok</CODE></TD><TD valign="top">use instead of <CODE>exec</CODE> to be prompted before command is executed</TD></TR>
+<TR><TD valign="top"><CODE>-depth</CODE></TD><TD valign="top">starts at lowest level in directory tree rather than root of given directory</TD></TR>
+<TR><TD valign="top"><CODE>-prune</CODE></TD><TD valign="top">used when you want to exclude certain subdirectories</TD></TR>
+</TABLE>
+
+<P>I'll be giving examples that show how to use and combine these expressions. 
+Before doing that, what can <CODE>find</CODE> be used for? If you use the <CODE>whatis</CODE> 
+command to see what it does, the answer may surprise you:</P>
+
+<PRE><CODE>whatis find
+find(1)           - walk a file hierarchy</CODE></PRE>
+
+<P>In a nutshell, <CODE>find</CODE> is meant to recursively search directories to 
+find any files that meet your specified expressions. This may not seem 
+like such a big deal, but there aren't that many  Unix utilities that 
+can "walk" through a directory and all of its subdirectories. This ability 
+proves quite useful, as not only can you find files, but you can do 
+something with them as you find them.</P>
+
+<P>Let's start with some simple examples and then work our way towards some more seemingly-complicated expressions. The simplest <CODE>find</CODE> you can do is 
+to simply type this:</P>
+
+<PRE><CODE>find . -print</CODE></PRE>
+
+<P>Since the "<CODE>.</CODE>" represents your current directory, this <CODE>find</CODE> command will 
+find all of the files in your current directory and all of its 
+subdirectories, and then <CODE>print</CODE> the results to your screen.</P>
+
+<P>On your FreeBSD system, <CODE>-print</CODE> is assumed if you forget to type it, so 
+this command will also give the same result:</P>
+
+<PRE><CODE>find .</CODE></PRE> 
+
+<P>However, it's a good idea to get in the habit of using <CODE>-print</CODE>, in case you ever need to do a <CODE>find</CODE> on a system that does not assume this action.</P>
+
+<P>To find all of the files in your home directory, you should first make sure 
+you are in your home directory, then repeat that <CODE>find</CODE> command, like so:</P>
+
+<PRE><CODE>cd
+find . -print</CODE></PRE>
+
+<P>The <CODE>cd</CODE> command will always take you to your home directory. Since the 
+<CODE>find</CODE> command can be used to do powerful things, it is always a good idea 
+to first <CODE>cd</CODE> to the directory structure in which you wish to work. For the rest 
+of this article, I will assume that you are in your home directory, so you 
+won't inadvertantly affect any files on your FreeBSD system that don't 
+reside in your home directory.</P>  
+
+<P>The above examples demonstrated how easy it is to use <CODE>find</CODE>, but usually 
+you are looking for something specific when you invoke the <CODE>find</CODE> command. 
+This is where the other expressions come into play.  Let's try to find 
+a file with a specific name:</P>
+
+<PRE><CODE>touch file1
+find . -name file1 -print		
+./file1</CODE></PRE>
+
+<P>Let's pick apart what I just did for a moment. I created an empty file named 
+<CODE>file1</CODE> using the <CODE>touch</CODE> command. I then told <CODE>find</CODE> to search my current 
+directory ("<CODE>.</CODE>") for a file named (<CODE>-name</CODE>) <CODE>file1</CODE> and to <CODE>print</CODE> the results of 
+the search to my screen. Also, I can tell that I only have one file named 
+<CODE>file1</CODE> in my home directory and all of its subdirectories, as only one result 
+was displayed.</P>
+
+<P>Often, when you need to use the <CODE>find</CODE> command, you are looking for more than 
+one file. For example, you may want to find all of the files with a 
+certain extension. I tend to download a lot of .pdf files and don't always 
+remember to keep them in the same place. Occasionally, I like to collect 
+them and put them in a directory I've created named <CODE>pdfs</CODE>. When this urge 
+strikes, I can use the following <CODE>find</CODE> command to search my home 
+directory and its subdirectories for all .pdf files:</P>
+
+<PRE><CODE>find . -name "*.pdf" -print
+./pdfs/50130201a.pdf
+./pdfs/50130201b.pdf
+./pdfs/50130201c.pdf
+./pdfs/IWARLab.pdf
+./pdfs/DoS_trends.pdf
+./pdfs/Firewall-Guide.pdf
+./2000_ports.pdf</CODE></PRE>
+
+<P>It looks like I've been pretty good lately, as I only have one .pdf file 
+that is not in my <CODE>pdfs</CODE> directory.</P>
+
+<P>You'll note that in order to get this <CODE>find</CODE> command to work, I had to 
+"quote" the "<CODE>*</CODE>" wildcard by typing <CODE>"*.pdf"</CODE> instead of just <CODE>*.pdf</CODE>. There 
+are two other ways to quote, so the following two commands will yield the same 
+results:</P>
+
+<PRE><CODE>find . -name \*.pdf -print
+find . -name '*.pdf' -print</CODE></PRE>
+
+<P>Let's add to that original command and see how the output changes. What if 
+I was only interested in seeing which .pdf files were not in the <CODE>pdfs</CODE> 
+directory? Let's repeat that <CODE>find</CODE> command, but pipe the results to <CODE>grep</CODE> so only that one file will be displayed:</P>
+
+<P><CODE>find . -name "*.pdf" -print | grep -v "^\./pdfs/"
+./2000_ports.pdf</CODE></P>
+
+<P>Well, that command worked, but that syntax looks pretty scary; we better 
+pick it apart. Whenever you use <CODE>grep -v</CODE>, you are creating a reverse 
+filter, meaning that you want it to show the opposite of what follows. In 
+my case, I'm not interested in the files that reside in the <CODE>./pdfs/</CODE> 
+directory; I want to find the files that aren't, so I used the reverse 
+filter. You'll note that I also "quoted" the whole expression. I also 
+added a bit extra, that <CODE>^\</CODE> stuff. The <CODE>^</CODE> tells <CODE>grep</CODE> to only search 
+the very beginning of a line for my expression. The <CODE>\</CODE> is an extra quote so that 
+<CODE>grep</CODE> does not interpret the <CODE>.</CODE> as a special character. The whole thing put 
+together told <CODE>grep</CODE> to just show me the files that don't live in the 
+<CODE>./pdfs/</CODE> directory, so I received the desired output.</P>
+
+<TABLE width="100%" border="0" cellspacing="0" cellpadding="0"><TR><TD><P class="secondary">
+</P></TD><TD><P class="secondary" align="right">
+<A href="<!--CS_NEXT_REF-->">
+
+</A></P></TD></TR></TABLE>
+
+
+
+
+
+
+
+
+
+
+</P>
+
+
+<P>Brave enough to try something even more useful but complicated-looking? 
+Let's get <CODE>find</CODE> to not only find this file, but move it to the correct 
+directory using the following command:</P>
+
+<P><CODE>find . -name "*.pdf" -print | grep -v "^\./pdfs/" | xargs -J X mv X ./pdfs/</CODE></P>
+
+<P>To see if it worked, let's repeat the original <CODE>find</CODE> command:</P>
+
+<PRE><CODE>find . -name "*.pdf" -print
+./pdfs/50130201a.pdf
+./pdfs/50130201b.pdf
+./pdfs/50130201c.pdf
+./pdfs/IWARLab.pdf
+./pdfs/DoS_trends.pdf
+./pdfs/Firewall-Guide.pdf
+./pdfs/2000_ports.pdf</CODE></PRE>
+
+<P>So it worked. Let's see why. Once <CODE>grep</CODE> finished filtering the <CODE>find</CODE> 
+output, we piped that result to the <CODE>xargs</CODE> command to finish the job for 
+us. The <CODE>J</CODE> switch tells <CODE>xargs</CODE> to take all of the files it receives and 
+assume that the file you specify with the command is to be the destination. 
+For example, before I ran the <CODE>find</CODE> command, I had no idea how many files 
+needed to be moved. There may have been one, or there may have been several. I 
+needed to let <CODE>xargs</CODE> know that regardless of how many files were found, I 
+want them all moved and I want them all moved to the <CODE>pdfs</CODE> directory. That bit 
+of magic is the job of the <CODE>J</CODE> switch. To get the <CODE>J</CODE> switch to work 
+properly, I also defined a character (<CODE>X</CODE>) and put that character on either side 
+of the <CODE>mv</CODE> command.</P>
+
+<HR width="70%" size="1" noshade>
+<CENTER>
+<TABLE width="70%" border="0" cellspacing="0" cellpadding="0">
+<TR>
+<TD valign="top" width="50%" align="center">
+
+<A href="http://www.oreilly.com/catalog/lunix5/index.html"><IMG src="/catalog/covers/lunix5.s.gif" alt="Learning the Unix Operating System, 5th Edition" border="0" hspace="20" /></A>
+</TD>
+<TD valign="top" width="50%"><P class="headline">Related Reading</P>
+<P class="medlist"><SPAN class="title"><A href="http://www.oreilly.com/catalog/lunix5/index.html">Learning the Unix Operating System, 5th Edition</A></SPAN><STRONG><BR />
+
+A Concise Guide for the New User<BR />
+
+By <A href="http://www.oreillynet.com/cs/catalog/view/au/28?x-t=book.view">Jerry Peek</A>, <A href="http://www.oreillynet.com/cs/catalog/view/au/270?x-t=book.view">Grace Todino</A>, <A href="http://www.oreillynet.com/cs/catalog/view/au/336?x-t=book.view">John Strang</A></STRONG>
+</P>
+<DIV class="secondary">
+ <A href="http://www.oreilly.com/catalog/lunix5/toc.html">Table of Contents</A><BR /> 
+  <A href="http://www.oreilly.com/catalog/lunix5/inx.html">Index</A><BR /> 
+ 
+ <A href="http://www.oreilly.com/catalog/lunix5/chapter/ch02.html">Sample Chapter</A><BR /> 
+ 
+
+
+<A href="http://safari.oreilly.com/main.asp?bookname=lunix5">Read Online--Safari</A>
+
+</DIV>
+</TD>
+</TR>
+</TABLE>
+</CENTER>
+<HR width="70%" size="1" noshade>
+
+<P>Remember that Unix filenames don't necessarily have extensions, so you may 
+want to search for a more complicated pattern. Let's say I want to find 
+any files that have "bsd" somewhere in their name. I would do this 
+command:</P>
+
+<PRE><CODE>find . -name "*bsd*" -print
+./.kde/share/icons/favicons/www.freebsd.org.png
+./.kde/share/icons/favicons/www.freebsddiary.org.png
+./.kde/share/wallpapers/bsdbg1280x1024.jpg
+./mnwclient-1.11/contrib/freebsd</CODE></PRE>
+
+<P>We can also find a file by more than just its name. For example, to find
+all the files that you have not read in more than (<CODE>+</CODE>) 30 days:</P>
+
+<PRE><CODE>find . -atime +30 -print</CODE></PRE>
+
+<P>To see files you haven't modified, use <CODE>-mtime</CODE> instead, and to see files you haven't changed the owner or permissions of, use <CODE>-ctime</CODE>. The number 
+after the <CODE>+</CODE> indicates how many days or 24-hour periods. To see which 
+files were modified today, try:</P>
+
+<PRE><CODE>find . -mtime -1 -print</CODE></PRE>
+
+<P>This will show what files were modified during the last 24 hours. Note 
+that this time you should use the <CODE>-</CODE>, as you want to find the files from
+less than one day ago.</P>
+
+<P>The other switch that deals with time is the <CODE>-newer</CODE> switch. The three 
+<CODE>time</CODE> switches all use 24-hour periods. If you would like to be a bit 
+more granular in your time than that, the <CODE>-newer</CODE> switch will compare a 
+file's access, modification, and change times to within a minute. For 
+example, to see if any of your "dot" files were changed since you last 
+changed your <CODE>.cshrc</CODE> file, you could execute this command:</P>
+
+<PRE><CODE>find . -type f -name ".*" -newer .cshrc -print</CODE></PRE>
+
+<P>You'll note that I've included some other new switches in this command. I 
+specified a "type" of <CODE>-f</CODE> for files, as I don't want to see any 
+directories, just files. I told the <CODE>-name</CODE> switch that I was 
+interested in seeing files that start with a "<CODE>.</CODE>". Finally, I used the 
+<CODE>-newer</CODE> switch to indicate that I was interested in the files that were 
+modified since I last modified my <CODE>.cshrc</CODE> file.</P>
+
+<P>Since I've started to combine switches that indicate which files I'm 
+interested in finding, I should mention that all switches are logically 
+"anded" unless you use the <CODE>-o</CODE> or logical "or". Since the switches are 
+logically anded, I really told the <CODE>find</CODE> utility that I was only 
+interested in files that were of a certain type <I>and</I> had a certain name 
+<I>and</I> were newer than my <CODE>.cshrc</CODE> file.</P>
+
+<P>Let's look at an example that shows the difference between a logical "and" and a 
+logical "or". If I wanted to see all of the files in my home directory that had 
+not been accessed in the last seven days "and" are larger than 10 Mb, I would 
+use this command:</P>
+
+<PRE><CODE>find . -atime +7 -size +20480 -print</CODE></PRE>
+
+<P>However, if I wanted to see any files that either had not been accessed in 
+the last seven days "or" that were over 10 MB in size, I would use this 
+command instead:</P>
+
+<PRE><CODE>find . -atime +7 -o -size +20480 -print</CODE></PRE>
+
+<P>You'll note that I had to do some math to come up with the number to give 
+to the <CODE>-size</CODE> expression, since <CODE>-size</CODE> is looking for the number of 512-byte blocks. However, I could have used the <CODE>expr</CODE> command to do the math 
+for me, like so:</P>
+
+<P>find . -atime +7 -o -size +`expr 10 \* 1024 \* 2` -print</P>
+
+<P>Note that in this example, everything between the backquotes (the ` on the far left of your 
+keyboard) is what will do the required math. We still need 
+the <CODE>+</CODE> in front of the first back quote, as we want to see files greater than 
+10 MB. You could also test what the results of the math will be by adding the 
+<CODE>echo</CODE> command to the beginning of the command:</P>
+
+<P><CODE>echo find . -atime +7 -o -size +`expr 10 \* 1024 \* 2` -print
+find . -atime +7 -size +20480 -print</CODE></P>
+
+<P>It is a good idea to <CODE>echo</CODE> complex commands first, to ensure that the 
+stuff you've quoted will do what you expect before asking the <CODE>find</CODE> command to execute it.</P>
+
+<P>That should get you started for this week. In next week's article, I'll 
+continue through the rest of the expressions and give some more practical 
+examples for using the <CODE>find</CODE> command.</P>
+
+<P><I>
+<A href="/pub/au/73">Dru Lavigne</A> 
+is a networking instructor at a private technical college in Kingston,
+ON, and is notorious for
+seeing how many operating systems she can convince to multi-boot on her
+test machine.
+
+</I></P>
+
+<HR size="1" noshade />
+
+<P><I>Read more from <A href="/pub/ct/15"><B>FreeBSD Basics</A></B></I>.</P>
+
+
+
+
+
+
+
+
+
+
+
+<P>Return to the <A href="/bsd/">BSD DevCenter</A>.</P>
+
+
+
+
+
+<IMG src="/images/trans.gif" alt=" " width="490" height="1" /><BR />
+
+
+<A name="thread"></A>
+
+
+
+<IMG src="/images/trans.gif" alt=" " width="450" height="12" border="0" /><BR />
+<TD width="20" valign="top">
+<IMG src="/images/trans.gif" alt=" " width="20" height="1" /></TD>
+<TD width="140" bgcolor="#663366" valign="top" align="center" rowspan="5">
+<P class="header">Sponsored by:</P><TABLE border="0" cellpadding="0" cellspacing="0" width="120" height="480"><TR><TD>				</NOLAYER>
+				</TD></TR></TABLE>
+<P></P>
+<P></P>
+<IMG src="/images/trans.gif" alt=" " width="140" height="1"></TD>
+</TR>
+</TABLE>
+
+<TABLE width=100% border="0" cellpadding="0" cellspacing="0">
+<TR>
+<TD width="100%">
+<IMG src="/images/trans.gif" alt=" " width="640" height="5"></TD>
+</TR>
+
+<TR>
+<TD><A href="/pub/a/mediakit/contact.html"><IMG src="/images/trail-contact.gif" alt="Contact Us" width="76" height="16" border="0" align="top"></A><A href="/pub/a/mediakit/index.html"><IMG src="/images/trail-media.gif" alt="Media Kit" width="68" height="16" border="0" align="top"></A><A href="/pub/a/mediakit/privacy.html"><IMG src="/images/trail-privacy.gif" alt="Privacy Policy" width="94" height="16" border="0" align="top"></A><A href="/pub/q/pressroom"><IMG src="/images/trail-press.gif" alt="Press News" width="85" height="16" border="0" align="top"></A><A href="/jobs/"><IMG src="/images/trail-jobs.gif" alt="Jobs @ O'Reilly Network" width="41" height="16" border="0" align="top"></A></TD>
+</TR>
+
+<TR>
+<TD width="100%">
+<IMG src="/images/trans.gif" alt=" " width="640" height="5"></TD>
+</TR>
+
+<TR>
+<TD colspan="2" bgcolor="#663366"><IMG src="/images/trans.gif" height="7" align="top" alt=" "></TD>
+</TR>
+
+<TR>
+<TD valign="top" align="right">
+<FONT face="verdana, sans serif, serif" size="1">Copyright © 2000-2002 O'Reilly & Associates, Inc. All Rights Reserved.<BR />
+All trademarks and registered trademarks appearing on the O'Reilly Network are the property of their respective owners.<BR />
+For problems or assistance with this site, email <A href="mailto:help@oreillynet.com">help@oreillynet.com</A></FONT></TD>
+</TR>
+</TABLE>
+<BR />
+
+<TABLE width="100%" cellspacing="0" cellpadding="0">
+<TR>
+<TD width="130" valign="top" align="center">
+<A href="/pub/a/rss/2000/03/17/about_meerkat.html"><IMG src="/images/120x60_meerkat.gif" width="120" height="60" border="0" alt="Have you seen Meerkat?" /></A></TD>
+<TD valign="top" align="right">
+<TABLE border="0" cellpadding="0" cellspacing="0" width="468" height="60"><TR><TD>				</NOLAYER>
+				</TD></TR></TABLE></TD>
+</TR>
+</TABLE></BODY>
+
+
+</HTML>

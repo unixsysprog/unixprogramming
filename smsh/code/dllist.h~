@@ -1,0 +1,4 @@
+
+void add_item_list(int k , int r, int s);
+void remove_item_list()
+int get_cur_state()

@@ -1,0 +1,76 @@
+<html>
+<head>
+	<title>Assignment 4: pong</title>
+</head>
+
+<body bgcolor="#DEEEDE">
+<h3>Assignment 4: pong
+<hr></h3>
+<img src="pong2.gif" border=0 align=left>
+<!--
+<img src=menu08.gif border=0 align=left>
+  -->
+
+<p>
+<ul>
+	<li>The Problem
+		<ul>
+		<li><a href=pong.txt>plain text</a>
+		<li><a href=pong.pdf>pdf file</a>
+		<!-- <li><a href=pong.tr>troff file</a> -->
+		</ul>
+		<p>
+	<li>Notes, Questions, News
+		<ul>
+		<li><a href=bounce_info.txt
+				target='_top'>Explanation of bouncing</a>
+		<li><a href='sigact-info.pdf'
+				target='_top'>Information on sigaction</a>
+		<li><a href=pong_q+a.txt
+				target='_top'>Some Questions and Answers</a>
+		<li><a href='http://www-128.ibm.com/developerworks/linux/library/l-reent.html'
+				target='_top'>
+			Guidelines for writing re-entrant code</a>
+		<li><a href='xbounce.c'
+				target='_top'>bounce2d X-Windows</a>
+		<li><a href=x11pong.html
+				target='_top'>Pong for X-Windows</a>
+		<li><a href=oop.html
+				target='_top'>Object Design for MultiBall </a>
+		<li><a href=resize.html
+				target='_top'>Adjustable windows</a>
+		</ul>
+	<!--
+	<li>Plans
+		<ul>
+		<li>Click <a href='plans/'>here</a> to see several
+		examples of plans
+		</ul>
+	<li>Solutions
+		<ul>
+		<li><a href=sols/X>Student X</a>
+		<li><a href=sols/Y>Student Y</a>
+		<li><a href=sols/Z>Student Z</a>
+		<li><a href=sols/W>Student W</a>
+	-->
+		</ul>
+</ul>
+<img src=pong.gif border=0>
+<ul>
+	<li>Other Notes
+		<ul>
+		<li><a href="../../../reference/history/spacetravel.html"
+				target='_top'>
+			A Video Game led to Unix</a>
+		<li><a 
+		href="http://www.emuunlim.com/doteaters/play2sta1.htm"
+				target='_top'>
+			Jobs and Wozniak worked on breakout before Apple
+			</a>
+		<li><a href='http://www.blinkenlights.net/blinkenlights'
+				target='_top'>
+			<!-- <a href=blinkenpong.html> -->
+			<img src='play_pong.blm.gif' border=0></a>
+		</ul>
+	</li>
+</ul>

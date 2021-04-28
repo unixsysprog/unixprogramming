@@ -1,0 +1,98 @@
+Notes for today
+
+PONG
+
+  0- Review of model
+
+  a- why not just include up down keys in same loop as other keystrokes?
+  b- How to handle timer tick when in middle of key processing?
+  c- General efficiencies for this problem?
+  d- Which race condition in particular? -- see b
+
+LECT8
+  - Env var persist when you change to a new user session
+  - nothing else
+
+   
+
+	We use blocking for reading keyboard input
+	and we use a timer interrupt to control the animation --
+	The ball, and the clock run on their own without user control
+
+	The problem listed is that if you press the up or down key
+	Then you call the code to move the paddle.
+
+	Moving the paddle requires calling some curses functions to
+	position the cursor and then draw a char and then do it again
+	several times.
+
+	But these operations  (move, addch, move, addch .... ) are not
+	atomic.
+
+	What to do?
+
+	Suggestions?
+		- recv signal but put it on hold 
+			a - catch it but do not act until later
+				| move * addch |
+				     ^--- timer tick calls ball_move
+					  Add that event to a Q and then 
+					  deQ when after the move and addch
+
+				In the ball_move
+
+					you could have a flag called -- don't draw
+					paddle_move could tell the ball "I'm drawing now!"
+					Then when a tick arrives, the ball move function
+					can check that flag.  If set, it will
+						Q it up == increment a tick counter
+					when the paddle is done, it can say "I'm done.."
+					to the ball which can count down and process that
+					many ticks.
+
+					Q does this add lag?
+
+					Can you record the position of the cursor?
+					YES. You can use getyx(stdscrn, r, c);
+					that will store the current position which
+					can be restored when ball move is done.
+
+					Q: is that really safe?
+					A: what is the risk spot?
+
+					'up key' -> paddle_up -> move addch move addch ...
+					What if paddle up interrupted a ball_move?
+
+					Block on keyboard input
+						timer -- process that
+						will we get keboard input during ball move?
+						the user can press key and that key is buffered
+						in the tty driver.  But it is not read until
+						the loop hits the getch
+
+				Fact: keyboard cannot interrupt ball move unless you use
+				interrupt managed input vs blocked input.
+
+				BUT: if the ball move and clock update are slow, another
+				timer tick can occur while you are moving the ball and/or
+				updating the clock.
+
+				Q: won't that always or never occur?  The clock update does
+				not happend every tick and the ball might not move each tick.
+			
+				If a sigalrm happens when servicing a sigalrm then one Qs up.
+				But the rest are lost.  The default is to hold one in the flag.
+				You can tell it to interrupt itself, but that can be tricky.
+				
+				You can just use the Q all the time.
+
+				You can have the ball move function store yx, then
+				act.  What if a tick happens during that time?  You can
+				accumulate the ticks and keep moving as long as you
+				have ticks in the Q and when done, return to where the
+				cursor was.
+			
+			b - When you do the move record where you moved
+				before the addch, do move again and then addch
+				move, * record where you moved, * move again, * addch
+				(still vulnerable)

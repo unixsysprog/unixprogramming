@@ -1,0 +1,5 @@
+Add rows and cols to give students a chance
+to use ioctl.
+
+Note that one can set rows and cols even
+if the numbers are false.

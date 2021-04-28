@@ -1,0 +1,60 @@
+<html>
+<head>
+	<title>requirement for pong</title>
+</head>
+<body bgcolor=white>
+<center>
+	<b>Required Modularity for Pong</b>
+</center>
+<p>
+<b>New Required Part of Pong Assignment</b>
+<blockquote>
+The pong assignment suggests taking a modular/object approach to the
+paddle in the game.  This suggestion has been promoted to a requirement.
+Here are the details.
+</blockquote>
+<b>The Original Description</b>
+<blockquote>
+The assignment suggests defining a data structure for a paddle and then says:
+<p>
+Having created the paddle data structure, you need to write a few
+simple operations for it:  <tt>init_paddle()</tt>, <tt>up_paddle()</tt>,
+<tt>down_paddle()</tt>, and <tt>is_a_hit(y,x)</tt>.  The <tt>init_paddle()</tt>
+function must initialize the paddle data structure and draw it on the
+screen.  The up and down functions should check if there is space to
+move the paddle in the requested direction, and if there is, to
+</blockquote>
+<b>The Revised, Clarified Requirement</b>
+<blockquote>
+You must implement the paddle as a separate C file, called <tt>paddle.c</tt>.  That 
+file is required to:
+<ul><li>use static data to store the state of the paddle, preventing other
+	parts of the program from having direct access to the state of the paddle
+    <li>implement a set of functions for moving the paddle, setting paddle
+	attributes, and reading paddle information
+    <li>have a header file called <tt>paddle.h</tt> that contains declarations of
+	the non-static functions in <tt>paddle.c</tt>
+</ul>
+</blockquote>
+
+<b>Questions?</b>
+<blockquote>
+If you are not sure how to create a separate abstract object or layer in C, look at the
+<tt>utmplib.c</tt> file from lecture 2.   Or send us email with specific questions about
+your design.
+</blockquote>
+
+<b>General Modularity</b>
+<blockquote>
+Some of the regular design points on pong are based on applying this modular
+approach to other objects in the system.  You can write <tt>ball.c</tt> and
+</tt>ball.h</tt> files to implement the ball.  
+</blockquote>
+
+<b>Extra Credit</b>
+<blockquote>
+You can earn up ten points of extra credit by adding a significant addition to the game.
+For example, you could allow several balls in the game at once, or you could allow the
+paddle to move forward and backwards, or you could create a two-player game.  
+Displaying the score or printing little messages is nice but is not a significant addition.
+</blockquote>

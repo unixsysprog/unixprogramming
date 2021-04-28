@@ -1,0 +1,211 @@
+/* controlflow.c
+ *
+ * "if" processing is done with two state variables
+ *    if_state and if_result
+ */
+#include	<stdio.h>
+#include        <stdlib.h>
+#include	<string.h>
+#include        "dllist.h"
+#include	"smsh.h"
+
+
+enum states   { NEUTRAL, WANT_THEN, THEN_BLOCK, ELSE_BLOCK };
+enum results  { SUCCESS, FAIL, NEVER };
+enum keywords { NONE, K_IF, K_THEN, K_ELSE, K_FI };
+struct kw { char *str; int tok; };
+
+struct kw words[] = { {"if", K_IF}, {"then", K_THEN},{"else", K_ELSE},
+                      {"fi", K_FI}, {NULL,0} };
+
+
+
+int  process_control_cmd(int , char** );
+int  is_valid_state(int );
+void execute_if(char** , int* );
+int  is_a_control_word(char *s);
+int  syn_err(char *);
+
+
+
+/*
+ * purpose: determine the shell should execute a command
+ * returns: 1 for yes, 0 for no
+ * details: if in THEN_BLOCK and if_result was SUCCESS then yes
+ *          if in THEN_BLOCK and if_result was FAIL    then no
+ *          if in WANT_THEN  then syntax error (sh is different)
+ */
+int ok_to_execute()
+{
+    int	rv = 1;		/* default is positive */
+    int state, result;
+   
+    if (is_list_empty() == 1)
+      return rv;
+
+    state  = get_list_state();
+    result = get_list_result();
+
+    if (state == WANT_THEN){
+      syn_err("then expected");
+      rv = 0;
+    }
+    else if (state == THEN_BLOCK && result == SUCCESS)
+      rv = 1;
+    else if (state == THEN_BLOCK && (result == FAIL || result == NEVER))
+      rv = 0;
+    else if (state == ELSE_BLOCK && result == FAIL)
+      rv = 1;
+    else if (state == ELSE_BLOCK && (result == SUCCESS || result == NEVER))
+      rv =0;
+
+    return rv;
+}
+
+/*
+ * purpose: boolean to report if the command is a shell control command
+ * returns: 0 or 1
+ */
+int is_control_command(char *s)
+{
+    return ( is_a_control_word(s) != NONE );
+}
+
+int is_a_control_word(char *s)
+{
+    int	i;
+
+    for(i=0; words[i].str != NULL ; i++ )
+      {
+	if (strcmp(s, words[i].str) == 0)
+		return words[i].tok;
+      }
+    return NONE;
+}
+
+/*
+ * purpose: Process "if", "then", "fi" - change state or detect error
+ * returns: 0 if ok, -1 for syntax error
+ *   notes: I would have put returns all over the place, Barry says "no"
+ */
+int do_control_command(char **args)
+{
+    char *cmd = args[0];
+    int	 rv = -1;
+
+    if (strcmp(cmd,"if")==0){
+       rv = process_control_cmd(K_IF, args);	        
+    }
+    else if (strcmp(cmd,"then")==0){
+       rv = process_control_cmd(K_THEN,args);
+    }
+    else if (strcmp(cmd,"else") == 0){
+       rv = process_control_cmd(K_ELSE, args); 
+    }
+    else if (strcmp(cmd,"fi")==0){
+       rv = process_control_cmd(K_FI, args);
+    }
+    else 
+      fatal("internal error processing:", cmd, 2);
+    return rv;
+}
+
+
+int check_if_state()
+{
+    if (is_list_empty() == 0 && get_list_state() != NEUTRAL){
+      syn_err("unexpected close of if block");
+      return -1;
+    }
+    return 0;
+ }
+
+
+int process_control_cmd(int key, char** args)
+{
+      int rv = -1;
+      int result = 0;
+      int isvalid = is_valid_state(key);
+      
+      if (isvalid == -1) {
+	rv = syn_err("unexpected");
+	return rv;
+      }
+     
+      switch (key){
+      case K_IF:
+	execute_if(args+1, &result);
+	add_item_list(K_IF, result,WANT_THEN);	  
+	rv = 0;
+	break;
+      case K_THEN:
+	result = get_list_result();
+	add_item_list(K_THEN,result,THEN_BLOCK);
+	rv = 0;
+	break;
+      case K_ELSE:
+	result = get_list_result();
+	add_item_list(K_ELSE,result,ELSE_BLOCK);
+	rv = 0;
+	break;
+      case K_FI:
+	remove_item_list();
+	rv = 0;
+	break;
+      default:
+	break;
+      }
+      return rv ;
+}
+
+void execute_if(char** argv,int *result)
+{
+    int ret = 0;
+    if (!ok_to_execute()) {
+      *result = NEVER;
+    }
+    else {
+      ret = process(argv);
+      *result = (ret == 0 ? SUCCESS : FAIL);
+    }
+}
+
+int is_valid_state(int key )
+{
+    int rv = 0;
+    int isempty = is_list_empty();
+    int state   = get_list_state();
+
+    switch (key){
+    case K_IF:
+      if (isempty == 0 && (state == WANT_THEN || state == NEUTRAL))
+	rv = -1;
+      break;
+    case K_THEN:
+      if (isempty == 1 || state != WANT_THEN)
+	rv = -1;
+      break;
+    case K_ELSE:
+      if (isempty == 1 || state != THEN_BLOCK)
+	rv = -1;
+      break;
+    case K_FI:
+      if (isempty || state == WANT_THEN || state == NEUTRAL)
+	rv = -1;
+      break;
+    default:
+      break;
+    }
+    return rv;
+
+}
+
+/* purpose: handles syntax errors in control structures
+ * details: resets state to NEUTRAL
+ * returns: -1 in interactive mode. Should call fatal in scripts
+ */
+int syn_err(char *msg)
+{
+    fprintf(stderr,"syntax error: %s\n", msg);
+    return -1;
+}

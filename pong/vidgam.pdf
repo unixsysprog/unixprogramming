@@ -1,0 +1,2603 @@
+%PDF-1.3
+%âãÏÓ
+2 0 obj
+<<
+/Length 8326
+>>
+stream
+BT
+/TT2 1 Tf
+12 0 0 12 108 718.89 Tm
+0 g
+/GS1 gs
+0 Tc
+0.0013 Tw
+(The In)Tj
+/TT3 1 Tf
+2.8636 0 TD
+0 Tw
+(ß)Tj
+/TT2 1 Tf
+0.5562 0 TD
+0.0013 Tw
+(uence of the)Tj
+9.6 0 0 9.6 213.4038 718.89 Tm
+0 Tw
+(UNIX)Tj
+12 0 0 12 237.9382 718.89 Tm
+(®)Tj
+10 0 0 10 249.9091 722.89 Tm
+(1)Tj
+12 0 0 12 257.9251 718.89 Tm
+0.0012 Tw
+[(Operating System on the De)15(v)10(elopment of)]TJ
+-1.4748 -1.25 TD
+-0.186 Tw
+[(T)74(w)74( o)-250(V)37(ideo )-186(Games.)]TJ
+/TT5 1 Tf
+10 0 0 10 252.705 679.89 Tm
+0 Tw
+[(P)80(eter S. Langston)]TJ
+/TT7 1 Tf
+-3.0035 -1.8 TD
+(Bell Communications Research)Tj
+8 0 0 8 349.3106 665.0901 Tm
+(2)Tj
+/TT5 1 Tf
+10 0 0 10 264.535 625.89 Tm
+[(ABSTRA)30(CT)]TJ
+/TT7 1 Tf
+-13.1535 -2.4 TD
+0.0219 Tw
+(The Lucas)Tj
+/TT8 1 Tf
+4.2143 0 TD
+0 Tw
+(Þ)Tj
+/TT7 1 Tf
+0.5562 0 TD
+0.0219 Tw
+[(lm Games Group w)10(as established to e)15(xplore w)10(ays of applying the tech-)]TJ
+-7.2704 -1.2 TD
+0.0615 Tw
+[(nological and methodological e)15(xpertise de)25(v)15(eloped at Lucas)]TJ
+/TT8 1 Tf
+24.0279 0 TD
+0 Tw
+(Þ)Tj
+/TT7 1 Tf
+0.5562 0 TD
+0.0615 Tw
+(lm \(principally for )Tj
+/TT8 1 Tf
+7.8212 0 TD
+0 Tw
+(Þ)Tj
+/TT7 1 Tf
+0.5562 0 TD
+0.0615 Tw
+(lm pro-)Tj
+-32.9614 -1.2 TD
+-0.0001 Tc
+0.1612 Tw
+[(duction\) in a ne)24.9(w)-411.2(entertainment medium — video games. )-250.1(One)-411.3(of the major tools on)]TJ
+T*
+0 Tc
+0.1324 Tw
+[(which that e)15(xpertise is based is the)]TJ
+8 0 0 8 258.4695 565.89 Tm
+0 Tw
+(UNIX)Tj
+10 0 0 10 282.2886 565.89 Tm
+0.1323 Tw
+[(operating system.)-632.3(It is an interesting coinci-)]TJ
+-17.4289 -1.2 TD
+0.131 Tw
+[(dence that this operating system’)55(s)-381(early de)25(v)15(elopment w)10(as hea)20(vily in)]TJ
+/TT8 1 Tf
+28.2962 0 TD
+0 Tw
+(ß)Tj
+/TT7 1 Tf
+0.5562 0 TD
+-0.0003 Tc
+0.1313 Tw
+(uenced by games)Tj
+-28.8523 -1.2 TD
+-0.0001 Tc
+0.0001 Tw
+(and the interests of game designers.)Tj
+8 0 0 8 250.6844 545.09 Tm
+0 Tc
+0 Tw
+(3)Tj
+10 0 0 10 133 526.29 Tm
+-0.0001 Tc
+0.0667 Tw
+[(This paper describes the de)24.9(v)14.9(elopment of the tw)9.9(o)-316.7(video games ‘)73.9(‘)]TJ
+/TT5 1 Tf
+26.14 0 TD
+0 Tc
+0 Tw
+[(B)25(ALLBLAZER)]TJ
+/TT7 1 Tf
+5.8646 0 TD
+-0.074 Tc
+(’’)Tj
+6 0 0 6 458.9669 528.6901 Tm
+0 Tc
+(TM)Tj
+10 0 0 10 108 514.29 Tm
+0.0149 Tw
+[(and ‘)74(‘Rescue on Fractalus!’)74(’)]TJ
+6 0 0 6 221.0881 516.6901 Tm
+0 Tw
+(TM)Tj
+10 0 0 10 232.7371 514.29 Tm
+0.0149 Tw
+[(and the w)10(ays in which)]TJ
+8 0 0 8 325.3059 514.29 Tm
+0 Tw
+(UNIX)Tj
+10 0 0 10 347.951 514.29 Tm
+0.0149 Tw
+[(softw)10(are aided and in)]TJ
+/TT8 1 Tf
+8.6148 0 TD
+0 Tw
+(ß)Tj
+/TT7 1 Tf
+0.5562 0 TD
+(uenced)Tj
+-33.166 -1.2 TD
+0.0337 Tw
+[(their design.)-533.7(The initial decision to use a)]TJ
+8 0 0 8 277.8786 502.29 Tm
+0 Tw
+(UNIX)Tj
+10 0 0 10 300.7107 502.29 Tm
+0.0336 Tw
+[(system w)10(as based lar)18(gely on my personal)]TJ
+-19.2711 -1.2 TD
+-0.0001 Tc
+0.0318 Tw
+[(preference as leader \(and sole member at the time\) of the games group, b)19.9(ut as the project)]TJ
+T*
+0 Tc
+0 Tw
+[(progressed we disco)15(v)15(ered more and more reasons to belie)25(v)15(e)15( )-15(it)-250(had been the right choice.)]TJ
+/TT2 1 Tf
+-3.6 -3.6 TD
+[(HIST)18(OR)35(Y)]TJ
+/TT7 1 Tf
+2.5 -1.56 TD
+0.1472 Tw
+[(‘)74(‘Months ago in a deserted w)10(arehouse in Marin County)65(,)-397.2(Geor)18(ge Lucas met with a lone program-)]TJ
+-2.5 -1.2 TD
+0.0637 Tw
+[(mer)55(...)70(’)74(’)74( )-73.9(be)15(gins one of the man)15(y)-313.7(descriptions of the formation of the Lucas)]TJ
+/TT8 1 Tf
+30.11 0 TD
+0 Tw
+(Þ)Tj
+/TT7 1 Tf
+0.5562 0 TD
+0.0637 Tw
+[(lm Games Group.)-563.7(Needless to)]TJ
+-30.6662 -1.2 TD
+0.1498 Tw
+[(say)65(,)-399.9(some journalistic license is e)25(vident in such accounts of the group’)55(s)-399.9(formation b)20(ut when the purple)]TJ
+T*
+0.0515 Tw
+[(prose is stripped a)15(w)10(ay)-301.5(what remains is the important part of the group’)55(s)-301.6(charter — to look at the booming)]TJ
+T*
+-0.0001 Tc
+0.0885 Tw
+[(industry of video games and see in what w)9.9(ays the ‘)73.9(‘magic’)73.9(’)-338.5(o)-0.1(f)-338.5(Lucas)]TJ
+/TT8 1 Tf
+28.5011 0 TD
+0 Tc
+0 Tw
+(Þ)Tj
+/TT7 1 Tf
+0.5562 0 TD
+0.0884 Tw
+[(lm could be brought to bear)55(.)-588.4(That)]TJ
+-29.0573 -1.2 TD
+0.0976 Tw
+[(‘)74(‘magic’)74(’)-347.6(consists of tw)10(o)-347.6(parts: an uncompromising attention to detail \(leading to a sense of in)40(v)20(olv)15(ement)]TJ
+T*
+0.0758 Tw
+[(and realism e)25(v)15(en)-325.9(in)-325.9(the most unrealistic of situations\) and the use of high-tech tools to mak)10(e)-325.8(possible the)]TJ
+T*
+0.0044 Tw
+[(creation of formerly impossible sequences and images.)-504.4(An important part of those tools w)10(as the)]TJ
+8 0 0 8 460.521 342.69 Tm
+0 Tw
+(UNIX)Tj
+10 0 0 10 483.0621 342.69 Tm
+[(oper)20(-)]TJ
+-41.1062 -1.2 TD
+0.0262 Tw
+(ating system introduced within Lucas)Tj
+/TT8 1 Tf
+15.1019 0 TD
+0 Tw
+(Þ)Tj
+/TT7 1 Tf
+0.5562 0 TD
+0.0262 Tw
+(lm by the Lucas)Tj
+/TT8 1 Tf
+6.4936 0 TD
+0 Tw
+(Þ)Tj
+/TT7 1 Tf
+0.5562 0 TD
+0.0261 Tw
+[(lm Computer Di)25(vision, of which the Games Group)]TJ
+-22.7078 -1.2 TD
+-0.0001 Tc
+0.0581 Tw
+[(w)9.9(a)-0.1(s)-308.1(a)-308.1(part. )-250(When)-308.1(we formed the games group at Lucas)]TJ
+/TT8 1 Tf
+22.7789 0 TD
+0 Tc
+0 Tw
+(Þ)Tj
+/TT7 1 Tf
+0.5561 0 TD
+0.058 Tw
+(lm the bene)Tj
+/TT8 1 Tf
+4.781 0 TD
+0 Tw
+(Þ)Tj
+/TT7 1 Tf
+0.5562 0 TD
+0.058 Tw
+(ts of using a)Tj
+8 0 0 8 412.1515 318.69 Tm
+0 Tw
+(UNIX)Tj
+10 0 0 10 435.2286 318.69 Tm
+0.0581 Tw
+[(system for lar)18(ge-)]TJ
+-36.3229 -1.2 TD
+0.0519 Tw
+[(scale graphics softw)10(are de)25(v)15(elopment w)10(as already well appreciated; what remained to be seen w)10(as whether)]TJ
+T*
+0 Tw
+(those bene)Tj
+/TT8 1 Tf
+4.2485 0 TD
+(Þ)Tj
+/TT7 1 Tf
+0.5562 0 TD
+[(ts w)10(ould also apply to small-scale softw)10(are de)25(v)15(elopment for ‘)74(‘to)10(y’)74(’)-250(machines.)]TJ
+-2.3047 -1.56 TD
+(The )Tj
+/TT8 1 Tf
+1.8981 0 TD
+(Þ)Tj
+/TT7 1 Tf
+0.5562 0 TD
+-0.0001 Tc
+0.0935 Tw
+[(rst project we \(the games group\) undertook w)9.9(as a sur)]TJ
+22.0693 0 TD
+-0.015 Tc
+0.1234 Tw
+[(vey o)-15(f)]TJ
+2.9337 0 TD
+-0.0002 Tc
+0.0936 Tw
+[(the games industry to learn ho)24.8(w)]TJ
+-29.9571 -1.2 TD
+-0.0001 Tc
+0.0513 Tw
+[(games de)24.9(v)14.9(elopment w)9.9(as being carried out.)-551.3(W)79.9(e)79.9( )-80(were amazed.)-551.3(Home video games were being produced in)]TJ
+T*
+0.0675 Tw
+[(one of tw)9.9(o)-317.5(w)9.9(ays. )-250(Either)-317.5(a)-317.6(single programmer w)9.9(ould spend a year or tw)9.9(o)-317.6(o)-0.1(f)-317.6(spare time creating the game)]TJ
+T*
+0 Tc
+0.0382 Tw
+(concept, graphics, sound, play mechanics, and writing the game program in assembler \(typically in a base-)Tj
+T*
+0.0697 Tw
+[(ment on a system with too little memory)65(,)-319.7(too fe)25(w)]TJ
+/TT8 1 Tf
+20.5762 0 TD
+0 Tw
+(ß)Tj
+/TT7 1 Tf
+0.5562 0 TD
+0.0697 Tw
+[(opp)10(y)-319.7(disks, no reasonable w)10(ay to mak)10(e)-319.7(a)-319.7(backup, and)]TJ
+-21.1324 -1.2 TD
+0.0312 Tw
+[(fe)25(w)-281.3(i)0(f)-281.3(a)0(n)15(y)15( )-15(deb)20(ugging tools\).)-531.2(Or a team consisting of a programmer and one or tw)10(o)-281.2(helpers w)10(ould be allot-)]TJ
+T*
+-0.0001 Tc
+0.0256 Tw
+[(ted tw)9.9(o)-275.6(t)-0.1(o)-275.6(three months to carry a game from concept to deb)19.9(ugged implementation.)-525.6(Programmers in either)]TJ
+T*
+0 Tc
+0.0889 Tw
+[(case often had no prior e)15(xperience in computer programming and were plagued by )]TJ
+/TT8 1 Tf
+34.4337 0 TD
+0 Tw
+(ß)Tj
+/TT7 1 Tf
+0.5562 0 TD
+0.1038 Tw
+[(ak)10(e)15(y)15( equipment )15(and)]TJ
+-34.9898 -1.2 TD
+0.0885 Tw
+[(the lack of man)15(y)-338.5(aids that we considered basic: high-le)25(v)15(e)0(l)-338.5(languages, support tools, libraries of softw)10(are,)]TJ
+T*
+0.075 Tw
+(input/output redirection, hierarchical )Tj
+/TT8 1 Tf
+15.164 0 TD
+0 Tw
+(Þ)Tj
+/TT7 1 Tf
+0.5562 0 TD
+0.075 Tw
+[(le systems, lar)18(ge storage de)25(vices, and an understanding of softw)10(are)]TJ
+-15.7201 -1.2 TD
+0 Tw
+(design methodologies.)Tj
+ET
+0 G
+1 J 1 j 0.32 w 10 M []0 d
+1 i 
+72.03 151.11 m
+144.03 151.11 l
+S
+BT
+6 0 0 6 72 141.69 Tm
+(1)Tj
+8 0 0 8 77 139.29 Tm
+(See the last page for a list of trademarks.)Tj
+6 0 0 6 72 129.89 Tm
+(2)Tj
+8 0 0 8 77 127.4901 Tm
+[(The w)10(ork described here w)10(as done at Lucas)]TJ
+/TT8 1 Tf
+17.5005 0 TD
+(Þ)Tj
+/TT7 1 Tf
+0.5562 0 TD
+[(lm Ltd., San Raf)10(ael, Calif.)]TJ
+6 0 0 6 72 118.09 Tm
+(3)Tj
+8 0 0 8 77 115.69 Tm
+[(c.f. ‘)74(‘The in)]TJ
+/TT8 1 Tf
+4.7014 0 TD
+(ß)Tj
+/TT7 1 Tf
+0.5562 0 TD
+-0.0001 Tc
+0.0001 Tw
+[(uence of games on the de)24.9(v)14.9(elopment of the)]TJ
+6.4 0 0 6.4 255.9855 115.69 Tm
+0 Tc
+0 Tw
+(UNIX)Tj
+8 0 0 8 273.9824 115.69 Tm
+[(operating system’)74(’)-250(\(unpublished\).)]TJ
+ET
+endstream
+endobj
+3 0 obj
+<<
+/ProcSet [/PDF /Text ]
+/Font <<
+/TT2 4 0 R
+/TT3 5 0 R
+/TT5 6 0 R
+/TT7 7 0 R
+/TT8 8 0 R
+>>
+/ExtGState <<
+/GS1 9 0 R
+>>
+>>
+endobj
+12 0 obj
+<<
+/Length 7540
+>>
+stream
+BT
+/TT7 1 Tf
+10 0 0 10 97 757.89 Tm
+0 g
+/GS1 gs
+-0.0001 Tc
+0.0841 Tw
+[(When we look)9.9(ed at arcade \(‘)73.9(‘coin-op’)73.9(’\) video games the situation w)9.9(as dif)24.9(ferent, b)19.9(ut no better)54.9(.)-584.2(The)]TJ
+-2.5 -1.2 TD
+0.1515 Tw
+[(typical de)24.9(v)14.9(elopment c)14.9(ycle appeared to be: 1\) come up with a game concept and get appro)14.9(v)24.9(a)-0.1(l)-401.5(for it, 2\))]TJ
+T*
+0 Tc
+0.0291 Tw
+[(design the hardw)10(are, 3\) b)20(uild the hardw)10(are, 4\) test the hardw)10(are, 5\) write the softw)10(are, 6\) try the game out,)]TJ
+T*
+0.0456 Tw
+[(7\) decide whether to continue, and 8\) deb)20(ug and polish.)-545.6(Although steps 3, 4, and 5 could be o)15(v)15(erlapped it)]TJ
+T*
+0.011 Tw
+[(still took 6 to 18 months to get to step 6.)-511(At that point, it w)10(as too late to mak)10(e)-261.1(major changes or to drop the)]TJ
+T*
+-0.0001 Tc
+0.0598 Tw
+[(project, which w)9.9(ould entail a big loss.)-559.9(As a result man)14.9(y)-309.8(uninteresting coin-op games were produced.)-559.8(W)79.9(e)]TJ
+T*
+0 Tc
+0.099 Tw
+[(learned that the reason general purpose hardw)10(are w)10(as not used w)10(as that special purpose hardw)10(are is less)]TJ
+T*
+0.1253 Tw
+[(e)15(xpensi)25(v)15(e)15( )-15.1(to)-375.4(manuf)10(acture than general purpose equipment and the)15(y)-375.3(w)10(anted to sell 10,000 to 100,000 of)]TJ
+T*
+-0.0001 Tc
+0.035 Tw
+[(these games. )-250(Thus)-285(a)-285(manuf)9.9(acturing sa)19.9(vings of $1,000 on each unit could mean a sa)19.9(ving of $10,000,000 to)]TJ
+T*
+0 Tc
+0.1708 Tw
+[($100,000,000 o)15(v)15(erall. )-250(This)-420.8(combination of optimism and greed apparently blinded the industry to an)15(y)]TJ
+T*
+0 Tw
+(thoughts of rational planning.)Tj
+2.5 -1.56 TD
+0.0654 Tw
+(Media interest in Lucas)Tj
+/TT8 1 Tf
+9.6098 0 TD
+0 Tw
+(Þ)Tj
+/TT7 1 Tf
+0.5562 0 TD
+0.0654 Tw
+[(lm has al)10(w)10(ays been high and so it w)10(as not long before we found ourselv)15(es)]TJ
+-12.6659 -1.2 TD
+-0.0001 Tc
+0.0638 Tw
+[(being quoted in the press, pompously telling the games industry Ho)24.9(w)-313.9(I)-0.1(t)-313.9(Should Be Done.)-563.8(In the midst of)]TJ
+T*
+0 Tc
+0.0159 Tw
+[(all this media attention our group realized that since none of us had e)25(v)15(er)-265.9(tak)10(en a video game through all the)]TJ
+T*
+0.0567 Tw
+[(steps of production we might be setting ourselv)15(es up for some embarrassing surprises.)-556.7(‘)74(‘)]TJ
+/TT2 1 Tf
+36.2799 0 TD
+0 Tw
+(Lucas)Tj
+/TT3 1 Tf
+2.5562 0 TD
+(Þ)Tj
+/TT2 1 Tf
+0.5562 0 TD
+0.0567 Tw
+(lm Com-)Tj
+-39.3922 -1.2 TD
+0.1082 Tw
+[(puter Scientists Eat W)75(ords)]TJ
+/TT7 1 Tf
+11.7218 0 TD
+0.1822 Tw
+[(’)74(’)74( and )74(‘)74(‘)]TJ
+/TT2 1 Tf
+3.3443 0 TD
+0.1083 Tw
+[(Iv)10(ory T)92(o)10(wer T)92(alk is Cheap)]TJ
+/TT7 1 Tf
+11.7854 0 TD
+[(’)74(’)74( )-74(screamed the banner headlines in our)]TJ
+-26.8514 -1.2 TD
+0 Tw
+(nightmares.)Tj
+2.5 -1.56 TD
+0.0452 Tw
+[(T)80(o)80( )-80(a)20(v)20(oid such possibilities we decided to design and implement one or tw)10(o)-295.2(‘)74(‘thro)25(w-a)15(w)10(ay’)74(’)-295.2(g)5(ames as)]TJ
+-2.5 -1.2 TD
+-0.0001 Tc
+0.0296 Tw
+[(a)-279.6(combination rite-of-passage and reality check.)-529.6(These games w)9.9(ould also serv)14.9(e)-279.6(a)-0.1(s)-279.6(a)-279.6(w)9.9(ay of identifying the)]TJ
+T*
+0 Tc
+0.0426 Tw
+[(areas that w)10(ould pro)]TJ
+/TT8 1 Tf
+8.254 0 TD
+0 Tw
+(Þ)Tj
+/TT7 1 Tf
+0.5562 0 TD
+0.0425 Tw
+[(t most from the creation of some softw)10(are tools.)-542.6(It’)55(s)-292.6(a)-292.6(credit both to the members of)]TJ
+-8.8102 -1.2 TD
+0.0916 Tw
+[(the Games Group and the ideas we championed that the tw)10(o)-341.7(‘)74(‘thro)25(w-a)15(w)10(ay’)74(’)-341.7(g)5(ames produced ha)20(v)15(e)15( )-15.1(gotten)]TJ
+T*
+0.0792 Tw
+[(such enthusiastic re)25(vie)25(ws)]TJ
+8 0 0 8 174.7246 501.89 Tm
+0 Tw
+(4)Tj
+10 0 0 10 182.0166 498.69 Tm
+-0.0001 Tc
+0.0793 Tw
+[(—)-329.3(ranging from ‘)73.9(‘Geor)17.9(ge Lucas does it again!’)73.9(’)-579.4(t)-0.1(o)-329.4(‘)73.9(‘setting a ne)24.9(w)-329.4(standard in)]TJ
+-11.0017 -1.2 TD
+0 Tc
+0 Tw
+[(the industry’)74(’.)]TJ
+2.5 -1.56 TD
+-0.0001 Tc
+0.0083 Tw
+[(Of course, the games ne)24.9(v)14.9(e)-0.1(r)-258.3(did get ‘)73.9(‘thro)24.9(wn-a)14.9(w)9.9(ay’)73.9(’)-258.3(and will appear in stores in the near future.)-508.3(As to)]TJ
+-2.5 -1.2 TD
+0 Tc
+0.1067 Tw
+[(whether the)15(y)-356.7(will sho)25(w)-356.7(the w)10(orld Ho)25(w)-356.7(I)0(t)-356.7(Should Be Done — we think so, b)20(ut soon you will be able to)]TJ
+T*
+0 Tw
+(decide for yourself...)Tj
+/TT2 1 Tf
+0 -2.4 TD
+[(THE HARD)40(W)120(ARE)]TJ
+/TT7 1 Tf
+2.5 -1.56 TD
+0.0258 Tw
+[(The Atari 800 computer contains a 6502 microprocessor chip, 32K to 64K of RAM, and se)25(v)15(eral spe-)]TJ
+-2.5 -1.2 TD
+0.0184 Tw
+[(cial purpose chips designed by Atari.)-518.5(The ‘)74(‘)80(ANTIC’)74(’)-268.5(chip handles DMA, some interrupts, v)15(ertical and hor)20(-)]TJ
+T*
+0.0265 Tw
+[(izontal scrolling, and the v)15(ertical line counter)55(.)-526.6(The ‘)74(‘GTIA)111(’)74(’)74( )-74.1(chip handles the graphics generation, graphics)]TJ
+T*
+0.1776 Tw
+[(objects, collision detection, and miscellaneous switches and triggers.)-677.7(The ‘)74(‘POKEY’)74(’)-427.7(chip handles the)]TJ
+T*
+0.0409 Tw
+[(k)10(e)15(yboard, serial communications port, timers, hardw)10(are random number generator)40(,)-290.9(potentiometers, and the)]TJ
+T*
+0 Tw
+[(sound generators.)-500(The ‘)74(‘PIA)111(’)74(’)74( )-74(chip handles the jo)10(ystick controllers and interrupt lines.)]TJ
+2.5 -1.56 TD
+0.0224 Tw
+[(An Atari 800 computer)40(,)-272.4(complete with k)10(e)15(yboard, po)25(wer supply)65(,)-272.4(and cabling that allo)25(ws use of a con-)]TJ
+-2.5 -1.2 TD
+0.054 Tw
+[(v)15(entional tele)25(vision set as the screen, costs about $100 in discount stores today)65(.)-554(The 6502 microprocessor)]TJ
+T*
+0.0963 Tw
+(chip used in the Atari machines \(also used in the Apple II and other home computers\) costs about $1.50)Tj
+T*
+0.0552 Tw
+[(\(retail\) in single unit quantities.)-555.3(All in all, the Atari 800 and the 5200 are)]TJ
+/TT5 1 Tf
+30.3768 0 TD
+0 Tw
+(small)Tj
+/TT7 1 Tf
+2.4722 0 TD
+0.3052 Tw
+[(computers. Ne)25(v)15(ertheless,)]TJ
+-32.849 -1.2 TD
+0.0958 Tw
+[(we found that writing good programs for a small computer often requires using tools that are v)15(ery lar)18(ge.)]TJ
+T*
+0.1581 Tw
+[(Such a disco)15(v)15(ery rules out using the Atari machines to run the tools.)-658.1(A)-408.1(much better arrangement is a)]TJ
+T*
+-0.0001 Tc
+0.0001 Tw
+[(hybrid that uses a lar)17.9(ge machine for editing and assembly and a sla)19.9(v)14.9(e)14.9( )-15(Atari machine for testing.)]TJ
+/TT2 1 Tf
+0 -2.4 TD
+0 Tc
+0 Tw
+[(THE T)18(OOLS)]TJ
+/TT7 1 Tf
+2.5 -1.56 TD
+0.0696 Tw
+[(Man)15(y)-319.6(pieces of softw)10(are were created by our group speci)]TJ
+/TT8 1 Tf
+23.5086 0 TD
+0 Tw
+(Þ)Tj
+/TT7 1 Tf
+0.5562 0 TD
+-0.0001 Tc
+0.0697 Tw
+[(cally for the game de)24.9(v)14.9(elopment projects.)]TJ
+-26.5648 -1.2 TD
+0 Tc
+0 Tw
+[(T)80(ypical of these were:)]TJ
+0 -1.56 TD
+1.417 Tw
+[(1\) a)-250(cross )1417(assembler)]TJ
+T*
+0 Tw
+[(2\) )-1417(a)-250(library of macros for the cross assembler)]TJ
+T*
+0.0776 Tw
+[(3\) )-1339.4(a)-327.7(pair of programs that do)25(wnload an Atari 800 home computer o)15(v)15(e)0(r)-327.7(a)-327.6(serial line from a DEC V)135(A)0(X)]TJ
+2.5 -1.2 TD
+0 Tw
+(11/750)Tj
+ET
+0 G
+1 J 1 j 0.32 w 10 M []0 d
+1 i 
+72.03 141.51 m
+144.03 141.51 l
+S
+BT
+6 0 0 6 72 133.89 Tm
+(4)Tj
+8 0 0 8 77.592 131.49 Tm
+-0.0001 Tc
+0.074 Tw
+[(OMNI magazine named one of the games in its ‘)73.9(‘)-0.1(T)79.9(op T)69.9(en V)59.9(ideo Games of the Y)99.9(ear’)73.9(’)-324(\(tied for second\) e)24.9(v)14.9(en)]TJ
+-0.699 -1.25 TD
+0.0001 Tw
+[(though the game has ne)24.9(v)14.9(e)-0.1(r)-250.1(been released.)]TJ
+ET
+endstream
+endobj
+13 0 obj
+<<
+/ProcSet [/PDF /Text ]
+/Font <<
+/TT2 4 0 R
+/TT3 5 0 R
+/TT5 6 0 R
+/TT7 7 0 R
+/TT8 8 0 R
+>>
+/ExtGState <<
+/GS1 9 0 R
+>>
+>>
+endobj
+15 0 obj
+<<
+/Length 8435
+>>
+stream
+BT
+/TT7 1 Tf
+10 0 0 10 72 757.89 Tm
+0 g
+/GS1 gs
+0 Tc
+0 Tw
+[(4\) )-1417(a)-250(similar pair of programs that do)25(wnload an Atari 800 )]TJ
+/TT8 1 Tf
+24.3026 0 TD
+(ß)Tj
+/TT7 1 Tf
+0.5562 0 TD
+[(opp)10(y)-250(disk o)15(v)15(e)0(r)-250(a)-250(serial line)]TJ
+-24.8588 -1.56 TD
+1.417 Tw
+[(5\) a)-250(simulation )1417(of )]TJ
+/TT8 1 Tf
+8.749 0 TD
+0 Tw
+(ß)Tj
+/TT7 1 Tf
+0.5562 0 TD
+[(ight dynamics and graphics on an Ev)25(ans & Sutherland Picture System I)]TJ
+-9.3052 -1.56 TD
+-0.0001 Tc
+0.0001 Tw
+[(6\) )-1417(a)-250.1(program that turns an Atari 800 into a drum rhythm machine)]TJ
+T*
+0 Tc
+0 Tw
+[(7\) )-1417(a)-250(music scoring system using)]TJ
+/TT5 1 Tf
+14.4712 0 TD
+(pic)Tj
+/TT7 1 Tf
+1.4717 0 TD
+(and)Tj
+/TT5 1 Tf
+1.6938 0 TD
+[(tr)45(of)18(f)]TJ
+/TT7 1 Tf
+-17.6367 -1.56 TD
+[(8\) )-1417(a)-250(storyboard editor that runs on a Sun W)80(orkstation)]TJ
+T*
+1.417 Tw
+[(9\) a)-250(6502 )1417(disassembler)]TJ
+2.5 -1.56 TD
+0.0774 Tw
+[(It w)10(as not surprising to us \(although it w)10(as to some people in the industry\) that the majority of our)]TJ
+-2.5 -1.2 TD
+0.0376 Tw
+[(softw)10(are ended up written in high-le)25(v)15(e)0(l)-287.7(languages. )-250.1(The)-287.7(cross assembler and its macro library were written)]TJ
+T*
+0.016 Tw
+[(in Lisp.)-516(The Atari end of the do)25(wnload programs and the drum machine program were written in our Lisp-)]TJ
+T*
+0 Tw
+[(lik)10(e)-250(cross assembler)55(.)-500(The rest of the tool softw)10(are w)10(as written in C.)]TJ
+2.5 -1.56 TD
+0.0182 Tw
+[(Lisp w)10(as chosen for the cross assembler because it only took tw)10(o)-268.2(weeks to implement a cross assem-)]TJ
+-2.5 -1.2 TD
+0.1515 Tw
+[(bler that allo)25(wed both assembler macro de)]TJ
+/TT8 1 Tf
+17.8225 0 TD
+0 Tw
+(Þ)Tj
+/TT7 1 Tf
+0.5562 0 TD
+0.1515 Tw
+[(nitions and arbitrary Lisp e)15(xpressions to be included in the)]TJ
+-18.3786 -1.2 TD
+0.0538 Tw
+[(assembly task.)-553.8(This allo)25(wed us to e)15(xtend or recon)]TJ
+/TT8 1 Tf
+20.5525 0 TD
+0 Tw
+(Þ)Tj
+/TT7 1 Tf
+0.5562 0 TD
+0.0538 Tw
+[(gure the assembler as we disco)15(v)15(ered unforeseen needs)]TJ
+-21.1087 -1.2 TD
+0 Tw
+(and de)Tj
+/TT8 1 Tf
+2.6377 0 TD
+(Þ)Tj
+/TT7 1 Tf
+0.5562 0 TD
+(ciencies.)Tj
+-0.6938 -1.56 TD
+0.1584 Tw
+[(The macro library had tw)10(o)-408.4(important ef)25(fects. )-250.1(First,)-408.5(it allo)25(wed us to write in a pseudo-structured)]TJ
+-2.5 -1.2 TD
+0.0197 Tw
+[(assembler that included ‘)74(‘)]TJ
+/TT5 1 Tf
+10.3425 0 TD
+0 Tw
+(if-then-else)Tj
+/TT7 1 Tf
+4.498 0 TD
+-0.074 Tc
+[(’’)-74(,)-343.7(‘)0(‘)]TJ
+/TT5 1 Tf
+1.7037 0 TD
+0 Tc
+(for)Tj
+/TT7 1 Tf
+1.167 0 TD
+-0.074 Tc
+[(’’)-74(,)-343.7(‘)0(‘)]TJ
+/TT5 1 Tf
+1.7037 0 TD
+0 Tc
+(while)Tj
+/TT7 1 Tf
+2.1665 0 TD
+0.0196 Tw
+[(’)74(’)0(,)-269.7(and other f)10(amiliar constructs.)-519.6(Second, it acted as a)]TJ
+/TT8 1 Tf
+-21.5815 -1.2 TD
+0 Tw
+(Þ)Tj
+/TT7 1 Tf
+0.5562 0 TD
+0.0736 Tw
+[(rst step to)25(w)10(ard a subroutine library of commonly used routines.)-573.7(W)80(e)80( )-80.1(found that man)15(y)-323.7(o)0(f)-323.7(the routines we)]TJ
+-0.5562 -1.2 TD
+0.0013 Tw
+[(included in the initial set ne)25(v)15(e)0(r)-251.4(were used at all, while others that we added as we went along were used fre-)]TJ
+T*
+0 Tw
+[(quently)65(.)]TJ
+2.5 -1.56 TD
+0.1885 Tw
+[(The do)25(wnload programs made it easy to maintain the source on lar)18(ger machines running UNIX)]TJ
+-2.5 -1.2 TD
+0.0197 Tw
+[(where we could assemble the code and deb)20(ug syntactic problems using man)15(y)-269.7(dif)25(ferent tools before sending)]TJ
+T*
+0.15 Tw
+[(e)15(x)15(ecutables to the small Atari machines for deb)20(ugging. )-250.1(Unfortunately)65(,)-400.1(deb)20(ugging on the Atari w)10(as not)]TJ
+T*
+0.0956 Tw
+[(al)10(w)10(ays con)40(v)15(enient, so we designed a dual-ported memory card that w)10(ould allo)25(w)-345.7(u)0(s)-345.7(t)0(o)-345.7(deb)20(ug the running)]TJ
+T*
+0.1451 Tw
+[(Atari program using softw)10(are running on the lar)18(ger machines.)-645.1(W)80(e)80( )-80(discarded the idea of simulating the)]TJ
+T*
+0.022 Tw
+[(Atari on the lar)18(ger machines after disco)15(v)15(ering an incredible number of important undocumented eccentrici-)]TJ
+T*
+0 Tw
+[(ties in the Atari hardw)10(are.)]TJ
+2.5 -1.56 TD
+0.0192 Tw
+[(The simulation on the E & S Picture System allo)25(wed us to start )]TJ
+/TT8 1 Tf
+25.7495 0 TD
+0 Tw
+(Þ)Tj
+/TT7 1 Tf
+0.5562 0 TD
+0.0192 Tw
+(ne tuning )Tj
+/TT8 1 Tf
+4.0379 0 TD
+0 Tw
+(ß)Tj
+/TT7 1 Tf
+0.5562 0 TD
+0.0192 Tw
+[(ight dynamics and mak)10(e)]TJ
+-33.3997 -1.2 TD
+0.062 Tw
+[(some general decisions about w)10(ays to achie)25(v)15(e)15( )-15(the graphic results we w)10(anted while the Atari graphics ren-)]TJ
+T*
+0 Tw
+[(dering code w)10(as still being designed.)]TJ
+2.5 -1.56 TD
+-0.0001 Tc
+0.0062 Tw
+[(The drum machine program pro)14.9(vided a w)9.9(orkbench on which we could e)14.9(xperiment with rhythmic pat-)]TJ
+-2.5 -1.2 TD
+0.0306 Tw
+[(terns to be used in the games. )-250.1(W)79.9(e)-280.7(were able to include the features that mak)9.9(e)-280.6(commercial microprocessor)19.9(-)]TJ
+T*
+0 Tc
+0.0605 Tw
+[(based rhythm units so popular and add ne)25(w)-310.6(features to suit our particular composition styles.)-560.6(Further)40(,)-310.6(the)]TJ
+T*
+0.0742 Tw
+[(program had the adv)25(antage of pro)15(viding us with the e)15(xact sounds that we w)10(ould be able to include in the)]TJ
+T*
+-0.0008 Tc
+0 Tw
+(games.)Tj
+2.5 -1.56 TD
+0 Tc
+0.0207 Tw
+(Although a music scoring system using)Tj
+/TT5 1 Tf
+16.1232 0 TD
+0 Tw
+(pic)Tj
+/TT7 1 Tf
+1.4924 0 TD
+0.0207 Tw
+[(is una)20(v)20(oidably unwieldy it still allo)25(wed us to use f)10(amiliar)]TJ
+-20.1156 -1.2 TD
+0.0427 Tw
+[(te)15(xt editors, the Sun W)80(orkstation graphics screen, and the Imagen printer for manipulation and distrib)20(ution)]TJ
+T*
+0 Tw
+(of musical ideas and )Tj
+/TT8 1 Tf
+8.4419 0 TD
+(Þ)Tj
+/TT7 1 Tf
+0.5562 0 TD
+(nal compositions.)Tj
+-6.498 -1.56 TD
+0.104 Tw
+[(A)-354(computerized storyboard editor seemed lik)10(e)-354(a)-354(particularly good idea because the pix)15(el sizes and)]TJ
+-2.5 -1.2 TD
+0.085 Tw
+[(graphics modes of the Atari graphics system are quite eccentric.)-585(Unfortunately)65(,)-335(the Atari graphics are)]TJ
+/TT5 1 Tf
+42.3057 0 TD
+0 Tw
+(so)Tj
+/TT7 1 Tf
+-42.3057 -1.2 TD
+0.1799 Tw
+[(eccentric that e)25(v)15(en)-429.9(the Sun W)80(orkstation’)55(s)-429.9(much higher resolution screen w)10(as unable to capture all the)]TJ
+T*
+0.0266 Tw
+[(‘)74(‘nuances’)74(’. )-250.1(A)-276.7(further problem w)10(as the need to display the colors that appear on the Atari screen.)-526.6(Because)]TJ
+T*
+0.0868 Tw
+[(of artif)10(acting ef)25(fects)]TJ
+8 0 0 8 154.4505 222.2901 Tm
+0 Tw
+(5)Tj
+10 0 0 10 161.8195 219.0901 Tm
+0.0869 Tw
+[(this w)10(ould ha)20(v)15(e)15( )-15(been dif)]TJ
+/TT8 1 Tf
+10.1087 0 TD
+0 Tw
+(Þ)Tj
+/TT7 1 Tf
+0.5562 0 TD
+0.0869 Tw
+[(cult to simulate e)25(v)15(en)-336.9(if)-336.9(we)-336.9(had had color graphics on the)]TJ
+-19.6468 -1.2 TD
+0.0119 Tw
+[(Sun W)80(orkstations. )-250.1(As)-262(a)-262(result we found the e)15(xisting, primiti)25(v)15(e)15( )-15(graphics editors a)20(v)25(ailable for the Atari more)]TJ
+T*
+0 Tw
+[(useful than the more sophisticated b)20(ut inappropriate editor we had written for the Sun W)80(orkstation.)]TJ
+2.5 -1.56 TD
+0.01 Tw
+(In our sur)Tj
+3.9082 0 TD
+-0.015 Tc
+0.04 Tw
+[(vey o)-15(f)-275(g)]TJ
+3.2619 0 TD
+0 Tc
+0.01 Tw
+[(ame softw)10(are, we found one or tw)10(o)-260.1(programs with unusually sophisticated graphics)]TJ
+-9.67 -1.2 TD
+0.0955 Tw
+[(and arranged to speak with their authors.)-595.5(W)80(e)80( )-80(were disappointed to disco)15(v)15(e)0(r)-345.5(that fe)25(w)-345.5(g)5(ame programmers)]TJ
+T*
+-0.0001 Tc
+0.0985 Tw
+[(are willing to discuss the technical details of their w)9.9(ork or share insights the)14.9(y)-348.6(may ha)19.9(v)14.9(e)14.9( )-15.1(gained.)]TJ
+8 0 0 8 468.9418 158.69 Tm
+0 Tc
+0 Tw
+(6)Tj
+10 0 0 10 476.4268 155.49 Tm
+0.0985 Tw
+[(W)40(ith a)]TJ
+ET
+0 G
+1 J 1 j 0.32 w 10 M []0 d
+1 i 
+72.03 147.51 m
+144.03 147.51 l
+S
+BT
+6 0 0 6 72 139.89 Tm
+0 Tw
+(5)Tj
+8 0 0 8 77 137.49 Tm
+[(The term ‘)74(‘artif)10(acting’)74(’)-250(refers to the interaction of colors in adjacent pix)15(els on the screen.)]TJ
+6 0 0 6 72 128.0901 Tm
+(6)Tj
+8 0 0 8 77.379 125.6901 Tm
+0.0474 Tw
+[(Not wishing to follo)25(w)-297.5(this clandestine approach we went so f)10(ar as to write an article called)]TJ
+/TT5 1 Tf
+37.2887 0 TD
+[(T)92(e)0(n)-297.5(T)55(ips fr)45(om the)]TJ
+-37.9611 -1.25 TD
+0.0084 Tw
+[(Pr)45(o)10(g)0(r)15(amming Pr)45(os)]TJ
+/TT7 1 Tf
+7.6439 0 TD
+-0.0001 Tc
+[(,)-258.5(for the Spring 1984 issue of Atari Connection Magazine in which we described man)14.9(y)-258.4(o)-0.1(f)-258.3(the)]TJ
+ET
+endstream
+endobj
+16 0 obj
+<<
+/ProcSet [/PDF /Text ]
+/Font <<
+/TT5 6 0 R
+/TT7 7 0 R
+/TT8 8 0 R
+>>
+/ExtGState <<
+/GS1 9 0 R
+>>
+>>
+endobj
+18 0 obj
+<<
+/Length 8923
+>>
+stream
+BT
+/TT7 1 Tf
+10 0 0 10 72 757.89 Tm
+0 g
+/GS1 gs
+0 Tc
+0.2332 Tw
+[(little w)10(ork, we were able to write a disassembler that made the dif)]TJ
+/TT8 1 Tf
+29.1155 0 TD
+0 Tw
+(Þ)Tj
+/TT7 1 Tf
+0.5562 0 TD
+0.2331 Tw
+(cult task of deciphering a 6502)Tj
+-29.6716 -1.2 TD
+0 Tw
+[(e)15(x)15(ecutable feasible.)]TJ
+2.5 -1.56 TD
+-0.0001 Tc
+0.1045 Tw
+[(Our intention had been to learn the steps necessary to produce a video game. )-250(As)-354.5(such we did not)]TJ
+-2.5 -1.2 TD
+0 Tc
+0.0738 Tw
+[(w)10(ant to try an)15(y)-323.9(radically ne)25(w)-323.9(approaches; instead, we w)10(anted to de)25(v)15(elop a list of w)10(ays to impr)]TJ
+38.9121 0 TD
+-0.015 Tc
+0.1038 Tw
+[(ove o)-15(n)-338.8(t)-15(h)-15(e)]TJ
+-38.9121 -1.2 TD
+0 Tc
+0.0474 Tw
+[(state-of-the-art. )-250(On)-297.4(the other hand, some aspects of the ‘)74(‘state-of-the-art’)74(’)-297.4(were just too primiti)25(v)15(e)15( )-15.1(for us to)]TJ
+T*
+0.0563 Tw
+[(bear)55(.)-556.4(A)0(s)-306.4(a)-306.3(result we compromised by making only those impro)15(v)15(ements that were quick to implement and)]TJ
+T*
+0.0237 Tw
+[(required minimal long-range planning.)-523.7(The need for an impro)15(v)15(e)0(d)-273.7(macro assembler w)10(as ob)15(vious and it w)10(a)0(s)]TJ
+T*
+0.09 Tw
+[(relati)25(v)15(ely quick to implement whereas the dual-ported memory cartridge turned out to be a lar)18(ger project)]TJ
+T*
+0 Tw
+[(than we had e)15(xpected, and its construction w)10(as postponed.)]TJ
+/TT2 1 Tf
+8 0 0 8 72 634.29 Tm
+(UNIX)Tj
+10 0 0 10 94.9453 634.29 Tm
+(AIDS)Tj
+/TT7 1 Tf
+0.2055 -1.56 TD
+0.0675 Tw
+[(The w)10(ays in which the)]TJ
+8 0 0 8 193.3082 618.6901 Tm
+0 Tw
+(UNIX)Tj
+10 0 0 10 216.4803 618.6901 Tm
+-0.0001 Tc
+0.0677 Tw
+[(system aided the games design process can be grouped into tw)9.9(o)-317.7(broad)]TJ
+-14.448 -1.2 TD
+0 Tc
+0.0309 Tw
+[(cate)15(gories, softw)10(are a)20(v)25(ailable on)]TJ
+8 0 0 8 206.0858 606.6901 Tm
+0 Tw
+(UNIX)Tj
+10 0 0 10 228.8909 606.6901 Tm
+0.0309 Tw
+(systems, and capabilities of the)Tj
+8 0 0 8 357.6283 606.6901 Tm
+0 Tw
+(UNIX)Tj
+10 0 0 10 380.4333 606.6901 Tm
+0.0309 Tw
+[(operating system itself.)-530.9(A)74(v)74( )231.9(ail-)]TJ
+-30.8433 -1.2 TD
+0.1745 Tw
+[(able softw)10(are included program languages, editors, communications programs, and other miscellaneous)]TJ
+T*
+0.0618 Tw
+[(tools. )-250(The)-311.8(capabilities of the system included a hierarchical )]TJ
+/TT8 1 Tf
+24.7979 0 TD
+0 Tw
+(Þ)Tj
+/TT7 1 Tf
+0.5562 0 TD
+0.0618 Tw
+(le system that made )Tj
+/TT8 1 Tf
+8.4118 0 TD
+0 Tw
+(Þ)Tj
+/TT7 1 Tf
+0.5561 0 TD
+0.0618 Tw
+[(le sharing con)40(v)15(enient,)]TJ
+-34.322 -1.2 TD
+0.0054 Tw
+[(input/output redirection, and a general ‘)74(‘permissi)25(v)15(eness’)74(’)-255.4(that k)10(ept the system from getting in our w)10(ay when)]TJ
+T*
+0 Tw
+(we needed to do something strange.)Tj
+/TT2 1 Tf
+0 -2.4 TD
+(Languages)Tj
+/TT7 1 Tf
+2.5 -1.56 TD
+0.0447 Tw
+[(Ha)20(ving languages lik)10(e)-294.7(C)0(,)-294.7(a)15(wk, the shell, and Portable Standard Lisp \(PSL\) readily a)20(v)25(ailable allo)25(wed)]TJ
+-2.5 -1.2 TD
+0.0148 Tw
+(us to choose a language to )Tj
+/TT8 1 Tf
+10.8637 0 TD
+0 Tw
+(Þ)Tj
+/TT7 1 Tf
+0.5562 0 TD
+0.0148 Tw
+[(t the requirements of an)15(y)-264.8(particular task.)-514.8(Some programs had to e)15(x)15(ecute a spe-)]TJ
+-11.4199 -1.2 TD
+0 Tw
+(ci)Tj
+/TT8 1 Tf
+0.7217 0 TD
+(Þ)Tj
+/TT7 1 Tf
+0.5562 0 TD
+0.0544 Tw
+(c, well-de)Tj
+/TT8 1 Tf
+3.9968 0 TD
+0 Tw
+(Þ)Tj
+/TT7 1 Tf
+0.5562 0 TD
+0.0544 Tw
+[(ned task as quickly as possible and were written in C \(e.g. the do)25(wn-load programs\).)-554.4(Other)]TJ
+-5.8308 -1.2 TD
+0.129 Tw
+[(programs were more e)15(xperimental and needed )]TJ
+/TT8 1 Tf
+19.5285 0 TD
+0 Tw
+(ß)Tj
+/TT7 1 Tf
+0.5562 0 TD
+0.129 Tw
+[(e)15(xibility in the w)10(ay the)15(y)-379(manipulated symbolic entities;)]TJ
+-20.0847 -1.2 TD
+0.0449 Tw
+[(these were written in Lisp.)-545(Still other programs had to be written quickly and w)10(ould only be used once or)]TJ
+T*
+0.0713 Tw
+(twice; these were written as shell command )Tj
+/TT8 1 Tf
+18.1876 0 TD
+0 Tw
+(Þ)Tj
+/TT7 1 Tf
+0.5562 0 TD
+-0.0001 Tc
+0.0714 Tw
+[(les or as a)14.9(wk scripts.)-571.4(Had we been using the typical games)]TJ
+-18.7437 -1.2 TD
+0 Tc
+0.1174 Tw
+[(industry systems we w)10(ould ha)20(v)15(e)15( )-15.1(written all these programs in assembler \(or perhaps F)15(ortran if we were)]TJ
+T*
+0 Tw
+[(luck)15(y\) and we w)10(ould still be deb)20(ugging some of them today)65(.)]TJ
+/TT2 1 Tf
+0 -2.4 TD
+(Editors)Tj
+/TT7 1 Tf
+2.5 -1.56 TD
+0.037 Tw
+[(Although e)25(v)15(ery class of Computer Science graduates seems to produce another editor)20(-to-end-all-edi-)]TJ
+-2.5 -1.2 TD
+-0.0001 Tc
+0.0223 Tw
+[(tors, none of these editors seems to ha)19.9(v)14.9(e)14.9( )-15.1(made it into common use in the video games industry)64.9(.)-522.3(W)79.9(e, on the)]TJ
+T*
+0 Tc
+0.0747 Tw
+(other hand, made much use of)Tj
+/TT5 1 Tf
+12.75 0 TD
+0 Tw
+(emacs)Tj
+/TT7 1 Tf
+2.499 0 TD
+(,)Tj
+/TT5 1 Tf
+0.5747 0 TD
+(vi)Tj
+/TT7 1 Tf
+0.7217 0 TD
+[(,)-324.7(and)]TJ
+/TT5 1 Tf
+2.3433 0 TD
+(ed)Tj
+/TT7 1 Tf
+0.9438 0 TD
+0.0747 Tw
+[(,)-324.7(enjo)10(ying the luxury of )]TJ
+/TT8 1 Tf
+10.0285 0 TD
+0 Tw
+(Þ)Tj
+/TT7 1 Tf
+0.5562 0 TD
+0.0747 Tw
+(tting the choice of editor to the)Tj
+-30.4172 -1.2 TD
+0.0535 Tw
+[(requirements of the task at hand with fe)25(w)65(,)65( )-65(if)-303.5(an)15(y)65(,)-303.5(religious debates o)15(v)15(e)0(r)-303.5(the virtues of modelessness or the)]TJ
+T*
+0 Tw
+[(sins of meta-cok)10(ebottle-shift.)]TJ
+/TT2 1 Tf
+0 -2.4 TD
+(Communications)Tj
+/TT7 1 Tf
+2.5 -1.56 TD
+0.045 Tw
+[(Our group put in man)15(y)-295(2)0(0)-295(hour days, sometimes spending 16 hours at w)10(ork and then going home to)]TJ
+-2.5 -1.2 TD
+0.0094 Tw
+[(say ‘)74(‘remember me?’)74(’)-259.5(t)0(o)-259.5(the f)10(amily before logging in for another fe)25(w)-259.4(hours of w)10(ork. )-250(After)-259.4(a)-259.4(f)0(e)25(w)25( )-25(months of)]TJ
+T*
+0.0965 Tw
+[(this, it became hard to predict when an)15(y)-346.6(particular person w)10(ould be in the of)]TJ
+/TT8 1 Tf
+31.8198 0 TD
+0 Tw
+(Þ)Tj
+/TT7 1 Tf
+0.5562 0 TD
+0.0966 Tw
+[(ce or e)25(v)15(en)-346.6(be)-346.6(a)15(w)10(ak)10(e.)-596.6(The)]TJ
+8 0 0 8 72 271.89 Tm
+0 Tw
+(UNIX)Tj
+10 0 0 10 94.7181 271.89 Tm
+0.0222 Tw
+[(mail system allo)25(wed us to k)10(eep in touch with each other and share ideas and status reports e)25(v)15(en)-272.2(when)]TJ
+-2.2718 -1.2 TD
+0.0477 Tw
+[(schedules didn’)18(t)-297.7(o)15(v)15(erlap. )-250(The)-297.7(ability to access )]TJ
+/TT8 1 Tf
+19.2522 0 TD
+0 Tw
+(Þ)Tj
+/TT7 1 Tf
+0.5562 0 TD
+0.0477 Tw
+[(les and programs through dial-in lines allo)25(wed occasional)]TJ
+-19.8084 -1.2 TD
+0 Tw
+[(f)10(amily visits and the speedy incorporation of middle-of-the-night inspirations.)]TJ
+/TT2 1 Tf
+0 -2.4 TD
+[(Miscellaneous T)92(ools)]TJ
+/TT7 1 Tf
+2.5 -1.56 TD
+0.0413 Tw
+[(W)80(e)80( )-80(used e)25(v)15(erything from)]TJ
+/TT5 1 Tf
+10.4861 0 TD
+0 Tw
+(adb)Tj
+/TT7 1 Tf
+1.7912 0 TD
+(to)Tj
+/TT5 1 Tf
+1.069 0 TD
+(yacc)Tj
+/TT7 1 Tf
+2.1227 0 TD
+0.0412 Tw
+[(at one time or another in this project.)-541.2(W)80(e)80( )-80(got recalcitrant pro-)]TJ
+-17.9691 -1.2 TD
+0.0318 Tw
+[(grams to w)10(ork with)]TJ
+/TT5 1 Tf
+8.1719 0 TD
+0 Tw
+(adb)Tj
+/TT7 1 Tf
+1.5 0 TD
+0.0318 Tw
+[(,)-281.8(k)10(ept track of important deadlines using)]TJ
+/TT5 1 Tf
+16.5974 0 TD
+0 Tw
+(calendar)Tj
+/TT7 1 Tf
+3.5547 0 TD
+0.0319 Tw
+[(,)-281.8(found the changes you mak)10(e)-281.9(b)0(y)]TJ
+-29.8239 -1.2 TD
+0.0624 Tw
+[(f)10(alling asleep)]TJ
+/TT5 1 Tf
+5.7237 0 TD
+0 Tw
+(on)Tj
+/TT7 1 Tf
+1.3124 0 TD
+0.0624 Tw
+[(your k)10(e)15(yboard with)]TJ
+/TT5 1 Tf
+8.2436 0 TD
+0 Tw
+[(dif)18(f)]TJ
+/TT7 1 Tf
+1.3155 0 TD
+0.0623 Tw
+[(,)-312.3(k)10(ept track of immense numbers of interdependent modules with)]TJ
+/TT5 1 Tf
+-16.5952 -1.2 TD
+0 Tw
+[(mak)10(e)]TJ
+/TT7 1 Tf
+2.0999 0 TD
+0.0765 Tw
+[(,)-326.5(printed cartridge dumps for the cop)10(yright of)]TJ
+/TT8 1 Tf
+18.6065 0 TD
+0 Tw
+(Þ)Tj
+/TT7 1 Tf
+0.5562 0 TD
+0.0765 Tw
+(ce with)Tj
+/TT5 1 Tf
+3.3185 0 TD
+0 Tw
+(od)Tj
+/TT7 1 Tf
+1 0 TD
+0.0765 Tw
+[(,)-326.5(scored music with)]TJ
+/TT5 1 Tf
+8.3324 0 TD
+0 Tw
+(pic)Tj
+/TT7 1 Tf
+1.2217 0 TD
+0.0765 Tw
+[(,)-326.5(made global name)]TJ
+-35.135 -1.2 TD
+0.1017 Tw
+(changes with)Tj
+/TT5 1 Tf
+5.7019 0 TD
+0 Tw
+(sed)Tj
+/TT7 1 Tf
+1.333 0 TD
+0.1017 Tw
+[(,)-351.7(prepared press releases using)]TJ
+/TT5 1 Tf
+12.8928 0 TD
+0 Tw
+(spell)Tj
+/TT7 1 Tf
+1.8887 0 TD
+(,)Tj
+/TT5 1 Tf
+0.6017 0 TD
+(tbl)Tj
+/TT7 1 Tf
+1.0557 0 TD
+[(,)-351.7(and)]TJ
+/TT5 1 Tf
+2.3972 0 TD
+[(tr)45(of)18(f)]TJ
+/TT7 1 Tf
+1.6597 0 TD
+0.1017 Tw
+[(,)-351.7(borro)25(wed tools from other sites with)]TJ
+/TT5 1 Tf
+-27.5307 -1.2 TD
+0 Tw
+(uucp)Tj
+/TT7 1 Tf
+1.9438 0 TD
+0.138 Tw
+[(,)-388(disassembled other designer’)55(s)-388(programs with)]TJ
+/TT5 1 Tf
+19.5748 0 TD
+0 Tw
+(yacc)Tj
+/TT7 1 Tf
+1.8315 0 TD
+0.138 Tw
+[(,)-388(and so forth.)-638(Because we had access to these)]TJ
+-23.3502 -1.2 TD
+0.0732 Tw
+(tools we were able to participate in parts of the production that normally are either left to specialists who)Tj
+ET
+0 G
+1 J 1 j 0.32 w 10 M []0 d
+1 i 
+72.03 128.31 m
+144.03 128.31 l
+S
+BT
+8 0 0 8 72 118.2901 Tm
+-0.0001 Tc
+0.0001 Tw
+(techniques we used to write our games.)Tj
+ET
+endstream
+endobj
+19 0 obj
+<<
+/ProcSet [/PDF /Text ]
+/Font <<
+/TT2 4 0 R
+/TT5 6 0 R
+/TT7 7 0 R
+/TT8 8 0 R
+>>
+/ExtGState <<
+/GS1 9 0 R
+>>
+>>
+endobj
+21 0 obj
+<<
+/Length 8307
+>>
+stream
+BT
+/TT7 1 Tf
+10 0 0 10 72 757.89 Tm
+0 g
+/GS1 gs
+-0.0001 Tc
+0.0679 Tw
+[(ha)19.9(v)14.9(e)14.9( )-14.9(no)-317.8(other connection with the project or are left undone altogether)54.9(.)-567.9(A)-0.1(s)-317.9(a)-317.9(result, the games display an)]TJ
+0 -1.2 TD
+0 Tc
+0 Tw
+(unusual coherence, with a common thread of design style unifying all the parts.)Tj
+2.5 -1.56 TD
+0.1148 Tw
+[(W)80(e)80( )-80.1(also found that other parts of the Lucas)]TJ
+/TT8 1 Tf
+18.1105 0 TD
+0 Tw
+(Þ)Tj
+/TT7 1 Tf
+0.5562 0 TD
+0.1148 Tw
+[(lm Computer Di)25(vision had created tools useful to us.)]TJ
+-21.1666 -1.2 TD
+0.0988 Tw
+[(The Pixar \(graphics processor\) project had written a program to load PR)40(OMs that we found useful.)-598.9(The)]TJ
+T*
+0.045 Tw
+[(Digital Audio project had written a program \(LUDS, pronounced "Le)25(wds"\) to aid in circuit design and the)]TJ
+T*
+0.0429 Tw
+[(creation of schematics, wire lists, etc. for their design of the ASP digital sound processor)55(.)-543(W)80(e)-293(used LUDS)]TJ
+T*
+0 Tw
+(for our dual-ported memory design.)Tj
+2.5 -1.56 TD
+-0.0001 Tc
+0.0254 Tw
+[(Finally)64.9(,)-275.4(w)-0.1(e)-275.4(used programs written for)39.9(,)-275.4(o)-0.1(r)-275.4(a)-0.1(s)-275.4(a)-275.4(result of, other game projects.)-525.4(These ranged from pro-)]TJ
+-2.5 -1.2 TD
+0 Tc
+0.1501 Tw
+[(grams that helped maintain lar)18(ge numbers of related source )]TJ
+/TT8 1 Tf
+25.2963 0 TD
+0 Tw
+(Þ)Tj
+/TT7 1 Tf
+0.5562 0 TD
+0.1501 Tw
+(les to programs written to manipulate the)Tj
+-25.8524 -1.2 TD
+-0.0001 Tc
+0.0001 Tw
+[(masses of data produced by games lik)9.9(e)-250.1(‘)73.9(‘Empire’)73.9(’.)]TJ
+2.5 -1.56 TD
+0 Tc
+0.0182 Tw
+[(Although none of these programs w)10(as written with our speci)]TJ
+/TT8 1 Tf
+24.3433 0 TD
+0 Tw
+(Þ)Tj
+/TT7 1 Tf
+0.5562 0 TD
+0.0181 Tw
+[(c needs in mind, each, lik)10(e)-268.1(much of the)]TJ
+-27.3994 -1.2 TD
+0.095 Tw
+[(softw)10(are associated with)]TJ
+8 0 0 8 175.5508 615.09 Tm
+0 Tw
+(UNIX)Tj
+10 0 0 10 198.9969 615.09 Tm
+0.095 Tw
+[(systems, w)10(as written to mak)10(e)-345.1(a)0(s)-345.1(f)0(e)25(w)25( )-25.1(limiting assumptions as possible and)]TJ
+-12.6997 -1.2 TD
+0 Tw
+(were perfectly adequate for our needs.)Tj
+/TT2 1 Tf
+0 -2.4 TD
+(File Sharing)Tj
+/TT7 1 Tf
+2.5 -1.56 TD
+0.0334 Tw
+[(Crucial to a team approach to softw)10(are de)25(v)15(elopment is the ability to break programs up into separate)]TJ
+-2.5 -1.2 TD
+0.1727 Tw
+[(modules and share access to them among the entire team.)-672.7(The)]TJ
+8 0 0 8 343.4091 551.4901 Tm
+0 Tw
+(UNIX)Tj
+10 0 0 10 367.6322 551.4901 Tm
+0.1727 Tw
+(operating system made this easy)Tj
+-29.5632 -1.2 TD
+0.0352 Tw
+[(although a little more concurrenc)15(y)-285.2(control in the v)25(arious editors w)10(ould ha)20(v)15(e)15( )-15(a)20(v)20(oided one or tw)10(o)-285.1(minidisas-)]TJ
+T*
+-0.0001 Tc
+0.1442 Tw
+[(ters. )-250(Often)-394.2(three people w)9.9(ould be w)9.9(orking on related parts of a game, passing )]TJ
+/TT8 1 Tf
+33.5113 0 TD
+0 Tc
+0 Tw
+(Þ)Tj
+/TT7 1 Tf
+0.5562 0 TD
+0.1442 Tw
+(les back and forth for)Tj
+-34.0674 -1.2 TD
+0 Tw
+[(advice or criticism while a fourth w)10(as compiling and testing the results of the others’ changes.)]TJ
+/TT2 1 Tf
+0 -2.4 TD
+[(Input/Output Redir)18(ection)]TJ
+/TT7 1 Tf
+2.5 -1.56 TD
+0.0543 Tw
+[(Man)15(y)-304.4(o)0(f)-304.4(the tools that we used could not ha)20(v)15(e)15( )-15(e)15(xisted on a system where the author of the softw)10(are)]TJ
+-2.5 -1.2 TD
+0.0127 Tw
+[(has to kno)25(w)-262.7(what kind of de)25(vice the data is coming from and what kind of de)25(vice it will go to.)-512.8(Because we)]TJ
+T*
+0.001 Tw
+[(had to kno)25(w)-251.1(less about the intended uses of a tool at the time we wrote it we were often able to use an e)15(xist-)]TJ
+T*
+0 Tw
+[(ing tool to solv)15(e)-250(a)-250(problem instead of ha)20(ving to create a ne)25(w)-250(one.)]TJ
+/TT2 1 Tf
+8 0 0 8 72 415.89 Tm
+(UNIX)Tj
+10 0 0 10 94.9453 415.89 Tm
+(INFLUENCES)Tj
+/TT7 1 Tf
+0.2055 -1.56 TD
+0.01 Tw
+[(The w)10(ays in which the)]TJ
+8 0 0 8 190.4322 400.29 Tm
+0 Tw
+(UNIX)Tj
+10 0 0 10 213.0283 400.29 Tm
+0.0101 Tw
+(system in)Tj
+/TT8 1 Tf
+3.8158 0 TD
+0 Tw
+(ß)Tj
+/TT7 1 Tf
+0.5562 0 TD
+-0.0001 Tc
+0.0102 Tw
+[(uenced our games de)24.9(v)14.9(elopment are subtle, as in)]TJ
+/TT8 1 Tf
+19.1302 0 TD
+0 Tc
+0 Tw
+(ß)Tj
+/TT7 1 Tf
+0.5562 0 TD
+0.0101 Tw
+(uences often)Tj
+-38.1611 -1.2 TD
+-0.0001 Tc
+0.0745 Tw
+[(are. )-250(While)-324.5(some of the members of the games group had not been e)14.9(xposed to the)]TJ
+8 0 0 8 411.9354 388.29 Tm
+0 Tc
+0 Tw
+(UNIX)Tj
+10 0 0 10 435.1745 388.29 Tm
+0.0743 Tw
+(operating system)Tj
+-36.3175 -1.2 TD
+0.0042 Tw
+(before joining, the majority of the people in the group were longtime)Tj
+8 0 0 8 350.4825 376.29 Tm
+0 Tw
+(UNIX)Tj
+10 0 0 10 373.0206 376.29 Tm
+(a)Tj
+/TT8 1 Tf
+0.4438 0 TD
+(Þ)Tj
+/TT7 1 Tf
+0.5562 0 TD
+0.0042 Tw
+(cionados and their enthusiasm)Tj
+-31.1021 -1.2 TD
+0 Tw
+[(for the system w)10(as soon adopted by all.)]TJ
+2.5 -1.56 TD
+0.0795 Tw
+[(Man)15(y)-329.5(o)0(f)-329.5(the in)]TJ
+/TT8 1 Tf
+6.139 0 TD
+0 Tw
+(ß)Tj
+/TT7 1 Tf
+0.5562 0 TD
+0.0794 Tw
+[(uences we felt were philosophical.)-579.5(Although no one of them is e)15(xclusi)25(v)15(ely associ-)]TJ
+-9.1952 -1.2 TD
+0.0046 Tw
+(ated with)Tj
+8 0 0 8 111.5256 336.69 Tm
+0 Tw
+(UNIX)Tj
+10 0 0 10 134.0677 336.69 Tm
+0.0046 Tw
+[(softw)10(are, the group, tak)10(en as a whole, implies)]TJ
+8 0 0 8 320.0169 336.69 Tm
+0 Tw
+(UNIX)Tj
+10 0 0 10 342.559 336.69 Tm
+(in)Tj
+/TT8 1 Tf
+0.7778 0 TD
+(ß)Tj
+/TT7 1 Tf
+0.5562 0 TD
+0.0046 Tw
+[(uence strongly)65(.)-504.7(I)0(t)-254.7(w)10(ould be impossi-)]TJ
+-28.3899 -1.2 TD
+0.1975 Tw
+(ble to consider the in)Tj
+/TT8 1 Tf
+9.1767 0 TD
+0 Tw
+(ß)Tj
+/TT7 1 Tf
+0.5562 0 TD
+0.1975 Tw
+(uence of the)Tj
+8 0 0 8 226.615 324.69 Tm
+0 Tw
+(UNIX)Tj
+10 0 0 10 251.0851 324.69 Tm
+0.1974 Tw
+(system without including the in)Tj
+/TT8 1 Tf
+13.3999 0 TD
+0 Tw
+(ß)Tj
+/TT7 1 Tf
+0.5562 0 TD
+0.1974 Tw
+[(uence of people lik)10(e)-447.4(Brian)]TJ
+-31.8646 -1.2 TD
+0.0964 Tw
+[(K)25(ernighan and John Mashe)15(y)-346.4(who ha)20(v)15(e)15( )-15(been eloquent spok)10(esmen for man)15(y)-346.4(o)0(f)-346.4(the ideas and philosophies)]TJ
+T*
+0 Tw
+(that permeate the system.)Tj
+2.5 -1.56 TD
+-0.0001 Tc
+0.0021 Tw
+[(The concept often called ‘)73.9(‘)-0.1(f)9.9(ail f)9.9(ast’)73.9(’)-252.2(seemed particularly rele)24.9(v)24.9(ant to games de)24.9(v)14.9(elopment. )-250(Much)-252.1(of the)]TJ
+-2.5 -1.2 TD
+0.0912 Tw
+[(decision making in game design comes do)24.9(wn to making a yes-or)19.9(-no decision about a potential approach.)]TJ
+T*
+0 Tc
+0.2097 Tw
+[(Such choices v)25(ary from ‘)74(‘is this idea interesting enough?’)74(’)-709.8(t)0(o)-459.8(‘)74(‘can it be done at all?’)74(’)-709.7(W)80(e)-459.7(found it)]TJ
+T*
+0.0573 Tw
+[(immensely ef)25(fecti)25(v)15(e)15( )-15(to)-307.3(try solving the hardest parts )]TJ
+/TT8 1 Tf
+21.1654 0 TD
+0 Tw
+(Þ)Tj
+/TT7 1 Tf
+0.5562 0 TD
+0.0573 Tw
+[(rst in deciding an)15(y)-307.4(o)0(f)-307.4(these questions, allo)25(wing us to)]TJ
+-21.7215 -1.2 TD
+0 Tw
+[(discard doomed approaches quickly and de)25(v)20(ote our ener)18(gies to potentially successful ones.)]TJ
+2.5 -1.56 TD
+0.0185 Tw
+[(W)80(e)80( )-80(al)10(w)10(ays tried to mak)10(e)-268.5(indi)25(vidual)]TJ
+/TT5 1 Tf
+14.4716 0 TD
+0 Tw
+(tools)Tj
+/TT7 1 Tf
+2.2133 0 TD
+0.0185 Tw
+(that performed a single general task well and then use com-)Tj
+-19.1849 -1.2 TD
+0.0562 Tw
+[(binations of such tools to perform comple)15(x)-306.2(tasks rather than making a ne)25(w)-306.3(program to solv)15(e)-306.3(each speci)]TJ
+/TT8 1 Tf
+42.1953 0 TD
+0 Tw
+(Þ)Tj
+/TT7 1 Tf
+0.5562 0 TD
+(c)Tj
+-42.7515 -1.2 TD
+0.0605 Tw
+[(comple)15(x)-310.6(task. )-250.1(As)-310.6(a)-310.6(result, we had to write relati)25(v)15(ely fe)25(w)-310.5(tools and ended up using each in man)15(y)-310.5(conte)15(xts)]TJ
+T*
+0 Tw
+[(—)-250(often in concert with tools written by others.)]TJ
+2.5 -1.56 TD
+0.1563 Tw
+[(The programs we wrote generated little or no gratuitous output.)-656.3(Thus, when someone w)10(anted to)]TJ
+-2.5 -1.2 TD
+0.0103 Tw
+[(mak)10(e)-260.3(that program a part of some lar)18(ger construct, there w)10(as little or no ef)25(fort spent trying to get rid of use-)]TJ
+T*
+0.0828 Tw
+[(less v)15(erbosity)65(.)-582.8(Further)40(,)-332.8(when diagnostics were called for)40(,)-332.9(the)15(y)-332.9(really stood out rather than being lost in a)]TJ
+T*
+0 Tw
+[(sequence of ‘)74(‘program starting...)70(’)74(’)0(,)-250(‘)74(‘P)15(ass 1 completed’)74(’, ‘)74(‘pass 2 loading...)70(’)74(’)0(,)-250(and so forth.)]TJ
+ET
+endstream
+endobj
+22 0 obj
+<<
+/ProcSet [/PDF /Text ]
+/Font <<
+/TT2 4 0 R
+/TT5 6 0 R
+/TT7 7 0 R
+/TT8 8 0 R
+>>
+/ExtGState <<
+/GS1 9 0 R
+>>
+>>
+endobj
+24 0 obj
+<<
+/Length 7575
+>>
+stream
+BT
+/TT7 1 Tf
+10 0 0 10 97 757.89 Tm
+0 g
+/GS1 gs
+0 Tc
+0.0297 Tw
+[(W)80(e)80( )-80.1(found simplicity to be an e)25(v)15(en)-279.7(better polic)15(y)-279.7(than honesty)65(.)-529.7(E)0(v)15(ery time we were tempted to elabo-)]TJ
+-2.5 -1.2 TD
+0.1352 Tw
+[(rate on some program the result w)10(as an unending job of )]TJ
+/TT8 1 Tf
+23.9997 0 TD
+0 Tw
+(Þ)Tj
+/TT7 1 Tf
+0.5562 0 TD
+0.1353 Tw
+(ne tuning the elaborations — probably made)Tj
+-24.5558 -1.2 TD
+0.0367 Tw
+(more dif)Tj
+/TT8 1 Tf
+3.4272 0 TD
+0 Tw
+(Þ)Tj
+/TT7 1 Tf
+0.5562 0 TD
+0.0366 Tw
+[(cult because the)15(y)-286.6(n)0(e)25(v)25( )276.6(er)-286.6(really belonged in the )]TJ
+/TT8 1 Tf
+18.7858 0 TD
+0 Tw
+(Þ)Tj
+/TT7 1 Tf
+0.5562 0 TD
+0.0366 Tw
+[(rst place.)-536.6(When we stayed simple, it w)10(as easy to)]TJ
+-23.3254 -1.2 TD
+0.0185 Tw
+[(see what needed to be done, and it w)10(as easy to tell when we were )]TJ
+/TT8 1 Tf
+26.6476 0 TD
+0 Tw
+(Þ)Tj
+/TT7 1 Tf
+0.5562 0 TD
+0.0186 Tw
+[(nished and could go on to the ne)15(xt task.)]TJ
+/TT2 1 Tf
+8 0 0 8 72 697.89 Tm
+0 Tw
+(UNIX)Tj
+10 0 0 10 94.9453 697.89 Tm
+[(ENVIR)30(ONMENT)]TJ
+/TT7 1 Tf
+0.2055 -1.56 TD
+(The)Tj
+8 0 0 8 116.0318 682.29 Tm
+(UNIX)Tj
+10 0 0 10 139.5129 682.29 Tm
+0.0984 Tw
+[(en)40(vironment w)10(as perfectly suited to our task.)-598.4(When we needed a program, it w)10(as either)]TJ
+-6.7513 -1.2 TD
+0.0346 Tw
+[(already there or it w)10(as easy to write.)-534.6(Perhaps that’)55(s)-284.7(because the)]TJ
+8 0 0 8 333.1866 670.29 Tm
+0 Tw
+(UNIX)Tj
+10 0 0 10 356.0298 670.29 Tm
+-0.0002 Tc
+0.0349 Tw
+[(system w)9.8(as designed by \(game\) pro-)]TJ
+-28.403 -1.2 TD
+0 Tc
+0.0455 Tw
+[(grammers to mak)10(e)-295.6(the job of program de)25(v)15(elopment as easy as possible.)-545.5(In an)15(y)-295.5(case, it made)]TJ
+/TT5 1 Tf
+37.9758 0 TD
+0 Tw
+(our)Tj
+/TT7 1 Tf
+1.6847 0 TD
+0.0455 Tw
+[(job easy)65(.)]TJ
+-39.6605 -1.2 TD
+0.0874 Tw
+[(W)80(e)80( didn’)18(t)-257.4(h)0(a)20(v)20( )332.4(e)-257.4(to )]TJ
+/TT8 1 Tf
+7.3385 0 TD
+0 Tw
+(Þ)Tj
+/TT7 1 Tf
+0.5562 0 TD
+0.0074 Tw
+(ght with programs that)Tj
+/TT5 1 Tf
+9.3616 0 TD
+0 Tw
+(almost)Tj
+/TT7 1 Tf
+2.9244 0 TD
+0.0075 Tw
+[(did what we needed b)20(ut had made some limiting assump-)]TJ
+-20.1807 -1.2 TD
+0.2199 Tw
+[(tion. )-250(Nor)-469.9(did we ha)20(v)15(e)15( )-15(to)-469.9(trick the operating system into letting us do something that it thought we)]TJ
+T*
+0 Tw
+[(shouldn’)18(t)-250(do.)]TJ
+2.5 -1.56 TD
+0.2219 Tw
+[(W)80(e)80( were )80(hea)20(vily )79.9(in)]TJ
+/TT8 1 Tf
+8.1276 0 TD
+0 Tw
+(ß)Tj
+/TT7 1 Tf
+0.5562 0 TD
+0.142 Tw
+[(uenced by the softw)10(are, philosophies, and concepts associated with the)]TJ
+8 0 0 8 483.9673 606.6901 Tm
+0 Tw
+(UNIX)Tj
+10 0 0 10 72 594.6901 Tm
+0.0399 Tw
+[(operating system.)-540(It could be ar)18(gued that the time w)10(as right for these de)25(v)15(elopments and that the)]TJ
+8 0 0 8 464.9439 594.6901 Tm
+0 Tw
+(UNIX)Tj
+10 0 0 10 487.839 594.6901 Tm
+(sys-)Tj
+-41.5839 -1.2 TD
+0.0811 Tw
+[(tem w)10(as just the v)15(ehicle for ideas that w)10(ould ha)20(v)15(e)15( )-15.1(appeared an)15(yw)10(ay; b)20(ut it’)55(s)-331.2(clear that without these, our)]TJ
+T*
+-0.0001 Tc
+0.1139 Tw
+[(games projects w)9.9(ould ha)19.9(v)14.9(e)14.9( )-15(ended v)14.9(ery dif)24.9(ferently)64.9(.)-613.9(W)79.9(e)-363.9(w)9.9(ould ha)19.9(v)14.9(e)14.9( )-15(spent more time chasing do)24.9(wn blind)]TJ
+T*
+0 Tc
+0.0567 Tw
+[(alle)15(ys and w)10(ould ha)20(v)15(e)15( )-15(e)15(xamined fe)25(wer potentially pro)]TJ
+/TT8 1 Tf
+21.9839 0 TD
+0 Tw
+(Þ)Tj
+/TT7 1 Tf
+0.5562 0 TD
+0.0567 Tw
+[(table approaches.)-556.7(W)80(e)80( )-80(w)10(ould not ha)20(v)15(e)15( )-15.1(been able to)]TJ
+-22.5401 -1.2 TD
+0.0576 Tw
+[(participate in as man)15(y)-307.7(areas of the production as we did, thereby lea)20(ving man)15(y)-307.6(crucial design decisions to)]TJ
+T*
+0.0412 Tw
+(the same people who crank out the standard, bland products that )Tj
+/TT8 1 Tf
+26.3902 0 TD
+0 Tw
+(ß)Tj
+/TT7 1 Tf
+0.5561 0 TD
+0.0412 Tw
+[(ood the mark)10(et. )-250(W)80(orst of all, we proba-)]TJ
+-26.9464 -1.2 TD
+0.0306 Tw
+[(bly w)10(ould ha)20(v)15(e)15( )-15.1(had to thro)25(w)-280.7(a)15(w)10(a)0(y)-280.7(the ‘)74(‘thro)25(w-a)15(w)10(ay’)74(’)-280.7(g)5(ames not only because we w)10(ould not ha)20(v)15(e)15( )-15(had time)]TJ
+T*
+0 Tw
+[(to complete them b)20(ut the)15(y)-250(w)10(ould not ha)20(v)15(e)15( )-15(been as interesting as the)15(y)-250(are.)]TJ
+/TT2 1 Tf
+0 -2.4 TD
+(THE GAMES)Tj
+/TT7 1 Tf
+2.5 -1.56 TD
+0.023 Tw
+[(In a paraphrase of the re)25(vie)25(wer from)]TJ
+/TT5 1 Tf
+14.9647 0 TD
+[(V)74(ideo Game Update)]TJ
+/TT7 1 Tf
+8.4099 0 TD
+-0.0001 Tc
+0.0232 Tw
+[(‘)73.9(‘These games simply must be e)14.9(xperienced)]TJ
+-25.8746 -1.2 TD
+0 Tc
+0 Tw
+[(to be appreciated.)70(’)74(’)]TJ
+/TT2 1 Tf
+0 -2.4 TD
+(CREDITS)Tj
+/TT7 1 Tf
+2.5 -1.56 TD
+0.0265 Tw
+[(The w)10(ork described in this paper w)10(as done by the members of the Lucas)]TJ
+/TT8 1 Tf
+29.2885 0 TD
+0 Tw
+(Þ)Tj
+/TT7 1 Tf
+0.5562 0 TD
+0.0265 Tw
+(lm Games Group, a part of)Tj
+-32.3446 -1.2 TD
+0.0157 Tw
+(the Lucas)Tj
+/TT8 1 Tf
+3.8751 0 TD
+0 Tw
+(Þ)Tj
+/TT7 1 Tf
+0.5562 0 TD
+0.0157 Tw
+[(lm Computer Di)25(vision which, in turn, w)10(as a part of Lucas)]TJ
+/TT8 1 Tf
+23.2289 0 TD
+0 Tw
+(Þ)Tj
+/TT7 1 Tf
+0.5562 0 TD
+0.0157 Tw
+[(lm Ltd.)-515.7(Although I headed and often)]TJ
+-28.2163 -1.2 TD
+0.1173 Tw
+[(spok)10(e)-367.4(for the group it w)10(ould be a mistak)10(e)-367.3(t)0(o)-367.3(think that I contrib)20(uted more than an)15(y)-367.3(o)0(f)-367.3(the others in the)]TJ
+T*
+0.0212 Tw
+[(group. )-250(Ev)15(ery member performed an irreplaceable function in the de)25(v)15(elopment of these games, and without)]TJ
+T*
+-0.0001 Tc
+0.0135 Tw
+[(an)14.9(y)-263.6(one of these people the games w)9.9(ould not ha)19.9(v)14.9(e)14.9( )-15.1(been as the)14.9(y)-263.6(are, indeed, the)14.9(y)-263.6(might not ha)19.9(v)14.9(e)14.9( )-15(been at all.)]TJ
+2.5 -1.56 TD
+0 Tc
+0 Tw
+[(The cast of characters, in alphabetical order)40(,)-250(is:)]TJ
+-2.5 -1.2 TD
+(Loren Carpenter)Tj
+T*
+[(Da)20(vid F)15(o)0(x)]TJ
+T*
+[(Charlie K)25(ellner)]TJ
+T*
+(Peter Langston)Tj
+T*
+[(Da)20(vid Le)25(vine)]TJ
+T*
+[(Gary W)40(innick)]TJ
+2.5 -1.56 TD
+0.1068 Tw
+[(Others made contrib)20(utions to our ef)25(fort that should not be o)15(v)15(erlook)10(ed: Ste)25(v)15(e)15( )-15.1(Arnold, Eric Benson,)]TJ
+-2.5 -1.2 TD
+0.0536 Tw
+[(Ste)25(v)15(e)15( )-15(Cantor)40(,)-303.6(E)0(d)-303.6(Catmull, T)70(erry Chostner)40(,)-303.6(Mik)10(e)-303.6(Cross, Marty Cutler)40(,)-303.6(Bob Doris, Gary Hare, Charlie K)25(ea-)]TJ
+T*
+0.0877 Tw
+[(gle, Geor)18(ge Lucas, L)55(yle Mays, P)15(at Methen)15(y)65(,)65( )-65.1(Lorne Peterson, Rob Poor)40(,)-337.8(D)0(a)20(vid Riordan, Richie Shulber)18(g,)]TJ
+T*
+0 Tw
+[(Ste)25(v)15(e)0(n)-250(Spielber)18(g)]TJ
+/TT2 1 Tf
+0 -2.4 TD
+(REVIEWS)Tj
+/TT7 1 Tf
+0 -1.56 TD
+-0.0001 Tc
+0.0001 Tw
+[(‘)73.9(‘)79.9(And the games, some enthusiasts say)64.9(,)-250.1(are among the most inno)14.9(v)24.9(ati)24.9(v)14.9(e)14.9( )-15(on)-250.1(the mark)9.9(et.)69.9(’)73.9(’)]TJ
+3.6 -1.2 TD
+0 Tc
+0 Tw
+(-- Businessweek)Tj
+-3.6 -1.56 TD
+[(‘)74(‘Its [)]TJ
+/TT5 1 Tf
+2.175 0 TD
+[(B)25(ALLBLAZER)]TJ
+/TT7 1 Tf
+5.8646 0 TD
+[(])-250(high-speed action and split screen ... may lea)20(v)15(e)15( )-15(players a bit dizzy)65(.)70(’)74(’)]TJ
+-4.4397 -1.2 TD
+(-- the San Francisco Chronicle)Tj
+-3.6 -1.56 TD
+-0.0001 Tc
+0.0464 Tw
+[(‘)73.9(‘)79.9(All of which promises to do for the game industry what Lucas)]TJ
+/TT8 1 Tf
+25.8723 0 TD
+0 Tc
+0 Tw
+(Þ)Tj
+/TT7 1 Tf
+0.5562 0 TD
+0.0463 Tw
+(lm has done for the )Tj
+/TT8 1 Tf
+8.2017 0 TD
+0 Tw
+(Þ)Tj
+/TT7 1 Tf
+0.5561 0 TD
+0.0463 Tw
+[(lm industry: re)25(write)]TJ
+-35.1863 -1.2 TD
+0 Tw
+[(the standards.)70(’)74(’)]TJ
+3.6 -1.2 TD
+-0.0001 Tc
+0.0001 Tw
+[(-- P)14.9(aul Cohen in Atari Connection Magazine)]TJ
+ET
+endstream
+endobj
+25 0 obj
+<<
+/ProcSet [/PDF /Text ]
+/Font <<
+/TT2 4 0 R
+/TT5 6 0 R
+/TT7 7 0 R
+/TT8 8 0 R
+>>
+/ExtGState <<
+/GS1 9 0 R
+>>
+>>
+endobj
+27 0 obj
+<<
+/Length 3386
+>>
+stream
+BT
+/TT7 1 Tf
+10 0 0 10 72 757.89 Tm
+0 g
+/GS1 gs
+-0.0001 Tc
+0.0001 Tw
+[(‘)73.9(‘... both games include sharp, sophisticated graphics and challenging game strate)14.9(gy)64.9(.)69.9(’)73.9(’)]TJ
+3.6 -1.2 TD
+0 Tc
+0 Tw
+(-- the San Francisco Examiner)Tj
+-3.6 -1.56 TD
+[(‘)74(‘... cartridges that materially adv)25(ance the state-of-the-art.)70(’)74(’)]TJ
+3.6 -1.2 TD
+-0.0001 Tc
+0.0001 Tw
+(-- Arnie Katz in Electronic Games Magazine)Tj
+-3.6 -1.56 TD
+[(‘)73.9(‘... the 3-D look mak)9.9(es a game that is chock full of sensory e)14.9(xcitement.)69.9(’)73.9(’)]TJ
+3.6 -1.2 TD
+0 Tc
+0 Tw
+[(-- San Jose Mercury Ne)25(ws)]TJ
+-3.6 -1.56 TD
+[(‘)74(‘It sounds lik)10(e)-250(John Coltrane!’)74(’)]TJ
+3.6 -1.2 TD
+[(-- P)15(at Methen)15(y)]TJ
+-3.6 -1.56 TD
+-0.074 Tc
+(‘‘)Tj
+/TT5 1 Tf
+0.592 0 TD
+0 Tc
+[(B)25(ALLBLAZER)]TJ
+/TT7 1 Tf
+6.1147 0 TD
+(... meets the standards that Lucas)Tj
+/TT8 1 Tf
+13.2183 0 TD
+(Þ)Tj
+/TT7 1 Tf
+0.5562 0 TD
+[(lm set in motion pictures’)74(’)]TJ
+-16.8811 -1.2 TD
+-0.0001 Tc
+0.0001 Tw
+(-- Alan Michaels in Atari Connection Magazine)Tj
+-3.6 -1.56 TD
+-0.074 Tc
+0 Tw
+(‘‘)Tj
+/TT5 1 Tf
+0.592 0 TD
+0 Tc
+[(B)25(ALLBLAZER)]TJ
+/TT7 1 Tf
+6.1147 0 TD
+-0.0001 Tc
+0.0001 Tw
+[(... is by f)9.9(ar one of the most interesting tw)9.9(o-player competition games to date.)69.9(’)73.9(’)]TJ
+-3.1067 -1.2 TD
+-0.0002 Tc
+0.0002 Tw
+[(-- Ne)24.8(wsweek Access Magazine)]TJ
+-3.6 -1.56 TD
+-0.0001 Tc
+0.0001 Tw
+[(‘)73.9(‘... the latest breakthroughs in the art of video game design.)69.9(’)73.9(’)]TJ
+3.6 -1.2 TD
+0 Tc
+0 Tw
+[(-- Ho)25(w)10(ard Pearlmutter)40(,)-250(the Kno)25(w)10(are Institute)]TJ
+-3.6 -1.56 TD
+-0.0001 Tc
+0.0001 Tw
+[(‘)73.9(‘)79.9(A)-250.1(breathtaking technical inno)14.9(v)24.9(ation in games design’)73.9(’)]TJ
+3.6 -1.2 TD
+[(-- P)14.9(aula Polle)14.9(y)-250.1(&)-250.1(Marina Hirsch in Atari Connection Magazine)]TJ
+-3.6 -1.56 TD
+0 Tc
+0.0236 Tw
+[(‘)74(‘... sophisticated animation and graphics technology heretofore only seen in more adv)25(anced computer sim-)]TJ
+0 -1.2 TD
+0 Tw
+[(ulations.)70(’)74(’)]TJ
+3.6 -1.2 TD
+[(-- the Hollyw)10(ood Reporter)]TJ
+-3.6 -1.56 TD
+-0.0001 Tc
+0.0001 Tw
+[(‘)73.9(‘)-0.1(W)79.9(e)79.9( )-80(were v)14.9(ery impressed with this game’)73.9(’)]TJ
+3.6 -1.2 TD
+0 Tc
+0 Tw
+[(-- The V)60(ideo Game Update)]TJ
+-3.6 -1.56 TD
+-0.074 Tc
+[(‘‘)-74([)]TJ
+/TT5 1 Tf
+0.925 0 TD
+0 Tc
+[(B)25(ALLBLAZER)]TJ
+/TT7 1 Tf
+6.1296 0 TD
+0.0149 Tw
+[(&)-265(Rescue on Fractalus!] ... use more sophisticated computer graphics and animation tech-)]TJ
+-7.0547 -1.2 TD
+-0.0001 Tc
+0.0001 Tw
+[(niques and ha)19.9(v)14.9(e)14.9( )-15(more of a three-dimensional appearance than most e)14.9(xisting games.)69.9(’)73.9(’)]TJ
+3.6 -1.2 TD
+0 Tc
+0 Tw
+[(-- W)80(all Street Journal)]TJ
+/TT2 1 Tf
+-3.6 -2.4 TD
+(TRADEMARKS)Tj
+/TT7 1 Tf
+8 0 0 8 97 406.29 Tm
+(UNIX)Tj
+10 0 0 10 120.5801 406.29 Tm
+0.1085 Tw
+[(is a trademark of A)111(T&T Bell Laboratories; Apple II is a trademark of Apple Computer Inc.;)]TJ
+-4.858 -1.2 TD
+0.0614 Tw
+[(Atari is probably a trademark of Atari Inc.; DEC and V)135(AX are trademarks of Digital Equipment Corpora-)]TJ
+T*
+0.1913 Tw
+[(tion; Picture System I is a trademark of Ev)25(ans & Sutherland, Sun W)80(orkstation is a trademark of Sun)]TJ
+T*
+0.1117 Tw
+[(Microsystems Inc.; Rescue on Fractalus, Ballblazer)40(,)-361.8(Pixar)40(,)-361.8(LUDS, and ASP are trademarks of Lucas)]TJ
+/TT8 1 Tf
+41.5847 0 TD
+0 Tw
+(Þ)Tj
+/TT7 1 Tf
+0.5562 0 TD
+(lm)Tj
+-42.1409 -1.2 TD
+(Ltd.)Tj
+ET
+endstream
+endobj
+28 0 obj
+<<
+/ProcSet [/PDF /Text ]
+/Font <<
+/TT2 4 0 R
+/TT5 6 0 R
+/TT7 7 0 R
+/TT8 8 0 R
+>>
+/ExtGState <<
+/GS1 9 0 R
+>>
+>>
+endobj
+9 0 obj
+<<
+/Type /ExtGState
+/SA false
+/SM 0.02
+/OP false
+/op false
+/OPM 1
+/BG2 /Default
+/UCR2 /Default
+/HT /Default
+/TR2 /Default
+>>
+endobj
+29 0 obj
+<<
+/Type /FontDescriptor
+/Ascent 750
+/CapHeight 676
+/Descent -250
+/Flags 262178
+/FontBBox [-168 -218 1000 935]
+/FontName /Times-Bold
+/ItalicAngle 0
+/StemV 133
+/XHeight 461
+/StemH 139
+>>
+endobj
+30 0 obj
+<<
+/Type /FontDescriptor
+/Ascent 750
+/CapHeight 676
+/Descent -250
+/Flags 262178
+/FontBBox [-168 -218 1000 935]
+/FontName /Times-Bold
+/ItalicAngle 0
+/StemV 133
+/XHeight 461
+/StemH 139
+>>
+endobj
+31 0 obj
+<<
+/Type /FontDescriptor
+/Ascent 750
+/CapHeight 653
+/Descent -250
+/Flags 98
+/FontBBox [-169 -217 1010 883]
+/FontName /Times-Italic
+/ItalicAngle -15
+/StemV 76
+/XHeight 441
+/StemH 76
+>>
+endobj
+32 0 obj
+<<
+/Type /FontDescriptor
+/Ascent 750
+/CapHeight 662
+/Descent -250
+/Flags 34
+/FontBBox [-168 -218 1000 898]
+/FontName /Times-Roman
+/ItalicAngle 0
+/StemV 84
+/XHeight 450
+/StemH 84
+>>
+endobj
+33 0 obj
+<<
+/Type /FontDescriptor
+/Ascent 750
+/CapHeight 662
+/Descent -250
+/Flags 34
+/FontBBox [-168 -218 1000 898]
+/FontName /Times-Roman
+/ItalicAngle 0
+/StemV 84
+/XHeight 450
+/StemH 84
+>>
+endobj
+4 0 obj
+<<
+/Type /Font
+/Subtype /TrueType
+/FirstChar 32
+/LastChar 174
+/Widths [250 0 0 0 0 0 0 0 0 0 0 0 0 333 250 278 
+0 500 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+0 722 0 722 722 667 611 778 778 389 0 778 667 944 722 778 
+0 0 722 556 667 722 722 1000 722 722 0 0 0 0 0 0 
+0 500 0 444 556 444 333 500 556 278 0 556 278 833 556 500 
+556 0 444 389 333 556 500 722 0 500 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 747 ]
+/Encoding /WinAnsiEncoding
+/BaseFont /Times-Bold
+/FontDescriptor 29 0 R
+>>
+endobj
+5 0 obj
+<<
+/Type /Font
+/Subtype /TrueType
+/FirstChar 222
+/LastChar 223
+/Widths [556 556 ]
+/Encoding /MacRomanEncoding
+/BaseFont /Times-Bold
+/FontDescriptor 30 0 R
+>>
+endobj
+6 0 obj
+<<
+/Type /Font
+/Subtype /TrueType
+/FirstChar 32
+/LastChar 121
+/Widths [250 0 0 0 0 0 0 0 0 0 0 0 0 333 250 0 
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+0 611 611 667 0 611 0 722 0 0 0 0 556 0 0 0 
+611 0 611 500 556 722 611 0 0 0 556 0 0 0 0 0 
+0 500 500 444 500 444 278 500 500 278 0 444 278 722 500 500 
+500 0 389 389 278 500 444 667 0 444 ]
+/Encoding /WinAnsiEncoding
+/BaseFont /Times-Italic
+/FontDescriptor 31 0 R
+>>
+endobj
+7 0 obj
+<<
+/Type /Font
+/Subtype /TrueType
+/FirstChar 32
+/LastChar 151
+/Widths [250 333 408 0 500 0 778 0 333 333 0 0 250 333 250 278 
+500 500 500 500 500 500 500 500 500 500 278 278 0 0 0 444 
+0 722 667 667 722 611 556 722 722 333 389 722 611 889 722 722 
+556 0 667 556 611 722 722 944 722 722 0 333 0 333 0 0 
+0 444 500 444 500 444 333 500 500 278 278 500 278 778 500 500 
+500 500 333 389 278 500 500 722 500 500 444 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+0 333 333 0 0 0 0 1000 ]
+/Encoding /WinAnsiEncoding
+/BaseFont /Times-Roman
+/FontDescriptor 32 0 R
+>>
+endobj
+8 0 obj
+<<
+/Type /Font
+/Subtype /TrueType
+/FirstChar 222
+/LastChar 223
+/Widths [556 556 ]
+/Encoding /MacRomanEncoding
+/BaseFont /Times-Roman
+/FontDescriptor 33 0 R
+>>
+endobj
+1 0 obj
+<<
+/Type /Page
+/Parent 10 0 R
+/Resources 3 0 R
+/Contents 2 0 R
+>>
+endobj
+11 0 obj
+<<
+/Type /Page
+/Parent 10 0 R
+/Resources 13 0 R
+/Contents 12 0 R
+>>
+endobj
+14 0 obj
+<<
+/Type /Page
+/Parent 10 0 R
+/Resources 16 0 R
+/Contents 15 0 R
+>>
+endobj
+17 0 obj
+<<
+/Type /Page
+/Parent 10 0 R
+/Resources 19 0 R
+/Contents 18 0 R
+>>
+endobj
+20 0 obj
+<<
+/Type /Page
+/Parent 10 0 R
+/Resources 22 0 R
+/Contents 21 0 R
+>>
+endobj
+23 0 obj
+<<
+/Type /Page
+/Parent 10 0 R
+/Resources 25 0 R
+/Contents 24 0 R
+>>
+endobj
+26 0 obj
+<<
+/Type /Page
+/Parent 10 0 R
+/Resources 28 0 R
+/Contents 27 0 R
+>>
+endobj
+34 0 obj
+<<
+/S /D
+>>
+endobj
+35 0 obj
+<<
+/Nums [0 34 0 R ]
+>>
+endobj
+10 0 obj
+<<
+/Type /Pages
+/Kids [1 0 R 11 0 R 14 0 R 17 0 R 20 0 R 23 0 R 26 0 R]
+/Count 7
+/MediaBox [0 0 612 792]
+>>
+endobj
+36 0 obj
+<<
+/CreationDate (D:20050127023533-08'00')
+/ModDate (D:20050127023533-08'00')
+/Producer (PSNormalizer.framework)
+>>
+endobj
+37 0 obj
+<<
+/Type /Catalog
+/Pages 10 0 R
+/PageLabels 35 0 R
+>>
+endobj
+xref
+0 38
+0000000000 65535 f 
+0000056826 00000 n 
+0000000016 00000 n 
+0000008394 00000 n 
+0000054929 00000 n 
+0000055483 00000 n 
+0000055656 00000 n 
+0000056082 00000 n 
+0000056652 00000 n 
+0000053791 00000 n 
+0000057479 00000 n 
+0000056907 00000 n 
+0000008533 00000 n 
+0000016126 00000 n 
+0000056991 00000 n 
+0000016266 00000 n 
+0000024754 00000 n 
+0000057075 00000 n 
+0000024872 00000 n 
+0000033848 00000 n 
+0000057159 00000 n 
+0000033977 00000 n 
+0000042337 00000 n 
+0000057243 00000 n 
+0000042466 00000 n 
+0000050094 00000 n 
+0000057327 00000 n 
+0000050223 00000 n 
+0000053662 00000 n 
+0000053931 00000 n 
+0000054133 00000 n 
+0000054335 00000 n 
+0000054535 00000 n 
+0000054732 00000 n 
+0000057411 00000 n 
+0000057439 00000 n 
+0000057603 00000 n 
+0000057735 00000 n 
+trailer
+<<
+/Size 38
+/Root 37 0 R
+/Info 36 0 R
+/ID [<ce51268a4e17b576b6ee4a710c4288f4><ce51268a4e17b576b6ee4a710c4288f4>]
+>>
+startxref
+57805
+%%EOF
